@@ -78,6 +78,16 @@ export default new Vuex.Store({
     logout({commit}) {
       commit('logout')
       router.push({name: "Home"})
+    },
+    TestPost(){
+      axios
+          .post('/test',{'test': 'test1'})
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err =>{
+            console.log(err)
+          })
     }
   },
 

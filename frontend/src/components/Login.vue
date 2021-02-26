@@ -41,7 +41,7 @@
                 @click="login({email, password})"
             >로그인
             </v-btn>
-<!--            <v-btn @click="test">테스트</v-btn>-->
+            <v-btn @click="TestPost">테스트</v-btn>
           </div>
         </v-card>
       </v-flex>
@@ -64,7 +64,7 @@ export default {
     ...mapState(['isLoginError', 'isLogin']),
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['login', 'TestPost']),
     }
 }
 </script>
