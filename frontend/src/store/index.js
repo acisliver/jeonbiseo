@@ -36,6 +36,9 @@ export default new Vuex.Store({
       state.isLogin = false
       state.isLoginError = false
       state.userInfo = null
+    },
+    TestPostText(state, payload){
+      state.testpostval = payload
     }
   },
 
@@ -79,12 +82,12 @@ export default new Vuex.Store({
       commit('logout')
       router.push({name: "Home"})
     },
-    TestPost(state){
+    TestPost({commit}){
       axios
           .post('/test',{'test': 'test1'})
           .then(res => {
             console.log(res)
-            state.testpostval = res.data
+            commit('TestPostText', res.data)
           })
           .catch(err =>{
             console.log(err)
