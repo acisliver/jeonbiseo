@@ -1,33 +1,26 @@
 server:
-  port: 8080
+  port: 8000
   servlet:
     context-path: /
-    encoding:
-      charset: UTF-8
-      enabled: true
-      force: true
 
 spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?createDatabaseIfNotExist=true&serverTimezone=Asia/Seoul
-    username: user
+    url: jdbc:mysql://localhost:3306/jeonbiseodb?serverTimezone=Asia/Seoul
+    username: root
     password: 1234
 
   jpa:
-    open-in-view: true  #lazy 로딩이 가능하게 함. https://www.youtube.com/watch?v=fSXh4hWJtKo&list=PL93mKxaRDidECgjOBjPgI3Dyo8ka6Ilqm&index=45 참고
+    open-in-view: true
     hibernate:
       ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      use-new-id-generator-mappings: false  #jpa의 기본 넘버링 전략을 사용하지 않음(DB 테이블의 넘버링 방식을 따라감)
-    show-sql: true
+      use-new-id-generator-mappings: false
+    #show-sql: true
     properties:
       hibernate.format_sql: true
-
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
   jackson:
     serialization:

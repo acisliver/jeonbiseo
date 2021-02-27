@@ -5,11 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-//ORM: 객체(ORM)를 테이플로 매핑해 줌
 @Entity
 @Data
 @NoArgsConstructor
@@ -34,10 +32,14 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
+    //@ColumnDefault("'user'")
+    //private String role; //Enum을 쓰면 도메인을 설정 할 수 있기 때문에, Enum을 쓰는것이 좋다.
+
     @Enumerated(EnumType.STRING)
     private RoleType role; //enum 타입으로 설정한 RoleType을 사용
 
     @CreationTimestamp //시간이 자동 입력됨
     private Timestamp createDate;
 
+    private String oAuth;
 }
