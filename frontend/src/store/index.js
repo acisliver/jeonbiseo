@@ -15,7 +15,6 @@ export default new Vuex.Store({
     ],
     isLogin: false,
     isLoginError: false,
-    testpostval: 'POST',
   },
 
   getters:{
@@ -37,28 +36,12 @@ export default new Vuex.Store({
       state.isLoginError = false
       state.userInfo = null
     },
-    TestPostText(state, payload){
-      state.testpostval = payload
-    }
   },
 
   actions: {
-    login(){
-      // let selecetd_user = null
-      // state.allUsers.forEach(user => {
-      //   if(user.email === loginObj.email) selecetd_user = user
-      // })
-      // if(!selecetd_user || selecetd_user.password !== loginObj.password)
-      //     commit('loginError')
-      // else{
-      //   commit('loginSuccess', selecetd_user)
-      //   router.push({name: 'Mypage'})
-      // }
+    login(loginObj){
       axios
-        .post("/login", {
-          "email": "eve.holt@reqres.in",
-          "password": "cityslicka"
-        })
+        .post("/login", loginObj)
           .then(res =>{
             let config = {
               headers : {
@@ -82,17 +65,18 @@ export default new Vuex.Store({
       commit('logout')
       router.push({name: "Home"})
     },
-    TestPost({commit}){
+   signup_summit(signupObj) {
+        console.log(signupObj)
       axios
-          .post('/test',{'test': 'test1'})
+          .post("/signup",signupObj)
           .then(res => {
             console.log(res)
-            commit('TestPostText', res.data)
           })
-          .catch(err =>{
-            console.log(err)
+          .catch(err => {
+              console.log(err)
           })
-    }
+       router.push({ name: 'Login'})
+   }
   },
 
   modules: {

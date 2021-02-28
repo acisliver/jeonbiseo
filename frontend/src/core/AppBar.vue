@@ -3,7 +3,7 @@
     <v-container>
 
       <v-row align="center">
-        <v-app-bar-title>전비서</v-app-bar-title>
+        <v-app-bar-title type="button" @click="$router.push({ name: 'Home'})">전비서</v-app-bar-title>
         <v-spacer />
         <v-toolbar-items class="hidden-sm-and-down">
           <router-link to="/">Home</router-link>

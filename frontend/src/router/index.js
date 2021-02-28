@@ -7,7 +7,8 @@ Vue.use(VueRouter)
 const Home = () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
 const About = () => import(/* webpackChunkName: "about" */ '../views/About.vue');
 const Login = () => import(/* webpackChunkName: "login" */ '../components/Login.vue');
-const Mypage = () => import(/* webpackChunkName: "mypage" */ '../views/MyPage.vue');
+const MyPage = () => import(/* webpackChunkName: "mypage" */ '../views/MyPage.vue');
+const SignUp = () => import(/* webpackChunkName: "mypage" */ '../components/SignUp.vue');
 
 const rejectAuthUser = (to, from, next) =>{
   if(store.state.isLogin){
@@ -48,9 +49,14 @@ const routes = [
   },
   {
     path: '/mypage',
-    name: 'Mypage',
+    name: 'MyPage',
     beforeEnter: onlyAuthUser,
-    component: Mypage
+    component: MyPage
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp
   },
 ]
 

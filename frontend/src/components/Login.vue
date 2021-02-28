@@ -41,7 +41,7 @@
                 @click="login({email, password})"
             >로그인
             </v-btn>
-            <v-btn @click="TestPost">테스트</v-btn>
+            <v-btn @click="$router.push({ name:'SignUp' })" >회원가입</v-btn>
           </div>
         </v-card>
       </v-flex>
@@ -56,15 +56,15 @@ export default {
   name: "Login",
   data(){
     return{
-      email: '',
-      password: '',
+      email: null,
+      password: null,
     }
   },
   computed: {
     ...mapState(['isLoginError', 'isLogin']),
   },
   methods: {
-    ...mapActions(['login', 'TestPost']),
+    ...mapActions(['login']),
     }
 }
 </script>
