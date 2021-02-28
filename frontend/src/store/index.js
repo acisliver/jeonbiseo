@@ -55,7 +55,7 @@ export default new Vuex.Store({
       //   router.push({name: 'Mypage'})
       // }
       axios
-        .post("https://reqres.in/api/login", {
+        .post("/login", {
           "email": "eve.holt@reqres.in",
           "password": "cityslicka"
         })
