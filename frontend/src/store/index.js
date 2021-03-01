@@ -70,7 +70,7 @@ export default new Vuex.Store({
    signup_summit(signupObj) {
         console.log(signupObj)
       axios
-          .post("/signup",{email:"b",password:"c"})
+          .post("/signup",{userName:"a",email:"b",password:"c"})
           .then(res => {
             console.log(res)
           })

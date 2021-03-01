@@ -13,10 +13,10 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-//    @Transactional(readOnly = true)
-//    public User login(User user){
-//        return userRepository.loginQuery(user.getUserName(),user.getPassword());
-//    }
+    @Transactional(readOnly = true)
+    public User login(User user){
+        return userRepository.loginQuery(user.getUserName(),user.getPassword());
+    }
 
     @Transactional
     public void signUpApi(User user){
