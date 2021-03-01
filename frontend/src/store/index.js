@@ -10,8 +10,8 @@ export default new Vuex.Store({
   state: {
     userInfo: null,
     allUsers: [
-      { id: 1, name: "hoza", email: "hoza@naver.com", password: "1234"},
-      { id: 2, name: "lego", email: "lego@naver.com", password: "1234"}
+      { id: 1, userName: "hoza", email: "hoza@naver.com", password: "1234"},
+      { id: 2, userName: "lego", email: "lego@naver.com", password: "1234"}
     ],
     isLogin: false,
     isLoginError: false,
@@ -70,7 +70,7 @@ export default new Vuex.Store({
    signup_summit(signupObj) {
         console.log(signupObj)
       axios
-          .post("/signup",signupObj)
+          .post("/signup",{email:"b",password:"c"})
           .then(res => {
             console.log(res)
           })

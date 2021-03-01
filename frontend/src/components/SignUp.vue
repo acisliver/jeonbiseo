@@ -10,8 +10,8 @@
         <v-card>
           <v-card-text>
             <v-text-field
-                v-model="name"
-                :rules="[() => !!name || '필수입력입니다.']"
+                v-model="userName"
+                :rules="[() => !!userName || '필수입력입니다.']"
                 label="이름"
                 required
             ></v-text-field>
@@ -71,7 +71,7 @@
             <v-btn
                 color="primary"
                 text
-                @click="signup_summit({name, email, password, year, month, day})"
+                @click="signup_summit({userName, email, password})"
             >
               Submit
             </v-btn>
@@ -91,7 +91,7 @@ export default {
   name: "SignUp",
   data () {
     return {
-      name: null,
+      userName: null,
       email: null,
       password: null,
       year: null,
