@@ -43,19 +43,21 @@ export default new Vuex.Store({
       axios
         .post("/login", loginObj)
           .then(res =>{
-            let config = {
-              headers : {
-                'access-token' : res.data.token
-              }
-            }
-            axios
-                .get("https://reqres.in/api/users/2", config)
-                .then(response => {
-                  console.log(response)
-                })
-                .catch(error => {
-                  console.log(error)
-                })
+              console.log(res)
+            // let config = {
+            //   headers : {
+            //     'access-token' : res.data.token
+            //   }
+            // }
+            // axios
+            //     .get("https://reqres.in/api/users/2", config)
+            //     .then(response => {
+            //       console.log(response)
+            //     })
+            //     .catch(error => {
+            //       console.log(error)
+            //     })
+
           })
           .catch(err=> {
             console.log(err)
