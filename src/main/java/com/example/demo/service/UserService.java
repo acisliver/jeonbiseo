@@ -19,8 +19,10 @@ public class UserService {
     }
 
     @Transactional
-    public void signUpApi(User user){
+    public User signUpApi(User user){
         user.setRole(RoleType.USER); //db의 정보 중 role만 자동적으로 입력이 되지 않기 때문에 넣어줘야 함.
-        userRepository.save(user);
+        User newUser = userRepository.save(user);
+        return newUser;
+
     }
 }

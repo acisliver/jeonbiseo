@@ -39,9 +39,9 @@ export default new Vuex.Store({
   },
 
   actions: {
-    login(loginObj){
+    login(){
       axios
-        .post("/login", loginObj)
+        .post("/login", {userName:"a",password:"c"})
           .then(res =>{
               console.log(res)
             // let config = {
@@ -70,7 +70,7 @@ export default new Vuex.Store({
    signup_summit(signupObj) {
         console.log(signupObj)
       axios
-          .post("/signup",{userName:"a",email:"b",password:"c"})
+          .post("/signup",{userName:"aaa",email:"bbb",password:"ccc"})
           .then(res => {
             console.log(res)
           })
