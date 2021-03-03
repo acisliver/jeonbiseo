@@ -6,10 +6,13 @@
         <v-app-bar-title type="button" @click="$router.push({ name: 'Home'})">전비서</v-app-bar-title>
         <v-spacer />
         <v-toolbar-items class="hidden-sm-and-down">
-          <router-link to="/">Home</router-link>
+          <router-link to="/">홈</router-link>
 
           <router-link to="/about">About</router-link>
 
+
+          <router-link v-if="!isLogin" to="/login" >로그인</router-link>
+          <router-link v-if="!isLogin" to="/signup">회원가입</router-link>
           <v-menu offset-y v-if="isLogin">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -24,17 +27,15 @@
             </template>
             <v-list>
               <v-list-item>
-                <v-list-item-title @click="$router.push({name:'Mypage'})">Mypage</v-list-item-title>
+                <v-list-item-title @click="$router.push({ name:'MyPage' })">마이페이지</v-list-item-title>
               </v-list-item>
               <v-list-item>
                 <v-list-item-title
-                  @click="$store.dispatch('logout')"
-                >Logout</v-list-item-title>
+                    @click="$store.dispatch('logoutAction')"
+                >로그아웃</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
-          <router-link v-else to="/login" >Login</router-link>
-
         </v-toolbar-items>
       </v-row>
 
@@ -49,14 +50,13 @@ export default {
   name: "AppBar",
   data() {
     return{
-
     }
   },
   computed: {
-    ...mapState(['isLogin'])
+    ...mapState(['isLogin', 'isLoginError'])
   },
   methods: {
-    ...mapActions(['logout'])
+    ...mapActions(['logoutAction'])
   }
 }
 </script>

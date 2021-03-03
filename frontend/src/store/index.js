@@ -1,14 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from "@/router"
-import axios from'axios'
-
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userInfo: null,
     isLogin: false,
     isLoginError: false,
   },
@@ -18,10 +15,9 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    loginSuccess(state, payload) {
+    loginSuccess(state) {
       state.isLogin = true
       state.isLoginError = false
-      state.userInfo = payload
     },
     loginError(state) {
       state.isLoginError = true
@@ -30,36 +26,20 @@ export default new Vuex.Store({
     logout(state) {
       state.isLogin = false
       state.isLoginError = false
-      state.userInfo = null
     },
   },
 
   actions: {
-    login(){
-      axios
-        .post("/login", {userName:"a",password:"c"})
-          .then(res =>{
-              console.log(res)
-            // let config = {
-            //   headers : {
-            //     'access-token' : res.data.token
-            //   }
-            // }
-            // axios
-            //     .get("https://reqres.in/api/users/2", config)
-            //     .then(response => {
-            //       console.log(response)
-            //     })
-            //     .catch(error => {
-            //       console.log(error)
-            //     })
-
-          })
-          .catch(err=> {
-            console.log(err)
-          })
+    loginAction({commit}, statusOk){
+      if(statusOk === 200){
+        commit("loginSuccess")
+        router.push({ name: "Home" })
+      }
+      else if(statusOk === 204 ){
+        commit('loginError')
+      }
     },
-    logout({commit}) {
+    logoutAction({commit}) {
       commit('logout')
       router.push({name: "Home"})
     },

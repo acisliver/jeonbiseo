@@ -10,8 +10,8 @@
         <v-card>
           <v-card-text>
             <v-text-field
-                v-model="user_name"
-                :rules="[() => !!user_name || '필수입력입니다.']"
+                v-model="userName"
+                :rules="[() => !!userName || '필수입력입니다.']"
                 label="이메일 혹은 전화번호"
                 required
             ></v-text-field>
@@ -24,9 +24,9 @@
                 required
             ></v-text-field>
             <v-text-field
-                v-model="nick_name"
+                v-model="nickName"
                 :rules="[
-                () => !!nick_name || '필수입력입니다.']"
+                () => !!nickName || '필수입력입니다.']"
                 label="닉네임"
                 maxlength="25"
                 counter="25"
@@ -48,7 +48,7 @@
             <v-btn
                 color="primary"
                 text
-                @click="signup_summit({user_name, password, nick_name})"
+                @click="signup_summit({userName, password, nickName})"
             >
               Submit
             </v-btn>
@@ -61,6 +61,7 @@
 
 <script>
 import axios from "axios";
+import router from "@/router";
 
 export default {
 
@@ -68,9 +69,9 @@ export default {
   name: "SignUp",
   data () {
     return {
-      user_name: null,
+      userName: null,
       password: null,
-      nick_name: null,
+      nickName: null,
       rules: [v => v.length <= 25 || 'Max 25 characters'],
       // wordsRules: [v => v.trim().split(' ').length <= 5 || 'Max 25 words'],
     }
@@ -81,6 +82,7 @@ export default {
       axios
           .post("/api/signup",signupObj)
           .then(res => {
+            router.push({ name: "Login"})
             console.log(res.data)
           })
           .catch(err => {

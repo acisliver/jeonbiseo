@@ -10,21 +10,13 @@
         >
           아이디와 비밀번호를 확인해주세요
         </v-alert>
-        <v-alert
-            :value="isLogin"
-            dense
-            outlined
-            type="success"
-        >
-          로그인이 완료되었습니다
-        </v-alert>
         <v-card style="max-width: 500px;">
           <v-toolbar flat class="indigo lighten-5">
             <v-toolbar-title>로그인</v-toolbar-title>
           </v-toolbar>
           <div class="pa-3">
             <v-text-field
-                v-model="user_name"
+                v-model="userName"
                 label="이메일"
             >
             </v-text-field>
@@ -38,7 +30,7 @@
                 depressed
                 large
                 block
-                @click="login({user_name, password})"
+                @click="login({userName, password})"
             >로그인
             </v-btn>
             <v-btn @click="$router.push({ name:'SignUp' })" >회원가입</v-btn>
@@ -50,14 +42,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import axios from "axios";
+import store from "@/store"
 
 export default {
   name: "Login",
   data(){
     return{
-      user_name: null,
+      userName: null,
       password: null,
     }
   },
@@ -65,18 +58,20 @@ export default {
     ...mapState(['isLoginError', 'isLogin']),
   },
   methods: {
+    ...mapActions(['loginAction', 'logoutAction']),
     login(loginObj) {
       console.log(loginObj)
       axios
           .post("/login",loginObj)
           .then(res => {
-            console.log(res.data)
+            console.log(res)
+            let statusOk = res.data.status
+            store.dispatch('loginAction', statusOk)
           })
           .catch(err => {
             console.log(err)
           })
-    }
-
+    },
     }
 }
 </script>
