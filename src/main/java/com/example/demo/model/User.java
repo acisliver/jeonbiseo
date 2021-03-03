@@ -30,7 +30,7 @@ public class User {
     private String password;
 
     @Column(nullable = false, length = 50)
-    private String email;
+    private String nickName;
 
     //@ColumnDefault("'user'")
     //private String role; //Enum을 쓰면 도메인을 설정 할 수 있기 때문에, Enum을 쓰는것이 좋다.

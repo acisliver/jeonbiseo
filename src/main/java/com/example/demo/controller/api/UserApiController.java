@@ -28,7 +28,7 @@ public class UserApiController {
         }
     }
 
-    @PostMapping("/signup")
+    @PostMapping("api/signup")
     public ResponseDto<Integer> save(@RequestBody User user) {
         User checkSignUp = userService.signUpApi(user);
         if(checkSignUp != null){
