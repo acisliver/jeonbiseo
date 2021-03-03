@@ -24,7 +24,7 @@
           </v-toolbar>
           <div class="pa-3">
             <v-text-field
-                v-model="email"
+                v-model="user_name"
                 label="이메일"
             >
             </v-text-field>
@@ -38,7 +38,7 @@
                 depressed
                 large
                 block
-                @click="login({email, password})"
+                @click="login({user_name, password})"
             >로그인
             </v-btn>
             <v-btn @click="$router.push({ name:'SignUp' })" >회원가입</v-btn>
@@ -50,13 +50,14 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
+import axios from "axios";
 
 export default {
   name: "Login",
   data(){
     return{
-      email: null,
+      user_name: null,
       password: null,
     }
   },
@@ -64,7 +65,18 @@ export default {
     ...mapState(['isLoginError', 'isLogin']),
   },
   methods: {
-    ...mapActions(['login']),
+    login(loginObj) {
+      console.log(loginObj)
+      axios
+          .post("/login",loginObj)
+          .then(res => {
+            console.log(res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    }
+
     }
 }
 </script>

@@ -9,16 +9,12 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     userInfo: null,
-    allUsers: [
-      { id: 1, userName: "hoza", email: "hoza@naver.com", password: "1234"},
-      { id: 2, userName: "lego", email: "lego@naver.com", password: "1234"}
-    ],
     isLogin: false,
     isLoginError: false,
   },
 
   getters:{
-    allUsersCount: state => state.allUsers.length
+
   },
 
   mutations: {
@@ -67,18 +63,7 @@ export default new Vuex.Store({
       commit('logout')
       router.push({name: "Home"})
     },
-   signup_summit(signupObj) {
-        console.log(signupObj)
-      axios
-          .post("/signup",{userName:"aaa",email:"bbb",password:"ccc"})
-          .then(res => {
-            console.log(res)
-          })
-          .catch(err => {
-              console.log(err)
-          })
-       router.push({ name: 'Login'})
-   }
+
   },
 
   modules: {
