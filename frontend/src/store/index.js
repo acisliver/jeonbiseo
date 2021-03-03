@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from "@/router"
+import axios from "axios";
 
 Vue.use(Vuex)
 
@@ -8,6 +9,7 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     isLoginError: false,
+    userInfo: null,
   },
 
   getters:{
@@ -27,9 +29,23 @@ export default new Vuex.Store({
       state.isLogin = false
       state.isLoginError = false
     },
+    setUserInfo(state, userInfoObj) {
+      state.userInfo = userInfoObj
+    }
   },
 
   actions: {
+    getUserInfo({commit}){
+      axios
+          .get('api/user')
+          .then(res => {
+            commit('setUserInfo', res.data)
+            console.log(res.data)
+          })
+          .catch(err => {
+            console.log(err)
+      })
+    },
     loginAction({commit}, statusOk){
       if(statusOk === 200){
         commit("loginSuccess")
@@ -41,7 +57,7 @@ export default new Vuex.Store({
     },
     logoutAction({commit}) {
       commit('logout')
-      router.push({name: "Home"})
+      router.push({ name: "Home" })
     },
 
   },
