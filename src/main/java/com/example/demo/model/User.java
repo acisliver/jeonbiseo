@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @Data
@@ -40,5 +43,6 @@ public class User {
 
     @CreationTimestamp //시간이 자동 입력됨
     private Timestamp createDate;
+
 
 }

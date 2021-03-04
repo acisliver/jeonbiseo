@@ -6,6 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface UserRepository extends JpaRepository<User,Integer> {
 
+
     @Query(value = "SELECT * FROM User WHERE userName= ?1 AND password= ?2", nativeQuery = true)
     User loginQuery(String userName, String password);
+
+    //네이밍 전략 사용
+    //User findByUsername(String username);
+
+    @Query(value = "SELECT * FROM User WHERE userName= ?1", nativeQuery = true)
+    User searchUserQuery(String userName);
 }
