@@ -9,7 +9,11 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     isLoginError: false,
-    userInfo: null,
+    userInfo: {
+      userName: "Test1",
+      password: "1234",
+      nickName: "TestNick1"
+    },
   },
 
   getters:{

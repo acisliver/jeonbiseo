@@ -3,9 +3,9 @@
     <h2>
       환영합니다!
     </h2>
-    <p>{{userInfo.userName}}</p>
-    <p>{{userInfo.password}}</p>
-    <p>{{userInfo.nickname}}</p>
+    <p>userName: {{userInfo.userName}}</p>
+    <p>password: {{userInfo.password}}</p>
+    <p>nickName:{{userInfo.nickName}}</p>
     <v-btn>수정</v-btn>
   </div>
 </template>

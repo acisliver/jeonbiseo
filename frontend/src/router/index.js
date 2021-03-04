@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '@/store'
+// import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -8,27 +8,28 @@ const Home = () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
 const About = () => import(/* webpackChunkName: "about" */ '../views/About.vue');
 const Login = () => import(/* webpackChunkName: "login" */ '../components/Login.vue');
 const MyPage = () => import(/* webpackChunkName: "mypage" */ '../views/MyPage.vue');
-const SignUp = () => import(/* webpackChunkName: "mypage" */ '../components/SignUp.vue');
+const SignUp = () => import(/* webpackChunkName: "signup" */ '../components/SignUp.vue');
+// const EditUserInfo = () => import(/* webpackChunkName: "edituserinfo" */ '../components/EditUserInfo.vue');
 
-const rejectAuthUser = (to, from, next) =>{
-  if(store.state.isLogin){
-    alert('이미 로그인하였습니다')
-    next('/')
-  }
-  else{
-    next()
-  }
-}
-
-const onlyAuthUser = (to, from, next) =>{
-  if(!store.state.isLogin){
-    alert('로그인이 필요한 기능힙니다')
-    next('/')
-  }
-  else{
-    next()
-  }
-}
+// const rejectAuthUser = (to, from, next) =>{
+//   if(store.state.isLogin){
+//     alert('이미 로그인하였습니다')
+//     next('/')
+//   }
+//   else{
+//     next()
+//   }
+// }
+//
+// const onlyAuthUser = (to, from, next) =>{
+//   if(!store.state.isLogin){
+//     alert('로그인이 필요한 기능힙니다')
+//     next('/')
+//   }
+//   else{
+//     next()
+//   }
+// }
 
 const routes = [
   {
@@ -44,14 +45,14 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    beforeEnter: rejectAuthUser,
+    // beforeEnter: rejectAuthUser,
     component: Login
   },
   {
     path: '/mypage',
     name: 'MyPage',
-    beforeEnter: onlyAuthUser,
-    component: MyPage
+    // beforeEnter: onlyAuthUser,
+    component: MyPage,
   },
   {
     path: '/signup',

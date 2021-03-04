@@ -7,10 +7,7 @@
         <v-spacer />
         <v-toolbar-items class="hidden-sm-and-down">
           <router-link to="/">홈</router-link>
-
           <router-link to="/about">About</router-link>
-
-
           <router-link v-if="!isLogin" to="/login" >로그인</router-link>
           <router-link v-if="!isLogin" to="/signup">회원가입</router-link>
           <v-menu offset-y v-if="isLogin">
@@ -27,12 +24,12 @@
             </template>
             <v-list>
               <v-list-item>
-                <v-list-item-title @click="$router.push({ name:'MyPage' })">마이페이지</v-list-item-title>
+                <v-list-item-title><router-link to="/mypage">마이페이지</router-link></v-list-item-title>
               </v-list-item>
               <v-list-item>
                 <v-list-item-title
                     @click="$store.dispatch('logoutAction')"
-                >로그아웃</v-list-item-title>
+                ><a>로그아웃</a></v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -81,5 +78,26 @@ export default {
        color: #42b983;
      }
   }
+}
+
+//마이페이지
+#list-item-23 > div > a{
+  text-decoration: none;
+  font-weight: bold;
+  color: #2c3e50;
+  padding: 10px;
+
+  &.router-link-exact-active {
+    color: #42b983;
+  }
+}
+
+//로그아웃
+#list-item-25 > div > a{
+  text-decoration: none;
+  font-weight: bold;
+  color: #2c3e50;
+  padding: 10px;
+
 }
 </style>
