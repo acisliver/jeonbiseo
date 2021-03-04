@@ -61,7 +61,7 @@
 
 <script>
 import axios from "axios";
-import router from "@/router";
+// import router from "@/router";
 
 export default {
   name: "SignUp",
@@ -80,7 +80,7 @@ export default {
       axios
           .post("/api/signup",signupObj)
           .then(res => {
-            router.push({ name: "Login"})
+            this.$router.push({ name: "Login"})
             console.log(res.data)
           })
           .catch(err => {

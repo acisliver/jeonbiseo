@@ -9,7 +9,6 @@ const About = () => import(/* webpackChunkName: "about" */ '../views/About.vue')
 const Login = () => import(/* webpackChunkName: "login" */ '../components/Login.vue');
 const MyPage = () => import(/* webpackChunkName: "mypage" */ '../views/MyPage.vue');
 const SignUp = () => import(/* webpackChunkName: "signup" */ '../components/SignUp.vue');
-// const EditUserInfo = () => import(/* webpackChunkName: "edituserinfo" */ '../components/EditUserInfo.vue');
 
 // const rejectAuthUser = (to, from, next) =>{
 //   if(store.state.isLogin){
@@ -49,10 +48,10 @@ const routes = [
     component: Login
   },
   {
-    path: '/mypage',
+    path: '/mypage/:username',
     name: 'MyPage',
     // beforeEnter: onlyAuthUser,
-    component: MyPage,
+    component: MyPage
   },
   {
     path: '/signup',

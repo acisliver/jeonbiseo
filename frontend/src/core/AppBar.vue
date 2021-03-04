@@ -24,12 +24,18 @@
             </template>
             <v-list>
               <v-list-item>
-                <v-list-item-title><router-link to="/mypage">마이페이지</router-link></v-list-item-title>
+                <v-list-item-title>
+                  <router-link :to="{
+                    name: 'MyPage',
+                    params: {
+                      username: this.$store.state.userInfo.userName
+                    }
+                }">마이페이지</router-link></v-list-item-title>
               </v-list-item>
               <v-list-item>
                 <v-list-item-title
                     @click="$store.dispatch('logoutAction')"
-                ><a>로그아웃</a></v-list-item-title>
+                ><router-link :to="{name: 'Home'}">로그아웃</router-link></v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
