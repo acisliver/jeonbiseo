@@ -1,5 +1,7 @@
 package com.example.demo.config;
 
+import com.example.demo.config.jwt.JwtAccessDeniedHandler;
+import com.example.demo.config.jwt.JwtAuthenticationEntryPoint;
 import com.example.demo.config.jwt.JwtAuthenticationFilter;
 import com.example.demo.config.jwt.JwtAuthotizationFilter;
 import com.example.demo.repository.UserRepository;
@@ -43,6 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .access("hasRole(RoleType.USER) or hasRole(RoleType.ADMIN)")
                 .antMatchers("/api/admin/**")
                 .access("hasRole(RoleType.ADMIN)")
-                .anyRequest().permitAll();
+                .anyRequest().permitAll()
+
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+                .accessDeniedHandler(new JwtAccessDeniedHandler());
     }
 }
