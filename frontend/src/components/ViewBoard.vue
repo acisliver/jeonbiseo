@@ -51,7 +51,7 @@ export default {
   },
   created() {
     axios
-        .get('api/boardHeader')
+        .get('/api/boardHeader')
         .then(res => {
           this.boardHeader = res.data
         })
