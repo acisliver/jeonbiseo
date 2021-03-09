@@ -14,6 +14,40 @@ export default new Vuex.Store({
       password: "1234",
       nickName: "TestNick1"
     },
+    board: {
+      writer: null,
+      title: null,
+      content: null,
+      boardId: null
+    },
+    boardHeader: [
+      {
+        writer: '대은',
+        title: '빅데이터란',
+        writeTime: 1,       //Date() 반환좀
+        content: '공부해야됨?야팔',
+        boardId: 1
+      },
+      {
+        writer: "성범",
+        title: '존잘이란',
+        writeTime: 2,
+        content: '강성범존잘',
+        boardId: 2
+      },
+      {
+        writer: '지훈',
+        title: '토비란',
+        writeTime: 3,
+        content: '스프링 설명개꿀',
+        boardId: 3
+      }
+    ],
+    boardBody: [
+      {
+
+      }
+    ]
   },
 
   getters:{
