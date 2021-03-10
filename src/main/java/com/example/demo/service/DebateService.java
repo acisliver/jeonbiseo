@@ -32,30 +32,31 @@ public class DebateService {
         });
     }
 
-    public void writeBoard(Debate debate, User user) {
+    public void writeDebate(Debate debate, User user) {
         debate.setCount(0);
         debate.setUser(user);
         debateRepository.save(debate);
     }
 
-    public void deleteBoard(int id) {
+    public void deleteDebate(int id) {
         debateRepository.deleteById(id);
     }
 
-    public void updateBoard(int id, Board requestBoard) {
-        Debate board=debateRepository.findById(id).orElseThrow(() -> {
+    public void updateBoard(int id, Debate requestDebate) {
+        Debate debate=debateRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당 글을 찾을 수 없습니다.");
         });
 
-        board.setTitle(requestBoard.getTitle());
-        board.setContent(requestBoard.getContent());
+        debate.setTitle(requestDebate.getTitle());
+        debate.setContent(requestDebate.getContent());
     }
 
-    public void writeReply(ReplySaveRequestDto replySaveRequestDto) {
+
+    public void writeDebateReply(ReplySaveRequestDto replySaveRequestDto) {
         debateReplyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
     }
 
-    public void deleteReply(int replyId) {
+    public void deleteDebateReply(int replyId) {
         debateReplyRepository.deleteById(replyId);
     }
 }

@@ -7,6 +7,7 @@ import com.example.demo.model.DebateReply;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.DebateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.DomainEvents;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,25 +26,7 @@ public class BoardController {
     @Autowired
     private DebateService debateService;
 
-    @GetMapping("/board")
-    public @ResponseBody Page<Board> board(){
-        return null;
-    }
 
-    @GetMapping("/api/boardHeader")
-    public @ResponseBody Page<Board> enterNoticeBoardPage(@PageableDefault(size=10,sort = "id",
-            direction = Sort.Direction.DESC)Pageable pageable){
-
-        Page<Board> boardHearder = boardService.postList(pageable);
-        return boardHearder;
-    }
-    @GetMapping("/api/debateHeader")
-    public @ResponseBody Page<Debate> enterNoticeDebatePage(@PageableDefault(size=10,sort = "id",
-            direction = Sort.Direction.DESC)Pageable pageable){
-
-        Page<Debate> debateHeader = debateService.postList(pageable);
-        return debateHeader;
-    }
 
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
@@ -51,6 +34,14 @@ public class BoardController {
     public @ResponseBody Board viewBoard(@PathVariable int boardId){
         Board board = boardService.viewBoard(boardId);
         return board;
+    }
+
+    //글을 눌렀을 때, 해당 글을 볼 수 있도록
+    //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
+    @GetMapping({"debate/{debateId}","debate/{debateId}/updateForm"})
+    public @ResponseBody Debate viewDebate(@PathVariable int debateId){
+        Debate debate = debateService.viewBoard(debateId);
+        return debate;
     }
 
 }

@@ -2,8 +2,11 @@ package com.example.demo.service;
 
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.model.Board;
+import com.example.demo.model.Debate;
 import com.example.demo.model.User;
 import com.example.demo.repository.BoardRepository;
+import com.example.demo.repository.DebateReplyRepository;
+import com.example.demo.repository.DebateRepository;
 import com.example.demo.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,11 +53,15 @@ public class BoardService {
         board.setContent(requestBoard.getContent());
     }
 
+
     public void writeReply(ReplySaveRequestDto replySaveRequestDto) {
         replyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
     }
 
+
     public void deleteReply(int replyId) {
         replyRepository.deleteById(replyId);
     }
+
+
 }
