@@ -78,7 +78,7 @@ export default new Vuex.Store({
           .get('/api/boardHeader')
           .then(res => {
             commit('setBoardHeader', res.data.content)
-            console.log(res)
+            console.log(res.data);
           })
           .catch(err => {
             console.log(err)
