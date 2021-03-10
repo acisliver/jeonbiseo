@@ -1,17 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from "@/components/Login";
 
 Vue.use(VueRouter)
 
 const Home = () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
-const About = () => import(/* webpackChunkName: "about" */ '../views/About.vue');
-// const Login = () => import(/* webpackChunkName: "login" */ '../components/Login.vue');
+// const About = () => import(/* webpackChunkName: "about" */ '../views/About.vue');
+const Login = () => import(/* webpackChunkName: "login" */ '../components/Login.vue');
 const MyPage = () => import(/* webpackChunkName: "mypage" */ '../views/MyPage.vue');
 const SignUp = () => import(/* webpackChunkName: "signup" */ '../components/SignUp.vue');
 const Board = () => import(/* webpackChunkName: "board-group" */ '../views/Board.vue');
 const FreeBoard = () => import(/* webpackChunkName: "board-group" */ '../views/FreeBoard');
 const DebateBoard = () => import(/* webpackChunkName: "board-group" */ '../views/DebateBoard');
+const WriteBoard = () => import(/* webpackChunkName: "board-group" */ '../views/WriteBoard');
+const WriteFree = () => import(/* webpackChunkName: "board-group" */ '../components/WriteFree');
+const WriteDebate = () => import(/* webpackChunkName: "board-group" */ '../components/WriteDebate');
 
 // const rejectAuthUser = (to, from, next) =>{
 //   if(store.state.isLogin){
@@ -39,11 +41,11 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: About
-  },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   component: About
+  // },
   {
     path: '/login',
     name: 'Login',
@@ -79,6 +81,21 @@ const routes = [
     path: '/board/debate-board',
     name: 'DebateBoard',
     component: DebateBoard
+  },
+  {
+    path: '/:board/write',
+    name: 'WriteBoard',
+    component: WriteBoard,
+    children: [
+        {
+          path: 'board',
+          component: WriteFree
+        },
+        {
+          path: 'debate',
+          component: WriteDebate
+        }
+    ]
   }
 ]
 

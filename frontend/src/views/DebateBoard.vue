@@ -1,5 +1,5 @@
 <template>
-  <Pagination :title = "title" :header="debateHeader"></Pagination>
+  <Pagination :title = "title" :header="debateHeader" :board-name="boardName"></Pagination>
 </template>
 
 <script>
@@ -9,7 +9,8 @@ export default {
   name: "DebateBoard",
   data () {
     return {
-      title: "토론주제"
+      title: "토론주제",
+      boardName: 'debate'
     }
   },
   components: {

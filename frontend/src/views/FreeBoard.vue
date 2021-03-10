@@ -1,5 +1,5 @@
 <template>
-  <Pagination :title = "title" :header="boardHeader"></Pagination>
+  <Pagination :title = "title" :header="boardHeader" :board-name="boardName"></Pagination>
 </template>
 
 <script>
@@ -10,7 +10,8 @@ export default {
   name: "ViewBoard",
   data () {
     return {
-      title: '제목'
+      title: '제목',
+      boardName: 'board'
     }
   },
   components: {

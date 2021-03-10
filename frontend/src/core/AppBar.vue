@@ -7,7 +7,7 @@
         <v-spacer />
         <v-toolbar-items class="hidden-sm-and-down">
           <router-link to="/">홈</router-link>
-          <router-link to="/about">About</router-link>
+<!--          <router-link to="/about">About</router-link>-->
           <router-link to="/board">게시판</router-link>
           <router-link v-if="!isLogin" to="/login" >로그인</router-link>
           <router-link v-if="!isLogin" to="/signup">회원가입</router-link>

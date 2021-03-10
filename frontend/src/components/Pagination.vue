@@ -39,13 +39,23 @@
 <!--          </v-row>-->
 <!--        </v-container>-->
 <!--      </div>-->
-      <div class="btn-cover">
+      <div class="align-end">
         <v-btn :disabled="pageNum === 0" @click="prevPage" class="page-btn">
           이전
         </v-btn>
         <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
         <v-btn :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
           다음
+        </v-btn>
+        <v-btn @click="$router.push(
+            {
+            name: 'WriteBoard',
+            params: {
+              board: boardName
+            }
+            })"
+        >
+          글쓰기
         </v-btn>
       </div>
     </template>
@@ -73,6 +83,10 @@ export default {
       type: Number,
       required: false,
       default: 7
+    },
+    boardName: {
+      type: String,
+      required: true
     }
   },
   methods: {
