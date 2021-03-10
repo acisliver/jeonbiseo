@@ -64,7 +64,7 @@ public class DebateApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
-    @PutMapping("/api/board/{id}")
+    @PutMapping("/api/debate/{id}")
     public ResponseDto<Integer> debateUpdate(@PathVariable int id, @RequestBody Debate debate){
         debateService.updateBoard(id, debate);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
