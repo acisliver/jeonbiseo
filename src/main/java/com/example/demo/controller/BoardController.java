@@ -1,7 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.BoardReturn;
 import com.example.demo.model.Board;
+import com.example.demo.model.Debate;
+import com.example.demo.model.DebateReply;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.DebateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,19 +22,34 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    //게시판 페이지에 들어왔을 때, 페이징을 사용하여 한번에 10가지 게시글만 볼 수 있도록 함.
-    @GetMapping("/noticeBoardPage")
+    @Autowired
+    private DebateService debateService;
+
+    @GetMapping("/board")
+    public @ResponseBody Page<Board> board(){
+        return null;
+    }
+
+    @GetMapping("/api/boardHeader")
     public @ResponseBody Page<Board> enterNoticeBoardPage(@PageableDefault(size=10,sort = "id",
-                                             direction = Sort.Direction.DESC)Pageable pageable){
-        Page<Board> pageBoard = boardService.postList(pageable);
-        return pageBoard;
+            direction = Sort.Direction.DESC)Pageable pageable){
+
+        Page<Board> boardHearder = boardService.postList(pageable);
+        return boardHearder;
+    }
+    @GetMapping("/api/debateHeader")
+    public @ResponseBody Page<Debate> enterNoticeDebatePage(@PageableDefault(size=10,sort = "id",
+            direction = Sort.Direction.DESC)Pageable pageable){
+
+        Page<Debate> debateHeader = debateService.postList(pageable);
+        return debateHeader;
     }
 
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
-    @GetMapping({"board/{id}","board/{id}/updateForm"})
-    public @ResponseBody Board viewBoard(@PathVariable int id){
-        Board board = boardService.viewBoard(id);
+    @GetMapping({"board/{boardId}","board/{boardId}/updateForm"})
+    public @ResponseBody Board viewBoard(@PathVariable int boardId){
+        Board board = boardService.viewBoard(boardId);
         return board;
     }
 
