@@ -9,9 +9,9 @@
         <th class="text-right">
           작성자
         </th>
-        <th class="text-right">
-          작성일자
-        </th>
+<!--        <th class="text-right">-->
+<!--          작성일자-->
+<!--        </th>-->
       </tr>
       </thead>
       <tbody>
@@ -30,34 +30,24 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+import { mapState,mapActions } from 'vuex'
 
 export default {
   name: "ViewBoard",
   data () {
     return {
-      boardHeader: null,
+
     }
   },
+  computed: {
+    ...mapState(['boardHeader'])
+  },
   methods: {
-    // getBoardBody(boardId){
-    //   let id = boardId
-    //   axios
-    //   .post('api/:id')
-    //   .then(res => {
-    //
-    //   })
-    // }
+    ...mapActions(['getBoardHeader'])
   },
   created() {
-    axios
-        .get('/api/boardHeader')
-        .then(res => {
-          this.boardHeader = res.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
+    this.getBoardHeader()
   }
 }
 </script>

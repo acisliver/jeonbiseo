@@ -22,7 +22,7 @@
           class="#42b983 py-4 text-center white--text"
           cols="12"
       >
-        {{ new Date().getFullYear() }} — <strong>전자기기 비교는 여기서</strong>
+        {{ new Date().getFullYear() }} — <strong><span>전</span>자기기 <span>비</span>교는 여기<span>서</span></strong>
       </v-col>
     </v-row>
   </v-footer>
