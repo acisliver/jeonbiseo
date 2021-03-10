@@ -32,6 +32,14 @@ public class BoardApiController {
         return boardHearder;
     }
 
+    //글을 눌렀을 때, 해당 글을 볼 수 있도록
+    //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
+    @GetMapping({"/api/board/{boardId}"})
+    public @ResponseBody Board viewBoard(@PathVariable int boardId){
+        Board board = boardService.viewBoard(boardId);
+        return board;
+    }
+
     //자유 게시판 글쓰기 버튼 눌렀을 때
     //토큰검증 필요
     @GetMapping("/api/board/write")
@@ -55,7 +63,6 @@ public class BoardApiController {
         boardService.deleteBoard(id);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
-
 
     //업데이트
     @PutMapping("/api/board/{id}")

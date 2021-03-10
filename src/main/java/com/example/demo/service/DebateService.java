@@ -26,7 +26,7 @@ public class DebateService {
         return debateRepository.findAll(pageable);
     }
 
-    public Debate viewBoard(int id){
+    public Debate viewDebate(int id){
         return debateRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당 글을 찾을 수 없다");
         });
