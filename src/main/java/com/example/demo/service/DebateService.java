@@ -53,7 +53,7 @@ public class DebateService {
 
 
     public void writeDebateReply(ReplySaveRequestDto replySaveRequestDto) {
-        debateReplyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+        //debateReplyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
     }
 
     public void deleteDebateReply(int replyId) {

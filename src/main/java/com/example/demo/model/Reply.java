@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Entity
@@ -20,7 +21,8 @@ public class Reply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, length = 200)
+    @NotNull
+    @Column( length = 200)
     private String content;
 
     //한 게시물에는 여러개의 답글이 있을 수 있다.
@@ -35,4 +37,17 @@ public class Reply {
 
     @CreationTimestamp
     private Timestamp createDate;
+
+    //부모노드 확인
+    @Column(nullable = false)
+    private int reparent;
+
+    //깊이
+    @Column(nullable = false)
+    private int redepth;
+
+    //순서
+    @Column(nullable = false)
+    private int reorder;
+
 }

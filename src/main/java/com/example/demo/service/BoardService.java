@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class BoardService {
 
@@ -55,7 +57,17 @@ public class BoardService {
 
 
     public void writeReply(ReplySaveRequestDto replySaveRequestDto) {
-        replyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+        if(replySaveRequestDto.getReparentId()!=0){//부모가 있을때 즉 대댓글일때
+            ReplySaveRequestDto reparentData= replyRepository.search(replySaveRequestDto.getReparentId());
+            replyRepository.update(reparentData.getReorder());
+            replyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent()
+                    ,replySaveRequestDto.getReparentId(),1,reparentData.getReorder()+1);
+        }
+        else{//일반댓글일때
+            replyRepository.update(0);
+            replyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent()
+                    ,replySaveRequestDto.getReparentId(),0,0);
+        }
     }
 
 
