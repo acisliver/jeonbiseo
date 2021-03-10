@@ -9,7 +9,9 @@ const About = () => import(/* webpackChunkName: "about" */ '../views/About.vue')
 // const Login = () => import(/* webpackChunkName: "login" */ '../components/Login.vue');
 const MyPage = () => import(/* webpackChunkName: "mypage" */ '../views/MyPage.vue');
 const SignUp = () => import(/* webpackChunkName: "signup" */ '../components/SignUp.vue');
-const Board = () => import(/* webpackChunkName: "board" */ '../views/Board.vue');
+const Board = () => import(/* webpackChunkName: "board-group" */ '../views/Board.vue');
+const FreeBoard = () => import(/* webpackChunkName: "board-group" */ '../views/FreeBoard');
+const DebateBoard = () => import(/* webpackChunkName: "board-group" */ '../views/DebateBoard');
 
 // const rejectAuthUser = (to, from, next) =>{
 //   if(store.state.isLogin){
@@ -67,6 +69,16 @@ const routes = [
   {
     path: '/board/:boardid',
     name: 'ReadBoard'
+  },
+  {
+    path: '/board/free-board',
+    name: 'FreeBoard',
+    component: FreeBoard
+  },
+  {
+    path: '/board/debate-board',
+    name: 'DebateBoard',
+    component: DebateBoard
   }
 ]
 

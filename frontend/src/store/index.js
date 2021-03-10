@@ -16,19 +16,25 @@ export default new Vuex.Store({
     },
     boardHeader: [
       {
-        writer: '대은',
         title: '빅데이터란',
-        id: 1
+        id: 1,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: "성범",
         title: '존잘이란',
-        id: 2
+        id: 2,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '토비란',
-        id: 3
+        id: 3,
+        user: {
+          nickName: '대은'
+        }
       }
     ],
     boardBody: [
@@ -38,80 +44,116 @@ export default new Vuex.Store({
     ],
     debateHeader: [
       {
-        writer: '대은',
         title: '캡스톤주제뭐할까',
-        id: 1
+        id: 1,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: "성범",
         title: '잘생겨지기위해필요한것',
-        id: 2
+        id: 2,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 3
+        id: 3,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 4
+        id: 4,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 5
+        id: 5,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 6
+        id: 6,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 7
+        id: 7,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 8
+        id: 8,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 9
+        id: 9,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 10
+        id: 10,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 11
-      },{
-        writer: '지훈',
-        title: '싱글턴어캐쓸까',
-        id: 12
-      },{
-        writer: '지훈',
-        title: '싱글턴어캐쓸까',
-        id: 13
-      },{
-        writer: '지훈',
-        title: '싱글턴어캐쓸까',
-        id: 14
+        id: 11,
+        user: {
+          nickName: '대은'
+        }
       },
       {
-        writer: '지훈',
         title: '싱글턴어캐쓸까',
-        id: 15
-      },{
-        writer: '지훈',
+        id: 12,
+        user: {
+          nickName: '대은'
+        }
+      },
+      {
         title: '싱글턴어캐쓸까',
-        id: 16
+        id: 13,
+        user: {
+          nickName: '대은'
+        }
+      },
+      {
+        title: '싱글턴어캐쓸까',
+        id: 14,
+        user: {
+          nickName: '대은'
+        }
+      },
+      {
+        title: '싱글턴어캐쓸까',
+        id: 15,
+        user: {
+          nickName: '대은'
+        }
+      },
+      {
+        title: '싱글턴어캐쓸까',
+        id: 16,
+        user: {
+          nickName: '대은'
+        }
       },
 
 

@@ -26,5 +26,10 @@ export default {
 </script>
 
 <style scoped>
-
+a{
+  font-weight: bold;
+  text-decoration: none;
+  font-size: large;
+  color: black;
+}
 </style>
