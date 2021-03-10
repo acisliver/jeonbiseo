@@ -66,7 +66,7 @@ export default {
       required: true
     },
     header: {
-      type: Array,
+      type: null,
       required: true
     },
     pageSize: {
@@ -85,6 +85,9 @@ export default {
   },
   computed: {
     pageCount () {
+      if (this.header === null ){
+        return 1;
+      }
       let listLeng = this.header.length,
           listSize = this.pageSize,
           page = Math.floor(listLeng / listSize);
@@ -99,6 +102,9 @@ export default {
     paginatedData () {
       const start = this.pageNum * this.pageSize,
           end = start + this.pageSize;
+      if (this.header === null){
+        return this.header;
+      }
       return this.header.slice(start, end);
     }
   }
