@@ -88,7 +88,7 @@ export default new Vuex.Store({
       axios
           .get('/api/debateHeader')
           .then(res => {
-            commit('setdebateHeader', res.data.content)
+            commit('setDebateHeader', res.data.content)
             console.log(res)
           })
           .catch(err => {

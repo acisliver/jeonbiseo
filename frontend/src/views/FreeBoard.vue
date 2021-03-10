@@ -3,7 +3,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import { mapState,mapActions } from 'vuex'
 
 export default {

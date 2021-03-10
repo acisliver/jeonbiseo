@@ -49,7 +49,7 @@
         </v-btn>
         <v-btn @click="$router.push(
             {
-            name: 'WriteBoard',
+            name: '',
             params: {
               board: boardName
             }

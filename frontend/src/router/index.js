@@ -11,8 +11,7 @@ const SignUp = () => import(/* webpackChunkName: "signup" */ '../components/Sign
 const Board = () => import(/* webpackChunkName: "board-group" */ '../views/Board.vue');
 const FreeBoard = () => import(/* webpackChunkName: "board-group" */ '../views/FreeBoard');
 const DebateBoard = () => import(/* webpackChunkName: "board-group" */ '../views/DebateBoard');
-const WriteBoard = () => import(/* webpackChunkName: "board-group" */ '../views/WriteBoard');
-const WriteFree = () => import(/* webpackChunkName: "board-group" */ '../components/WriteFree');
+const WriteBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteBoard');
 const WriteDebate = () => import(/* webpackChunkName: "board-group" */ '../components/WriteDebate');
 
 // const rejectAuthUser = (to, from, next) =>{
@@ -83,19 +82,14 @@ const routes = [
     component: DebateBoard
   },
   {
-    path: '/:board/write',
+    path: '/board/write',
     name: 'WriteBoard',
-    component: WriteBoard,
-    children: [
-        {
-          path: 'board',
-          component: WriteFree
-        },
-        {
-          path: 'debate',
-          component: WriteDebate
-        }
-    ]
+    component: WriteBoard
+  },
+  {
+    path: '/debate/write',
+    name: 'WriteDebate',
+    component: WriteDebate
   }
 ]
 

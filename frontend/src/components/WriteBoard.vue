@@ -1,10 +1,10 @@
 <template>
-  <div class="writeFree">자유게시판글쓰기</div>
+  <div class="writeBoard">자유게시판글쓰기</div>
 </template>
 
 <script>
 export default {
-  name: "WriteFree"
+  name: "WriteBoard"
 }
 </script>
 

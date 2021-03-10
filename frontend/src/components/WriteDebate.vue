@@ -1,5 +1,5 @@
 <template>
-  <div class="writeBoard">토론게시판글쓰기</div>
+  <div class="writeFree">토론게시판글쓰기</div>
 </template>
 
 <script>
