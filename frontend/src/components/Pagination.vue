@@ -20,11 +20,25 @@
           :key="board.id"
       >
         <td class="text-left">{{ board.title }}</td>
-        <td class="text-right">{{ board.writer }}</td>
+        <td class="text-right">{{ board.user.userName }}</td>
         <!--        <td class="text-right">{{ board.writeTime}}</td>-->
       </tr>
       </tbody>
-      <v-spacer/>
+<!--      <div class="text-center">-->
+<!--        <v-container>-->
+<!--          <v-row justify="center">-->
+<!--            <v-col cols="8">-->
+<!--              <v-container class="max-width">-->
+<!--                <v-pagination-->
+<!--                    v-model="pageNum"-->
+<!--                    class="my-4"-->
+<!--                    :length="15"-->
+<!--                ></v-pagination>-->
+<!--              </v-container>-->
+<!--            </v-col>-->
+<!--          </v-row>-->
+<!--        </v-container>-->
+<!--      </div>-->
       <div class="btn-cover">
         <v-btn :disabled="pageNum === 0" @click="prevPage" class="page-btn">
           이전

@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["board"],{"5d6d":function(n,e,a){"use strict";a.r(e);var t=function(){var n=this,e=n.$createElement,a=n._self._c||e;return a("div",{staticClass:"board"},[a("h2",[n._v("게시판")]),a("ViewBoard")],1)},c=[],d=(a("d3b7"),a("3ca3"),a("ddb0"),{name:"Board",components:{ViewBoard:function(){return a.e("chunk-26f434ea").then(a.bind(null,"c5d5"))}}}),o=d,r=a("2877"),i=Object(r["a"])(o,t,c,!1,null,"3cc13ebf",null);e["default"]=i.exports}}]);
-//# sourceMappingURL=board.b02cf16b.js.map

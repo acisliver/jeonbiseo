@@ -182,7 +182,8 @@ export default new Vuex.Store({
       axios
           .get('/api/boardHeader')
           .then(res => {
-            commit('setBoardHeader', res.data)
+            commit('setBoardHeader', res.data.content)
+            console.log(res)
           })
           .catch(err => {
             console.log(err)
@@ -192,7 +193,8 @@ export default new Vuex.Store({
       axios
           .get('/api/debateHeader')
           .then(res => {
-            commit('setdebateHeader', res.data)
+            commit('setdebateHeader', res.data.content)
+            console.log(res)
           })
           .catch(err => {
             console.log(err)
