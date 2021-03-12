@@ -20,7 +20,7 @@ export default {
     ...mapState(['freeHeader'])
   },
   methods: {
-    ...mapActions(['getBoardHeader'])
+    ...mapActions(['getFreedHeader'])
   },
   created() {
     this.getBoardHeader()

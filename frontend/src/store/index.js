@@ -73,7 +73,7 @@ export default new Vuex.Store({
       commit('logout')
       // router.push({ name: "Home" })
     },
-    getBoardHeader({commit}) {
+    getFreeHeader({commit}) {
       axios
           .get('/api/free-header')
           .then(res => {
