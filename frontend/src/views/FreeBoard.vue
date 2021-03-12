@@ -20,10 +20,10 @@ export default {
     ...mapState(['freeHeader'])
   },
   methods: {
-    ...mapActions(['getFreeHeader'])
+    ...mapActions(['getFreedHeader'])
   },
   created() {
-    this.getFreeHeader()
+    this.getBoardHeader()
   }
 }
 </script>
