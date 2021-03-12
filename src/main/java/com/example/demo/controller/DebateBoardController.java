@@ -3,5 +3,5 @@ package com.example.demo.controller;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class DebateController {
+public class DebateBoardController {
 }

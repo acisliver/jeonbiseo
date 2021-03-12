@@ -4,7 +4,7 @@ import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.model.Board;
 import com.example.demo.model.User;
 import com.example.demo.repository.FreeBoardRepository;
-import com.example.demo.repository.ReplyRepository;
+import com.example.demo.repository.FreeBoardReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ public class FreeBoardService {
     private FreeBoardRepository freeBoardRepository;
 
     @Autowired
-    private ReplyRepository replyRepository;
+    private FreeBoardReplyRepository freeBoardReplyRepository;
 
     @Transactional
     public List<Board> postList(){
@@ -52,12 +52,12 @@ public class FreeBoardService {
 
 
     public void writeReply(ReplySaveRequestDto replySaveRequestDto) {
-        replyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+        freeBoardReplyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
     }
 
 
     public void deleteReply(int replyId) {
-        replyRepository.deleteById(replyId);
+        freeBoardReplyRepository.deleteById(replyId);
     }
 
 

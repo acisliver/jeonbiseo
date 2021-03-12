@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-public interface ReplyRepository extends JpaRepository<Reply,Integer> {
+public interface FreeBoardReplyRepository extends JpaRepository<Reply,Integer> {
 
     //insert를 할 것이기 때문에 @Modifying 필요, @Modifying는 int만 반활 할 수 있다.
     @Modifying
