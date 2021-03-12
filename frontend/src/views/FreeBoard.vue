@@ -1,5 +1,5 @@
 <template>
-  <Pagination :title = "title" :header="boardHeader" :board-name="boardName"></Pagination>
+  <Pagination :title = "title" :header="freeHeader" :board-name="boardName"></Pagination>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
     Pagination: () => import('@/components/Pagination')
   },
   computed: {
-    ...mapState(['boardHeader'])
+    ...mapState(['freeHeader'])
   },
   methods: {
     ...mapActions(['getBoardHeader'])

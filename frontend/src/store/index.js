@@ -14,8 +14,8 @@ export default new Vuex.Store({
       password: "1234",
       nickName: "TestNick1"
     },
-    boardHeader: null,
-    boardBody: null,
+    freeHeader: null,
+    freeBody: null,
     debateHeader: null,
     debateBody: null,
   },
@@ -40,8 +40,8 @@ export default new Vuex.Store({
     setUserInfo(state, userInfoObj) {
       state.userInfo = userInfoObj
     },
-    setBoardHeader(state, boardHeader) {
-      state.boardHeader = boardHeader
+    setFreeHeader(state, freeHeader) {
+      state.freeHeader = freeHeader
     },
     setDebateHeader(state, debateHeader) {
       state.debateHeader = debateHeader
@@ -75,9 +75,9 @@ export default new Vuex.Store({
     },
     getBoardHeader({commit}) {
       axios
-          .get('/api/board-header')
+          .get('/api/free-header')
           .then(res => {
-            commit('setBoardHeader', res.data.content)
+            commit('setFreeHeader', res.data.content)
             console.log(res.data);
           })
           .catch(err => {
