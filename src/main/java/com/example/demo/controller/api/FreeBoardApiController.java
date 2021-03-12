@@ -4,7 +4,7 @@ import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.dto.ResponseDto;
 import com.example.demo.model.Board;
-import com.example.demo.service.BoardService;
+import com.example.demo.service.FreeBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,24 +13,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class BoardApiController {
+public class FreeBoardApiController {
 
     @Autowired
-    private BoardService boardService;
+    private FreeBoardService freeBoardService;
 
     @GetMapping("/api/free-header")
     public @ResponseBody
     List<Board> enterNoticeBoardPage(){
-        List<Board> freeHearder = boardService.postList();
+        List<Board> freeHearder = freeBoardService.postList();
         return freeHearder;
     }
 
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
     @GetMapping({"/api/free-board/{boardId}"})
-    public @ResponseBody Board viewBoard(@PathVariable int boardId){
-        Board freeBoard = boardService.viewBoard(boardId);
-        return freeBoard;
+    public @ResponseBody
+    Board viewBoard(@PathVariable int boardId){
+        Board board = freeBoardService.viewBoard(boardId);
+        return board;
     }
 
     //자유 게시판 글쓰기 버튼 눌렀을 때
@@ -44,37 +45,37 @@ public class BoardApiController {
     //자유게시판 글쓰기를 통해 작성 한 글 저장 버튼을 눌렀을 때
     //requestbosy란, post요청 시 json을 객체로 바인딩 할 수 있게 하는 것.
     @PostMapping("/api/free-board/write/save")
-    public ResponseDto<Integer> boardSave(@RequestBody Board freeBoard,
+    public ResponseDto<Integer> boardSave(@RequestBody Board board,
                                           @AuthenticationPrincipal PrincipalDetails principalDetails){
-        boardService.writeBoard(freeBoard,principalDetails.getUser());
+        freeBoardService.writeBoard(board,principalDetails.getUser());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //자유 게시글 삭제
     @DeleteMapping("/api/free-board/{id}")
     public ResponseDto<Integer> boardDelete(@PathVariable int id){
-        boardService.deleteBoard(id);
+        freeBoardService.deleteBoard(id);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //업데이트
     @PutMapping("/api/free-board/{id}")
-    public ResponseDto<Integer> boardUpdate(@PathVariable int id, @RequestBody Board freeBoard){
-        boardService.updateBoard(id, freeBoard);
+    public ResponseDto<Integer> boardUpdate(@PathVariable int id, @RequestBody Board board){
+        freeBoardService.updateBoard(id, board);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //자유게시판 댓글달기
     @PostMapping("/api/free-board/{boardId}/reply}")
     public ResponseDto<Integer> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto){
-        boardService.writeReply(replySaveRequestDto);
+        freeBoardService.writeReply(replySaveRequestDto);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //자유 게시판 댓글삭제
     @DeleteMapping("/api/free-board/{boardId}/reply/{replyId}")
     public ResponseDto<Integer> replyDelete(@PathVariable int replyId){
-        boardService.deleteReply(replyId);
+        freeBoardService.deleteReply(replyId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

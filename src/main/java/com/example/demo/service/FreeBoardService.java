@@ -2,36 +2,31 @@ package com.example.demo.service;
 
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.model.Board;
-import com.example.demo.model.Debate;
 import com.example.demo.model.User;
-import com.example.demo.repository.BoardRepository;
-import com.example.demo.repository.DebateReplyRepository;
-import com.example.demo.repository.DebateRepository;
+import com.example.demo.repository.FreeBoardRepository;
 import com.example.demo.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class BoardService {
+public class FreeBoardService {
 
     @Autowired
-    private BoardRepository boardRepository;
+    private FreeBoardRepository freeBoardRepository;
 
     @Autowired
     private ReplyRepository replyRepository;
 
     @Transactional
     public List<Board> postList(){
-        return boardRepository.findAll();
+        return freeBoardRepository.findAll();
     }
 
     public Board viewBoard(int id){
-        return boardRepository.findById(id).orElseThrow(() -> {
+        return freeBoardRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당 글을 찾을 수 없다");
         });
     }
@@ -39,15 +34,15 @@ public class BoardService {
     public void writeBoard(Board board, User user) {
         board.setCount(0);
         board.setUser(user);
-        boardRepository.save(board);
+        freeBoardRepository.save(board);
     }
 
     public void deleteBoard(int id) {
-        boardRepository.deleteById(id);
+        freeBoardRepository.deleteById(id);
     }
 
     public void updateBoard(int id, Board requestBoard) {
-        Board board=boardRepository.findById(id).orElseThrow(() -> {
+        Board board = freeBoardRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당 글을 찾을 수 없습니다.");
         });
 

@@ -27,7 +27,7 @@ public class DebateReply {
 
     //한 게시물에는 여러개의 답글이 있을 수 있다.
     @ManyToOne
-    @JoinColumn(name = "boardId")
+    @JoinColumn(name = "debateId")
     private Debate debate;
 
     //한 유저는 여러개의 답글을 달 수 있다.
@@ -36,5 +36,5 @@ public class DebateReply {
     private User user;
 
     @CreationTimestamp
-    private Timestamp createDate;
+    private Timestamp credateDate;
 }

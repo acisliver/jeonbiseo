@@ -1,35 +1,30 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.ReplySaveRequestDto;
-import com.example.demo.model.Board;
 import com.example.demo.model.Debate;
-import com.example.demo.model.DebateReply;
 import com.example.demo.model.User;
 import com.example.demo.repository.DebateReplyRepository;
-import com.example.demo.repository.DebateRepository;
-import lombok.RequiredArgsConstructor;
+import com.example.demo.repository.DebateBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class DebateService {
+public class DebateBoardService {
     @Autowired
-    private DebateRepository debateRepository;
+    private DebateBoardRepository debateBoardRepository;
     @Autowired
     private DebateReplyRepository debateReplyRepository;
 
     @Transactional
     public List<Debate> postList(){
-        return debateRepository.findAll();
+        return debateBoardRepository.findAll();
     }
 
     public Debate viewDebate(int id){
-        return debateRepository.findById(id).orElseThrow(() -> {
+        return debateBoardRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당 글을 찾을 수 없다");
         });
     }
@@ -37,15 +32,15 @@ public class DebateService {
     public void writeDebate(Debate debate, User user) {
         debate.setCount(0);
         debate.setUser(user);
-        debateRepository.save(debate);
+        debateBoardRepository.save(debate);
     }
 
     public void deleteDebate(int id) {
-        debateRepository.deleteById(id);
+        debateBoardRepository.deleteById(id);
     }
 
     public void updateBoard(int id, Debate requestDebate) {
-        Debate debate=debateRepository.findById(id).orElseThrow(() -> {
+        Debate debate= debateBoardRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당 글을 찾을 수 없습니다.");
         });
 

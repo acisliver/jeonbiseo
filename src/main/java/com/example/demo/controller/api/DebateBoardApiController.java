@@ -4,12 +4,8 @@ import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.dto.ResponseDto;
 import com.example.demo.model.Debate;
-import com.example.demo.service.DebateService;
+import com.example.demo.service.DebateBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -18,15 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class DebateApiController {
+public class DebateBoardApiController {
 
     @Autowired
-    private DebateService debateService;
+    private DebateBoardService debateBoardService;
 
     @GetMapping("/api/debate-header")
     public @ResponseBody
     List<Debate> enterNoticeDebatePage(){
-        List<Debate> debateHeader = debateService.postList();
+        List<Debate> debateHeader = debateBoardService.postList();
         return debateHeader;
     }
 
@@ -35,7 +31,7 @@ public class DebateApiController {
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
     @GetMapping({"/api/debate/{debate-id}"})
     public @ResponseBody Debate viewDebate(@PathVariable int debateId){
-        Debate debate = debateService.viewDebate(debateId);
+        Debate debate = debateBoardService.viewDebate(debateId);
         return debate;
     }
 
@@ -52,7 +48,7 @@ public class DebateApiController {
     @PostMapping("/api/debate/write/save")
     public ResponseDto<Integer> debateSave(@RequestBody Debate debate,
                                            @AuthenticationPrincipal PrincipalDetails principalDetails){
-        debateService.writeDebate(debate,principalDetails.getUser());
+        debateBoardService.writeDebate(debate,principalDetails.getUser());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
@@ -60,27 +56,27 @@ public class DebateApiController {
     //토론 게시글 삭제
     @DeleteMapping("/api/debate/{id}")
     public ResponseDto<Integer> debateDelete(@PathVariable int id){
-        debateService.deleteDebate(id);
+        debateBoardService.deleteDebate(id);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     @PutMapping("/api/debate/{id}")
     public ResponseDto<Integer> debateUpdate(@PathVariable int id, @RequestBody Debate debate){
-        debateService.updateBoard(id, debate);
+        debateBoardService.updateBoard(id, debate);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //토론게시판 댓글달기
     @PostMapping("/api/debate/{debateId}/reply}")
     public ResponseDto<Integer> addDebateReply(@RequestBody ReplySaveRequestDto replySaveRequestDto){
-        debateService.writeDebateReply(replySaveRequestDto);
+        debateBoardService.writeDebateReply(replySaveRequestDto);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //토론 게시판 댓글삭제
     @DeleteMapping("/api/debate/{debatedId}/reply/{replyId}")
     public ResponseDto<Integer> replyDebateDelete(@PathVariable int replyId){
-        debateService.deleteDebateReply(replyId);
+        debateBoardService.deleteDebateReply(replyId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
