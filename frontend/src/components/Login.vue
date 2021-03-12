@@ -66,8 +66,7 @@ export default {
             console.log(res)
             let statusOk = res.data.status
             let token = res.headers.access_token
-            localStorage.setItem("token",token);
-            this.$store.dispatch('loginAction', statusOk)
+            this.$store.dispatch('loginAction', statusOk, token)
           })
           .catch(err => {
             console.log(err)

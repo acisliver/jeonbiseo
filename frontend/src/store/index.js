@@ -24,9 +24,10 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    loginSuccess(state) {
+    loginSuccess(state, token) {
       state.isLogin = true
       state.isLoginError = false
+      localStorage.setItem("token",token)
     },
     loginError(state) {
       state.isLoginError = true
@@ -35,6 +36,7 @@ export default new Vuex.Store({
     logout(state) {
       state.isLogin = false
       state.isLoginError = false
+      localStorage.removeItem("token")
     },
     setUserInfo(state, userInfoObj) {
       state.userInfo = userInfoObj
@@ -59,10 +61,10 @@ export default new Vuex.Store({
             console.log(err)
       })
     },
-    loginAction({commit}, statusOk){
+    loginAction({commit}, statusOk, token){
       if(statusOk === 200){
-        commit("loginSuccess")
-          this.$router.push({ name: "Home" })
+        commit("loginSuccess", token)
+        this.$router.push({ name: "Home" })
       }
       else if(statusOk === 204 ){
         commit('loginError')
