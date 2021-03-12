@@ -77,7 +77,7 @@ export default new Vuex.Store({
       axios
           .get('/api/free-header')
           .then(res => {
-            commit('setFreeHeader', res.data.content)
+            commit('setFreeHeader', res.data)
             console.log(res.data);
           })
           .catch(err => {
@@ -88,7 +88,7 @@ export default new Vuex.Store({
       axios
           .get('/api/debate-header')
           .then(res => {
-            commit('setDebateHeader', res.data.content)
+            commit('setDebateHeader', res.data)
             console.log(res)
           })
           .catch(err => {
