@@ -10,7 +10,7 @@ export default {
   data () {
     return {
       title: "토론주제",
-      boardName: 'debate'
+      boardName: 'DebateBoard'
     }
   },
   components: {

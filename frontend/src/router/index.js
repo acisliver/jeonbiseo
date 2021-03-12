@@ -11,8 +11,10 @@ const SignUp = () => import(/* webpackChunkName: "signup" */ '../components/Sign
 const Board = () => import(/* webpackChunkName: "board-group" */ '../views/Board.vue');
 const FreeBoard = () => import(/* webpackChunkName: "board-group" */ '../views/FreeBoard');
 const DebateBoard = () => import(/* webpackChunkName: "board-group" */ '../views/DebateBoard');
-const WriteBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteBoard');
-const WriteDebate = () => import(/* webpackChunkName: "board-group" */ '../components/WriteDebate');
+const WriteFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteFreeBoard');
+const WriteDebateBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteDebateBoard');
+const Compare = () => import(/* webpackChunkName: "board-group" */ '../views/Compare');
+const Recommand = () => import(/* webpackChunkName: "board-group" */ '../views/Recommand');
 
 // const rejectAuthUser = (to, from, next) =>{
 //   if(store.state.isLogin){
@@ -62,14 +64,19 @@ const routes = [
     name: 'SignUp',
     component: SignUp
   },
+  //  게시판 라우팅
   {
     path: '/board',
     name: 'Board',
     component: Board
   },
   {
-    path: '/board/:boardid',
-    name: 'ReadBoard'
+    path: '/board/free-board/:board-id',
+    name: 'ReadFreeBoard'
+  },
+  {
+    path: '/board/debate-board/:board-id',
+    name: 'ReadDebateBoard'
   },
   {
     path: '/board/free-board',
@@ -82,14 +89,25 @@ const routes = [
     component: DebateBoard
   },
   {
-    path: '/board/write',
-    name: 'WriteBoard',
-    component: WriteBoard
+    path: '/board/free-board/write',
+    name: 'WriteFreeBoard',
+    component: WriteFreeBoard
   },
   {
-    path: '/debate/write',
-    name: 'WriteDebate',
-    component: WriteDebate
+    path: '/board/debate-board/write',
+    name: 'WriteDebateBoard',
+    component: WriteDebateBoard
+  },
+  //  웹사이트 서비스
+  {
+    path: '/compare',
+    name: 'Compare',
+    component: Compare
+  },
+  {
+    path: '/recommand',
+    name: 'Recommand',
+    component: Recommand
   }
 ]
 

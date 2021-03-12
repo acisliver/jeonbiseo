@@ -6,11 +6,11 @@
 import { mapState,mapActions } from 'vuex'
 
 export default {
-  name: "ViewBoard",
+  name: "FreeBoard",
   data () {
     return {
       title: '제목',
-      boardName: 'board'
+      boardName: 'FreeBoard'
     }
   },
   components: {

@@ -47,15 +47,11 @@
         <v-btn :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
           다음
         </v-btn>
-        <v-btn @click="$router.push(
-            {
-            name: '',
-            params: {
-              board: boardName
-            }
-            })"
-        >
-          글쓰기
+        <v-btn>
+          <router-link :to="{
+            name: 'Write'+boardName
+          }"
+          >글쓰기</router-link>
         </v-btn>
       </div>
     </template>
@@ -63,6 +59,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Pagination",
   data(){
@@ -126,5 +123,8 @@ export default {
 </script>
 
 <style scoped>
-
+a{
+  text-decoration: none;
+  color: black;
+}
 </style>

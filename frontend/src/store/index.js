@@ -17,7 +17,7 @@ export default new Vuex.Store({
     boardHeader: null,
     boardBody: null,
     debateHeader: null,
-    debateBody: null
+    debateBody: null,
   },
 
   getters:{
@@ -45,7 +45,7 @@ export default new Vuex.Store({
     },
     setDebateHeader(state, debateHeader) {
       state.debateHeader = debateHeader
-    }
+    },
   },
 
   actions: {
@@ -75,7 +75,7 @@ export default new Vuex.Store({
     },
     getBoardHeader({commit}) {
       axios
-          .get('/api/boardHeader')
+          .get('/api/board-header')
           .then(res => {
             commit('setBoardHeader', res.data.content)
             console.log(res.data);
@@ -86,7 +86,7 @@ export default new Vuex.Store({
     },
     getDebateHeader({commit}) {
       axios
-          .get('/api/debateHeader')
+          .get('/api/debate-header')
           .then(res => {
             commit('setDebateHeader', res.data.content)
             console.log(res)

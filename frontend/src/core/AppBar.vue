@@ -3,11 +3,13 @@
     <v-container>
 
       <v-row align="center">
-        <v-app-bar-title type="button" @click="$router.push({ name: 'Home'})">전비서</v-app-bar-title>
+        <v-app-bar-title type="button" @click="$router.push({ name: 'Home'})"><span style="color: #1976d2">전</span>비서</v-app-bar-title>
         <v-spacer />
         <v-toolbar-items class="hidden-sm-and-down">
           <router-link to="/">홈</router-link>
 <!--          <router-link to="/about">About</router-link>-->
+          <router-link to="/compare">비교</router-link>
+          <router-link to="/recommand">추천</router-link>
           <router-link to="/board">게시판</router-link>
           <router-link v-if="!isLogin" to="/login" >로그인</router-link>
           <router-link v-if="!isLogin" to="/signup">회원가입</router-link>
@@ -82,7 +84,7 @@ export default {
     padding: 10px;
 
     &.router-link-exact-active {
-       color: #42b983;
+       color: #1976d2;
      }
   }
 }
@@ -95,7 +97,7 @@ export default {
   padding: 10px;
 
   &.router-link-exact-active {
-    color: #42b983;
+    color: #1976d2;
   }
 }
 

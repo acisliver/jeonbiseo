@@ -8,7 +8,7 @@
     </v-card>
     <v-card width="600" height="500">
       <router-link :to="{name: 'DebateBoard'}">토론게시판</router-link>
-      <DebateBoard/>
+        <DebateBoard/>
     </v-card>
   </div>
 </div>
