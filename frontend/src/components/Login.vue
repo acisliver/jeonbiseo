@@ -44,7 +44,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import axios from "axios";
-import store from "@/store"
 
 export default {
   name: "Login",
@@ -66,7 +65,9 @@ export default {
           .then(res => {
             console.log(res)
             let statusOk = res.data.status
-            store.dispatch('loginAction', statusOk)
+            let token = res.headers.access_token
+            localStorage.setItem("token",token);
+            this.$store.dispatch('loginAction', statusOk)
           })
           .catch(err => {
             console.log(err)

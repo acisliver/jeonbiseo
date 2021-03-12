@@ -34,7 +34,9 @@ export default {
       axios
       .post('/api/free-board/write/save', contentObj)
       .then(res => {
+        alert('저장 완료')
         console.log(res)
+        this.$router.back()
       })
       .catch(err => {
         console.log(err)

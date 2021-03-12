@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import router from "@/router"
 import axios from "axios";
 
 Vue.use(Vuex)
@@ -63,7 +62,7 @@ export default new Vuex.Store({
     loginAction({commit}, statusOk){
       if(statusOk === 200){
         commit("loginSuccess")
-        router.push({ name: "Home" })
+          this.$router.push({ name: "Home" })
       }
       else if(statusOk === 204 ){
         commit('loginError')
