@@ -65,7 +65,7 @@ export default new Vuex.Store({
     loginAction({commit}, statusOk, token){
       if(statusOk === 200){
         commit("loginSuccess", token)
-        router.push({name: "Home"}).then(r =>{})
+        router.push({name: "Home"}).then(r =>{ console.log(r)})
        }
       else if(statusOk === 204 ){
         commit('loginError')
