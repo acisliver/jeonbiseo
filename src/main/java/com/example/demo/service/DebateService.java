@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class DebateService {
     @Autowired
@@ -22,8 +24,8 @@ public class DebateService {
     private DebateReplyRepository debateReplyRepository;
 
     @Transactional
-    public Page<Debate> postList(Pageable pageable){
-        return debateRepository.findAll(pageable);
+    public List<Debate> postList(){
+        return debateRepository.findAll();
     }
 
     public Debate viewDebate(int id){

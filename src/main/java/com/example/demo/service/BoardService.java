@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class BoardService {
 
@@ -24,8 +26,8 @@ public class BoardService {
     private ReplyRepository replyRepository;
 
     @Transactional
-    public Page<Board> postList(Pageable pageable){
-        return boardRepository.findAll(pageable);
+    public List<Board> postList(){
+        return boardRepository.findAll();
     }
 
     public Board viewBoard(int id){

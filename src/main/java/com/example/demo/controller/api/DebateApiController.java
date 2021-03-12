@@ -15,25 +15,25 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class DebateApiController {
 
     @Autowired
     private DebateService debateService;
 
-    @GetMapping("/api/debateHeader")
+    @GetMapping("/api/debate-header")
     public @ResponseBody
-    Page<Debate> enterNoticeDebatePage(@PageableDefault(size=10,sort = "id",
-            direction = Sort.Direction.DESC) Pageable pageable){
-
-        Page<Debate> debateHeader = debateService.postList(pageable);
+    List<Debate> enterNoticeDebatePage(){
+        List<Debate> debateHeader = debateService.postList();
         return debateHeader;
     }
 
 
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
-    @GetMapping({"/api/debate/{debateId}"})
+    @GetMapping({"/api/debate/{debate-id}"})
     public @ResponseBody Debate viewDebate(@PathVariable int debateId){
         Debate debate = debateService.viewDebate(debateId);
         return debate;
