@@ -22,6 +22,9 @@
                 maxlength="25"
                 counter="25"
                 required
+                :append-icon="isShow ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="isShow ? 'text' : 'password'"
+                @click:append="isShow = !isShow"
             ></v-text-field>
             <v-text-field
                 v-model="nickName"
@@ -70,6 +73,7 @@ export default {
       userName: null,
       password: null,
       nickName: null,
+      isShow: false,
       rules: [v => v.length <= 25 || 'Max 25 characters'],
       // wordsRules: [v => v.trim().split(' ').length <= 5 || 'Max 25 words'],
     }

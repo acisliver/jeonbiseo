@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: "MyPage",
@@ -48,6 +48,12 @@ export default {
     username() {
       return this.$route.params.username
     }
+  },
+  methods: {
+    ...mapActions(['getUserInfo'])
+  },
+  created() {
+    // this.getUserInfo()
   }
 }
 </script>

@@ -22,6 +22,9 @@
             </v-text-field>
             <v-text-field
                 v-model="password"
+                :append-icon="isShow ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="isShow ? 'text' : 'password'"
+                @click:append="isShow = !isShow"
                 label="비밀번호"
             >
             </v-text-field>
@@ -51,6 +54,7 @@ export default {
     return{
       userName: null,
       password: null,
+      isShow: false,
     }
   },
   computed: {
