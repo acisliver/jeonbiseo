@@ -22,10 +22,10 @@
                   v-on="on"
                   icon
               >
-                <v-icon color="green lighten-2">mdi-dialpad</v-icon>
+                <v-icon color="black">mdi-dialpad</v-icon>
               </v-btn>
             </template>
-            <v-list>
+            <v-list class="loginedBtn">
               <v-list-item>
                 <v-list-item-title>
                   <router-link :to="{
@@ -90,7 +90,7 @@ export default {
 }
 
 //마이페이지
-#list-item-23 > div > a{
+.loginedBtn a{
   text-decoration: none;
   font-weight: bold;
   color: #2c3e50;
@@ -102,10 +102,10 @@ export default {
 }
 
 //로그아웃
-#list-item-25 > div > a{
+.loginedBtn a{
   text-decoration: none;
   font-weight: bold;
-  color: #2c3e50;
+  color: black;
   padding: 10px;
 
 }

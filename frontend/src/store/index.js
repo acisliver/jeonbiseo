@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
-import router from "@/router";
+// import router from "@/router";
 
 Vue.use(Vuex)
 
@@ -25,10 +25,9 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    loginSuccess(state, token) {
+    loginSuccess(state) {
       state.isLogin = true
       state.isLoginError = false
-      sessionStorage.setItem("token",token)
     },
     loginError(state) {
       state.isLoginError = true
@@ -37,7 +36,7 @@ export default new Vuex.Store({
     logout(state) {
       state.isLogin = false
       state.isLoginError = false
-      sessionStorage.removeItem("token")
+      localStorage.removeItem("token")
     },
     setUserInfo(state, userInfoObj) {
       state.userInfo = userInfoObj
@@ -62,10 +61,9 @@ export default new Vuex.Store({
             console.log(err)
       })
     },
-    loginAction({commit}, statusOk, token){
+    loginAction({commit}, statusOk){
       if(statusOk === 200){
-        commit("loginSuccess", token)
-        router.push({name: "Home"}).then(r =>{ console.log(r)})
+        commit("loginSuccess")
        }
       else if(statusOk === 204 ){
         commit('loginError')

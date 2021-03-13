@@ -43,7 +43,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import axios from "axios";
+import axios from "axios"
 
 export default {
   name: "Login",
@@ -59,14 +59,15 @@ export default {
   methods: {
     ...mapActions(['loginAction', 'logoutAction']),
     login(loginObj) {
-      console.log(loginObj)
       axios
           .post("/login",loginObj)
           .then(res => {
-            console.log(res)
-            let statusOk = res.data.status
-            let token = res.headers.access_token
-            this.$store.dispatch('loginAction', statusOk, token)
+            let statusOk = res.status
+            if(statusOk===200){
+              localStorage.setItem("token", res.headers.token)
+              this.$router.push({name:'Home'})
+              this.$store.dispatch('loginAction', statusOk)
+            }
           })
           .catch(err => {
             console.log(err)
