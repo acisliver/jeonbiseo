@@ -13,6 +13,7 @@ const FreeBoard = () => import(/* webpackChunkName: "board-group" */ '../views/F
 const DebateBoard = () => import(/* webpackChunkName: "board-group" */ '../views/DebateBoard');
 const WriteFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteFreeBoard');
 const WriteDebateBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteDebateBoard');
+const ReadFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../components/ReadFreeBoard');
 const Compare = () => import(/* webpackChunkName: "board-group" */ '../views/Compare');
 const Recommand = () => import(/* webpackChunkName: "board-group" */ '../views/Recommand');
 
@@ -71,11 +72,12 @@ const routes = [
     component: Board
   },
   {
-    path: '/board/free-board/:board-id',
-    name: 'ReadFreeBoard'
+    path: '/board/free-board/:boardId',
+    name: 'ReadFreeBoard',
+    component: ReadFreeBoard
   },
   {
-    path: '/board/debate-board/:board-id',
+    path: '/board/debate-board/:boardId',
     name: 'ReadDebateBoard'
   },
   {

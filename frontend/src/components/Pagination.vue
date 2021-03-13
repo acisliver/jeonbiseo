@@ -18,6 +18,12 @@
       <tr
           v-for="board in paginatedData"
           :key="board.id"
+          @click="$router.push({
+          name: 'ReadFreeBaord',
+          params: {
+            boardId: board.id
+          }
+          })"
       >
         <td class="text-left">{{ board.title }}</td>
         <td class="text-right">{{ board.user.nickName }}</td>
