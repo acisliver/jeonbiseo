@@ -53,11 +53,8 @@
         <v-btn :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
           다음
         </v-btn>
-        <v-btn>
-          <router-link :to="{
-            name: 'Write'+boardName
-          }"
-          >글쓰기</router-link>
+        <v-btn @click="clickSaveBtn">
+          글쓰기
         </v-btn>
       </div>
     </template>
@@ -65,6 +62,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
 export default {
   name: "Pagination",
@@ -98,9 +96,18 @@ export default {
     },
     prevPage() {
       this.pageNum -= 1;
+    },
+    clickSaveBtn(){
+      if(this.isLogin){
+        this.$router.push({name: 'Write'+this.boardName})
+      }
+      else{
+        alert('로그인이 필요합니다')
+      }
     }
   },
   computed: {
+    ...mapState(['isLogin']),
     pageCount () {
       if (this.header === null ){
         return 1;
