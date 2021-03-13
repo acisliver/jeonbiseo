@@ -29,7 +29,7 @@ public class DebateBoardApiController {
 
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
-    @GetMapping({"/api/debate/{debate-id}"})
+    @GetMapping({"/api/debate/{debateId}"})
     public @ResponseBody Debate viewDebate(@PathVariable int debateId){
         Debate debate = debateBoardService.viewDebate(debateId);
         return debate;
@@ -54,15 +54,15 @@ public class DebateBoardApiController {
 
 
     //토론 게시글 삭제
-    @DeleteMapping("/api/debate/{id}")
-    public ResponseDto<Integer> debateDelete(@PathVariable int id){
-        debateBoardService.deleteDebate(id);
+    @DeleteMapping("/api/debate/{debateId}")
+    public ResponseDto<Integer> debateDelete(@PathVariable int debateId){
+        debateBoardService.deleteDebate(debateId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
-    @PutMapping("/api/debate/{id}")
-    public ResponseDto<Integer> debateUpdate(@PathVariable int id, @RequestBody Debate debate){
-        debateBoardService.updateBoard(id, debate);
+    @PutMapping("/api/debate/{debateId}")
+    public ResponseDto<Integer> debateUpdate(@PathVariable int debateId, @RequestBody Debate debate){
+        debateBoardService.updateBoard(debateId, debate);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

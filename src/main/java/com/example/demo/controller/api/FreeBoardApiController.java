@@ -67,16 +67,16 @@ public class FreeBoardApiController {
     }
 
     //자유 게시글 삭제
-    @DeleteMapping("/api/free-board/{id}")
-    public ResponseDto<Integer> boardDelete(@PathVariable int id){
-        freeBoardService.deleteBoard(id);
+    @DeleteMapping("/api/free-board/{boardId}")
+    public ResponseDto<Integer> boardDelete(@PathVariable int boardId){
+        freeBoardService.deleteBoard(boardId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //업데이트
-    @PutMapping("/api/free-board/{id}")
-    public ResponseDto<Integer> boardUpdate(@PathVariable int id, @RequestBody Board board){
-        freeBoardService.updateBoard(id, board);
+    @PutMapping("/api/free-board/{boardId}")
+    public ResponseDto<Integer> boardUpdate(@PathVariable int boardId, @RequestBody Board board){
+        freeBoardService.updateBoard(boardId, board);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

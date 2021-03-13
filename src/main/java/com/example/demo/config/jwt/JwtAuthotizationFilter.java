@@ -37,6 +37,7 @@ public class JwtAuthotizationFilter extends BasicAuthenticationFilter {
         //System.out.printf("권한 or 인증 필요 주소 요청됨");
         JwtProperties jwtProperties = new JwtProperties();
 
+        //헤더에 저장된 토큰 검증
         String jwtHeader = request.getHeader(jwtProperties.headerString);
 
         //postman에서 header를 통해 전달받은 jwt토큰을 검증해서 정상적인 사용자인지 확인
