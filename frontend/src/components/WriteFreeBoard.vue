@@ -24,15 +24,20 @@ export default {
     return {
       contents:{
         title:'',
-        content:''
+        content:'',
       }
     }
   },
   methods: {
     saveContent(contentObj){
+      let config = {
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      }
       console.log(contentObj)
       axios
-      .post('/api/free-board/write/save', contentObj)
+      .post('/api/free-board/write/save', contentObj, config)
       .then(res => {
         alert('저장 완료')
         console.log(res)

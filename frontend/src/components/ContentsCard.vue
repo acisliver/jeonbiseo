@@ -43,5 +43,7 @@ export default {
 </script>
 
 <style scoped>
-
+.v-card {
+  font-size: xx-large;
+}
 </style>
