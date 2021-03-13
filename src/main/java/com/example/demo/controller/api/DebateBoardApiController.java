@@ -35,14 +35,6 @@ public class DebateBoardApiController {
         return debate;
     }
 
-    //토론 게시판 글쓰기 버튼 눌렀을 때
-    //토큰검증 필요
-    @GetMapping("/api/debate/write")
-    public ResponseDto<Integer> Debatewrite(){
-        //토큰검증을 하고 토큰 검증이 끝나면 ok사인을 보내 해당 주소로 보내게 한다.
-        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
-    }
-
     //토론 글쓰기를 통해 작성 한 글 저장 버튼을 눌렀을 때
     //requestbosy란, post요청 시 json을 객체로 바인딩 할 수 있게 하는 것.
     @PostMapping("/api/debate/write/save")
