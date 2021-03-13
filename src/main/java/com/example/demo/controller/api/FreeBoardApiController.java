@@ -47,6 +47,21 @@ public class FreeBoardApiController {
     @PostMapping("/api/free-board/write/save")
     public ResponseDto<Integer> boardSave(@RequestBody Board board,
                                           @AuthenticationPrincipal PrincipalDetails principalDetails){
+        System.out.println(board.getTitle());
+        System.out.println(board.getContent());
+        System.out.println("prin"+principalDetails.toString());
+        if(principalDetails.getUser()!=null){
+            System.out.println("진입");
+            System.out.println("1111111111111111111111111111111");
+            System.out.println("Board username:"+principalDetails.getUser().getUserName());
+            System.out.println("Board password:"+principalDetails.getUser().getPassword());
+            System.out.println("Board nickname:"+principalDetails.getUser().getNickName());
+        }else{
+            System.out.println("진입 못함");
+            System.out.println("2222222222222222222222222222222");
+            System.out.println("user가 존재하지 않는다.");
+        }
+
         freeBoardService.writeBoard(board,principalDetails.getUser());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }

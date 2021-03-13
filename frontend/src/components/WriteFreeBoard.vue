@@ -32,7 +32,7 @@ export default {
     saveContent(contentObj){
       let config = {
         headers: {
-          token: localStorage.getItem('token')
+          //token: localStorage.getItem('token')
         }
       }
       console.log(contentObj)
