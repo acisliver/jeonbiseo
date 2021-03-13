@@ -25,22 +25,26 @@ public class FreeBoardService {
         return freeBoardRepository.findAll();
     }
 
+    @Transactional
     public Board viewBoard(int id){
         return freeBoardRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당 글을 찾을 수 없다");
         });
     }
 
+    @Transactional
     public void writeBoard(Board board, User user) {
         board.setCount(0);
         board.setUser(user);
         freeBoardRepository.save(board);
     }
 
+    @Transactional
     public void deleteBoard(int id) {
         freeBoardRepository.deleteById(id);
     }
 
+    @Transactional
     public void updateBoard(int id, Board requestBoard) {
         Board board = freeBoardRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당 글을 찾을 수 없습니다.");
@@ -50,12 +54,12 @@ public class FreeBoardService {
         board.setContent(requestBoard.getContent());
     }
 
-
+    @Transactional
     public void writeReply(ReplySaveRequestDto replySaveRequestDto) {
         freeBoardReplyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
     }
 
-
+    @Transactional
     public void deleteReply(int replyId) {
         freeBoardReplyRepository.deleteById(replyId);
     }

@@ -29,16 +29,19 @@ public class DebateBoardService {
         });
     }
 
+    @Transactional
     public void writeDebate(Debate debate, User user) {
         debate.setCount(0);
         debate.setUser(user);
         debateBoardRepository.save(debate);
     }
 
+    @Transactional
     public void deleteDebate(int id) {
         debateBoardRepository.deleteById(id);
     }
 
+    @Transactional
     public void updateBoard(int id, Debate requestDebate) {
         Debate debate= debateBoardRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("해당 글을 찾을 수 없습니다.");
@@ -48,11 +51,12 @@ public class DebateBoardService {
         debate.setContent(requestDebate.getContent());
     }
 
-
+    @Transactional
     public void writeDebateReply(ReplySaveRequestDto replySaveRequestDto) {
         debateReplyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
     }
 
+    @Transactional
     public void deleteDebateReply(int replyId) {
         debateReplyRepository.deleteById(replyId);
     }
