@@ -2,6 +2,7 @@ package com.example.demo.controller.api;
 
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.ReplySaveRequestDto;
+import com.example.demo.dto.ResponseDetailBoardDto;
 import com.example.demo.dto.ResponseDto;
 import com.example.demo.model.Debate;
 import com.example.demo.service.DebateBoardService;
@@ -30,9 +31,9 @@ public class DebateBoardApiController {
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
     @GetMapping({"/api/debate/{debateId}"})
-    public @ResponseBody Debate viewDebate(@PathVariable int debateId){
+    public @ResponseBody ResponseDetailBoardDto<Debate> viewDebate(@PathVariable int debateId){
         Debate debate = debateBoardService.viewDebate(debateId);
-        return debate;
+        return new ResponseDetailBoardDto<Debate>(debate);
     }
 
     //토론 글쓰기를 통해 작성 한 글 저장 버튼을 눌렀을 때

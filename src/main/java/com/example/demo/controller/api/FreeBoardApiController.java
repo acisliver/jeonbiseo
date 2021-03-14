@@ -2,6 +2,7 @@ package com.example.demo.controller.api;
 
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.ReplySaveRequestDto;
+import com.example.demo.dto.ResponseDetailBoardDto;
 import com.example.demo.dto.ResponseDto;
 import com.example.demo.model.Board;
 import com.example.demo.service.FreeBoardService;
@@ -29,9 +30,9 @@ public class FreeBoardApiController {
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
     @GetMapping({"/api/free-board/{boardId}"})
     public @ResponseBody
-    Board viewBoard(@PathVariable int boardId){
+    ResponseDetailBoardDto<Board> viewBoard(@PathVariable int boardId){
         Board board = freeBoardService.viewBoard(boardId);
-        return board;
+        return new ResponseDetailBoardDto<>(board);
     }
 
     //자유게시판 글쓰기를 통해 작성 한 글 저장 버튼을 눌렀을 때
