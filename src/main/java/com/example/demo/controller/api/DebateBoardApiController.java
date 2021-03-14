@@ -61,8 +61,9 @@ public class DebateBoardApiController {
 
     //토론게시판 댓글달기
     @PostMapping("/api/debate/{debateId}/reply}")
-    public ResponseDto<Integer> addDebateReply(@RequestBody ReplySaveRequestDto replySaveRequestDto){
-        debateBoardService.writeDebateReply(replySaveRequestDto);
+    public ResponseDto<Integer> addDebateReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
+                                               @AuthenticationPrincipal PrincipalDetails principalDetails){
+        debateBoardService.writeDebateReply(replySaveRequestDto,principalDetails.getUser().getId());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

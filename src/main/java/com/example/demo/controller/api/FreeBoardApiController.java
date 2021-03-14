@@ -1,9 +1,11 @@
 package com.example.demo.controller.api;
 
+import com.example.demo.Mapping.BoardMapping;
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.dto.ResponseDetailBoardDto;
 import com.example.demo.dto.ResponseDto;
+import com.example.demo.dto.ResponseHeaderDto;
 import com.example.demo.model.Board;
 import com.example.demo.service.FreeBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,15 +26,17 @@ public class FreeBoardApiController {
     public @ResponseBody
     List<Board> enterNoticeBoardPage(){
         List<Board> freeHearder = freeBoardService.postList();
+        //ResponseHeaderDto<List<Board>> a= new ResponseHeaderDto<List<Board>>();
+        //System.out.println(a.toString());
         return freeHearder;
     }
 
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
-    @GetMapping({"/api/free-board/{boardId}"})
+    @GetMapping({"/api/free-board/{freeId}"})
     public @ResponseBody
-    ResponseDetailBoardDto<Board> viewBoard(@PathVariable int boardId){
-        Board board = freeBoardService.viewBoard(boardId);
+    ResponseDetailBoardDto<Board> viewBoard(@PathVariable int freeId){
+        Board board = freeBoardService.viewBoard(freeId);
         return new ResponseDetailBoardDto<>(board);
     }
 
@@ -60,28 +65,28 @@ public class FreeBoardApiController {
     }
 
     //자유 게시글 삭제
-    @DeleteMapping("/api/free-board/{boardId}")
-    public ResponseDto<Integer> boardDelete(@PathVariable int boardId){
-        freeBoardService.deleteBoard(boardId);
+    @DeleteMapping("/api/free-board/{freeId}")
+    public ResponseDto<Integer> boardDelete(@PathVariable int freeId){
+        freeBoardService.deleteBoard(freeId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //업데이트
-    @PutMapping("/api/free-board/{boardId}")
-    public ResponseDto<Integer> boardUpdate(@PathVariable int boardId, @RequestBody Board board){
-        freeBoardService.updateBoard(boardId, board);
+    @PutMapping("/api/free-board/{freeId}")
+    public ResponseDto<Integer> boardUpdate(@PathVariable int freeId, @RequestBody Board board){
+        freeBoardService.updateBoard(freeId, board);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //자유게시판 댓글달기
-    @PostMapping("/api/free-board/{boardId}/reply}")
+    @PostMapping("/api/free-board/{freeId}/reply}")
     public ResponseDto<Integer> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto){
         freeBoardService.writeReply(replySaveRequestDto);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //자유 게시판 댓글삭제
-    @DeleteMapping("/api/free-board/{boardId}/reply/{replyId}")
+    @DeleteMapping("/api/free-board/{freeId}/reply/{replyId}")
     public ResponseDto<Integer> replyDelete(@PathVariable int replyId){
         freeBoardService.deleteReply(replyId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);

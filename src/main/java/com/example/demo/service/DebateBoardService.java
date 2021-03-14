@@ -52,8 +52,8 @@ public class DebateBoardService {
     }
 
     @Transactional
-    public void writeDebateReply(ReplySaveRequestDto replySaveRequestDto) {
-        debateReplyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+    public void writeDebateReply(ReplySaveRequestDto replySaveRequestDto, int userId) {
+        debateReplyRepository.replySave(userId,replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
     }
 
     @Transactional
