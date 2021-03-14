@@ -18,12 +18,7 @@
       <tr
           v-for="board in paginatedData"
           :key="board.id"
-          @click="$router.push({
-          name: 'ReadFreeBaord',
-          params: {
-            boardId: board.id
-          }
-          })"
+          @click="clickReadBtn(board.id)"
       >
         <td class="text-left">{{ board.title }}</td>
         <td class="text-right">{{ board.user.nickName }}</td>
@@ -99,11 +94,14 @@ export default {
     },
     clickSaveBtn(){
       if(this.isLogin){
-        this.$router.push({name: 'Write'+this.boardName})
+        this.$router.push({ name: 'Write'+this.boardName })
       }
       else{
         alert('로그인이 필요합니다')
       }
+    },
+    clickReadBtn(id){
+      this.$router.push({ name: 'ReadFreeBoard' ,params: { boardId: id}})
     }
   },
   computed: {
@@ -116,11 +114,6 @@ export default {
           listSize = this.pageSize,
           page = Math.floor(listLeng / listSize);
       if (listLeng % listSize > 0) page += 1;
-
-      /*
-      아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
-      이런식으로 if 문 없이 고칠 수도 있다!
-      */
       return page;
     },
     paginatedData () {
