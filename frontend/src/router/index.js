@@ -14,8 +14,8 @@ const DebateBoard = () => import(/* webpackChunkName: "board-group" */ '../views
 const WriteFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteFreeBoard');
 const WriteDebateBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteDebateBoard');
 const ReadFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../components/ReadFreeBoard');
-const Compare = () => import(/* webpackChunkName: "board-group" */ '../views/Compare');
-const Recommand = () => import(/* webpackChunkName: "board-group" */ '../views/Recommand');
+const Compare = () => import(/* webpackChunkName: "compare" */ '../views/Compare');
+const Recommand = () => import(/* webpackChunkName: "recommand" */ '../views/Recommand');
 
 // const rejectAuthUser = (to, from, next) =>{
 //   if(store.state.isLogin){
