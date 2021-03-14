@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ResponseDetailBoardDto<T> {
     T detailBoard;
+    int nullCheck;
 }

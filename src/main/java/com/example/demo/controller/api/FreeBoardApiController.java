@@ -1,11 +1,10 @@
 package com.example.demo.controller.api;
 
-import com.example.demo.Mapping.BoardMapping;
+import com.example.demo.Data.ExtractBoardData;
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.dto.ResponseDetailBoardDto;
 import com.example.demo.dto.ResponseDto;
-import com.example.demo.dto.ResponseHeaderDto;
 import com.example.demo.model.Board;
 import com.example.demo.service.FreeBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +23,13 @@ public class FreeBoardApiController {
 
     @GetMapping("/api/free-header")
     public @ResponseBody
-    ResponseHeaderDto<List<Board>> enterNoticeBoardPage(){
+    List<Board> enterNoticeBoardPage(){
         List<Board> freeHearder = freeBoardService.postList();
-        ResponseHeaderDto<List<Board>> a= new ResponseHeaderDto<List<Board>>();
-        System.out.println(a.toString());
-        return a;
+//        List<ExtractBoardData> extractFreeBoardData = new ArrayList<ExtractBoardData>();
+//        for(Board board : freeHearder){
+//            extractFreeBoardData(board.getId(),board.getContent(),board.getUser());
+//        }
+        return freeHearder;
     }
 
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
@@ -37,7 +38,10 @@ public class FreeBoardApiController {
     public @ResponseBody
     ResponseDetailBoardDto<Board> viewBoard(@PathVariable int freeId){
         Board board = freeBoardService.viewBoard(freeId);
-        return new ResponseDetailBoardDto<>(board);
+        if(board != null)
+            return new ResponseDetailBoardDto<Board>(board,1);
+        else
+            return new ResponseDetailBoardDto<Board>(board,0);
     }
 
     //자유게시판 글쓰기를 통해 작성 한 글 저장 버튼을 눌렀을 때

@@ -33,7 +33,10 @@ public class DebateBoardApiController {
     @GetMapping({"/api/debate/{debateId}"})
     public @ResponseBody ResponseDetailBoardDto<Debate> viewDebate(@PathVariable int debateId){
         Debate debate = debateBoardService.viewDebate(debateId);
-        return new ResponseDetailBoardDto<Debate>(debate);
+        if(debate != null)
+            return new ResponseDetailBoardDto<Debate>(debate,1);
+        else
+            return new ResponseDetailBoardDto<Debate>(debate,0);
     }
 
     //토론 글쓰기를 통해 작성 한 글 저장 버튼을 눌렀을 때
