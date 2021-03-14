@@ -56,8 +56,8 @@ public class FreeBoardService {
     }
 
     @Transactional
-    public void writeReply(ReplySaveRequestDto replySaveRequestDto) {
-        freeBoardReplyRepository.replySave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+    public void writeReply(ReplySaveRequestDto replySaveRequestDto,int userId) {
+        freeBoardReplyRepository.replySave(userId,replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
     }
 
     @Transactional

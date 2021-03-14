@@ -24,11 +24,11 @@ public class FreeBoardApiController {
 
     @GetMapping("/api/free-header")
     public @ResponseBody
-    List<Board> enterNoticeBoardPage(){
+    ResponseHeaderDto<List<Board>> enterNoticeBoardPage(){
         List<Board> freeHearder = freeBoardService.postList();
-        //ResponseHeaderDto<List<Board>> a= new ResponseHeaderDto<List<Board>>();
-        //System.out.println(a.toString());
-        return freeHearder;
+        ResponseHeaderDto<List<Board>> a= new ResponseHeaderDto<List<Board>>();
+        System.out.println(a.toString());
+        return a;
     }
 
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
@@ -80,8 +80,9 @@ public class FreeBoardApiController {
 
     //자유게시판 댓글달기
     @PostMapping("/api/free-board/{freeId}/reply}")
-    public ResponseDto<Integer> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto){
-        freeBoardService.writeReply(replySaveRequestDto);
+    public ResponseDto<Integer> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
+                                         @AuthenticationPrincipal PrincipalDetails principalDetails){
+        freeBoardService.writeReply(replySaveRequestDto, principalDetails.getUser().getId());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
