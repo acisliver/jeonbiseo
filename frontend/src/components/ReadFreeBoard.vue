@@ -18,11 +18,11 @@
               {{boardData.user.nickName}}
             </div>
           </v-row>
-          {{boardData.content.replace(/\n/ig, '')}}
+          {{boardData.content}}
         </v-card-text>
       </v-card>
     </v-container>
-    <Reply></Reply>
+    <Reply :replys="boardData.replys"></Reply>
   </div>
 
 </template>
@@ -56,6 +56,22 @@ export default {
           .catch(err => {
             console.log(err)
           })
+    },
+    replaceContent(content){
+      let contentArray = content.split('\n')
+      console.log(contentArray)
+      let htmls = ''
+      contentArray.forEach( content => {
+        htmls += <p>content</p>
+        console.log(content)
+      })
+
+      return this.stringToHTML(htmls)
+    },
+    stringToHTML(str) {
+      let dom = document.createElement('div');
+      dom.innerHTML = str;
+      return dom;
     }
   },
   created() {

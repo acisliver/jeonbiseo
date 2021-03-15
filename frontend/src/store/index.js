@@ -77,7 +77,7 @@ export default new Vuex.Store({
       axios
           .get('/api/free-header')
           .then(res => {
-            commit('setFreeHeader', res.data)
+            commit('setFreeHeader', res.data.reverse())
             console.log(res.data);
           })
           .catch(err => {
