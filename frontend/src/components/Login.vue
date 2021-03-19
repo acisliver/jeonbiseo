@@ -39,6 +39,14 @@
             <v-btn @click="$router.push({ name:'SignUp' })" >회원가입</v-btn>
           </div>
         </v-card>
+        <v-alert
+            dense
+            outlined
+            type="error"
+            v-show="failLogin"
+        >
+          아이디나 비밀번호가 틀렸습니다
+        </v-alert>
       </v-flex>
     </v-layout>
   </v-container>
@@ -55,6 +63,7 @@ export default {
       userName: null,
       password: null,
       isShow: false,
+      failLogin: false
     }
   },
   computed: {
@@ -71,6 +80,9 @@ export default {
               localStorage.setItem("token", res.headers.token)
               this.$router.push({name:'Home'})
               this.$store.dispatch('loginAction', statusOk)
+            }
+            else if(statusOk===204){
+              this.failLogin = true
             }
           })
           .catch(err => {

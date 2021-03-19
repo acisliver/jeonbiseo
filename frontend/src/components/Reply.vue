@@ -6,7 +6,7 @@
         v-for="reply in replys"
         :key="reply.id"
     >
-    {{reply.content}}
+    {{ reply.content }}
     </v-container>
   </div>
 
