@@ -1,6 +1,5 @@
 package com.example.demo.controller.api;
 
-import com.example.demo.Data.ExtractBoardData;
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.dto.ResponseDetailBoardDto;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,10 +22,6 @@ public class FreeBoardApiController {
     public @ResponseBody
     List<Board> enterNoticeBoardPage(){
         List<Board> freeHearder = freeBoardService.postList();
-//        List<ExtractBoardData> extractFreeBoardData = new ArrayList<ExtractBoardData>();
-//        for(Board board : freeHearder){
-//            extractFreeBoardData(board.getId(),board.getContent(),board.getUser());
-//        }
         return freeHearder;
     }
 
