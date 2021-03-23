@@ -21,8 +21,9 @@
           {{boardData.content}}
         </v-card-text>
       </v-card>
+      <WriteReply></WriteReply>
+      <Reply :replys="boardData.replys"></Reply>
     </v-container>
-    <Reply :replys="boardData.replys"></Reply>
   </div>
 
 </template>
@@ -38,7 +39,8 @@ export default {
     }
   },
   components: {
-    Reply: () =>import('@/components/Reply')
+    Reply: () =>import('@/components/Reply'),
+    WriteReply: () => import('@/components/WriteReply')
   },
   computed: {
 

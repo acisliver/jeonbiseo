@@ -83,7 +83,7 @@ public class FreeBoardApiController {
     }
 
     //자유게시판 댓글달기
-    @PostMapping("/api/free-board/{freeId}/reply}")
+    @PostMapping("/api/free-board/{freeId}/reply")
     public ResponseDto<Integer> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
                                          @AuthenticationPrincipal PrincipalDetails principalDetails){
         freeBoardService.writeReply(replySaveRequestDto, principalDetails.getUser().getId());

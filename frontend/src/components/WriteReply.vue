@@ -4,7 +4,7 @@
         v-model="replys.content"
         filled
         rows="4"
-        height="400"
+        height="100"
     ></v-textarea>
     <v-btn @click="saveReply(replys)">댓글쓰기</v-btn>
   </div>
@@ -18,8 +18,11 @@ export default {
   data() {
     return {
       replys: {
+        id: null,
         content: null,
-        boardId: null
+        boardId: null,
+        userId: null,
+        createDate: null
       }
     }
   },
@@ -30,15 +33,17 @@ export default {
           token: localStorage.getItem('token')
         }
       }
-      this.replys.boardId = this.$route.params
+      this.replys.boardId = this.$route.params.boardId
       console.log(replyObj)
       axios
           .post('/api/free-board/' + this.replys.boardId + '/reply', replyObj, config)
           .then(res => {
             alert('저장 완료')
             console.log(res)
+
           })
           .catch(err => {
+            alert('저장 실패')
             console.log(err)
           })
     }

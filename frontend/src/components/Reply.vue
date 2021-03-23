@@ -1,12 +1,25 @@
 <template>
   <div class="Reply">
-    <WriteReply></WriteReply>
-    <v-container
-        class="elevation-1"
-        v-for="reply in replys"
-        :key="reply.id"
-    >
-    {{ reply.content }}
+    <v-container>
+      <v-card
+          class="elevation-1 ma-1"
+          v-for="reply in replys"
+          :key="reply.id"
+      >
+        <v-card-text>
+          <v-row
+              class="mb-4"
+              align="center"
+          >
+            <div>
+              <v-icon>mdi-account</v-icon>
+              {{ reply.user.nickName }}
+            </div>
+          </v-row>
+          {{ reply.content }}
+        </v-card-text>
+      </v-card>
+
     </v-container>
   </div>
 
@@ -16,9 +29,6 @@
 
 export default {
   name: "Reply",
-  components: {
-    WriteReply: import('@/components/WriteReply')
-  },
   props: {
     replys: {
       type: Array,
