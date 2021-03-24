@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.Mapping.BoardMapping;
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.model.Board;
 import com.example.demo.model.User;
