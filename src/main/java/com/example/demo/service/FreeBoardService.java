@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.model.Board;
+import com.example.demo.model.Reply;
 import com.example.demo.model.User;
 import com.example.demo.repository.FreeBoardRepository;
 import com.example.demo.repository.FreeBoardReplyRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @Service
@@ -56,7 +58,17 @@ public class FreeBoardService {
 
     @Transactional
     public void writeReply(ReplySaveRequestDto replySaveRequestDto,int userId) {
-        freeBoardReplyRepository.replySave(userId,replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+        if(replySaveRequestDto.getReparentId()!= 0){//부모가 있을때 즉 대댓글일때
+            Reply parentReply= freeBoardReplyRepository.search(replySaveRequestDto.getReparentId());
+            freeBoardReplyRepository.update(parentReply.getReorder()+1);
+            freeBoardReplyRepository.replySave(userId,replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent()
+                    ,replySaveRequestDto.getReparentId(),1,parentReply.getReorder()+1);
+        }
+        else{//일반댓글일때
+            freeBoardReplyRepository.update(0);
+            freeBoardReplyRepository.replySave(userId,replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent()
+                    ,replySaveRequestDto.getReparentId(),0,0);
+        }
     }
 
     @Transactional

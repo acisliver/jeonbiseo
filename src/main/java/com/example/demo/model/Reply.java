@@ -35,4 +35,16 @@ public class Reply {
 
     @CreationTimestamp
     private Timestamp createDate;
+
+    //부모노드 확인
+    @Column(nullable = false)
+    private int reparent;
+
+    //깊이
+    @Column(nullable = false)
+    private int redepth;
+
+    //순서
+    @Column(nullable = false)
+    private int reorder;
 }

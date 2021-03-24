@@ -11,4 +11,6 @@ public interface DebateReplyRepository extends JpaRepository<Reply,Integer> {
     @Modifying
     @Query(value = "INSERT INTO reply(userID, boardId, content, createDate) VALUE(?1,?2,?3,now())",nativeQuery = true)
     int replySave(int userId, int boardId, String content);
+
+
 }
