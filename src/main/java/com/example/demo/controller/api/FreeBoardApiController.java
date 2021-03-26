@@ -77,10 +77,16 @@ public class FreeBoardApiController {
 
     //자유게시판 댓글달기
     @PostMapping("/api/free-board/{freeId}/reply")
-    public ResponseDto<Integer> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
+    public ResponseDetailBoardDto<Board> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
                                          @AuthenticationPrincipal PrincipalDetails principalDetails){
         freeBoardService.writeReply(replySaveRequestDto, principalDetails.getUser().getId());
-        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+
+        Board board = freeBoardService.viewBoard(replySaveRequestDto.getBoardId());
+        if(board != null)
+            return new ResponseDetailBoardDto<Board>(board,1);
+        else
+            return new ResponseDetailBoardDto<Board>(board,0);
+        
     }
 
     //자유 게시판 댓글삭제
