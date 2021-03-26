@@ -14,7 +14,7 @@ public interface FreeBoardReplyRepository extends JpaRepository<Reply,Integer> {
     int replySave(int userId, int boardId, String content,int reparent, int redepth, int reorder);
 
     @Modifying
-    @Query(value = "Update  reply Set reorder=reorder+1 WHERE reorder>=?1", nativeQuery = true)
+    @Query(value = "Update  reply Set reorder = reorder+1 WHERE reorder >= ?1", nativeQuery = true)
     int update(int reorder);
 
     @Query(value = "SELECT * FROM reply WHERE id= ?1", nativeQuery = true)

@@ -58,9 +58,15 @@ public class FreeBoardService {
 
     @Transactional
     public void writeReply(ReplySaveRequestDto replySaveRequestDto,int userId) {
-        if(replySaveRequestDto.getReparentId()!= 0){//부모가 있을때 즉 대댓글일때
+        //부모가 있을때 즉 대댓글일때
+        if(replySaveRequestDto.getReparentId()!= 0){
+            //전달받은 getReparentId로 몇번째 댓글의 자식(대댓글)인지 확인
             Reply parentReply= freeBoardReplyRepository.search(replySaveRequestDto.getReparentId());
+
+            //댓글에 대댓글을 달기 위해 기존의 데이터들의 순서를 하나씩 미룬다.
             freeBoardReplyRepository.update(parentReply.getReorder()+1);
+
+            //update에서 미룬 위치에 공간이 하나 확보 되므로, 해당 위치에 데이터 저장
             freeBoardReplyRepository.replySave(userId,replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent()
                     ,replySaveRequestDto.getReparentId(),1,parentReply.getReorder()+1);
         }
