@@ -7,17 +7,18 @@
           :key="reply.id"
       >
         <v-card-text>
-          <v-row
-              class="mb-4"
-              align="center"
-          >
+          <v-row class="mb-4" align="center">
             <div>
               <v-icon>mdi-account</v-icon>
               {{ reply.user.nickName }}
             </div>
           </v-row>
-          {{ reply.content }}
+          <v-col>
+            {{ reply.content }}
+            <v-btn class="float-right" @click="isRereplyClick()">대댓글</v-btn>
+          </v-col>
         </v-card-text>
+        <WriteRereply :reply="reply"></WriteRereply>
       </v-card>
 
     </v-container>
@@ -35,7 +36,30 @@ export default {
       required: true
     }
   },
+  data(){
+    return {
+      rereply: {
+        id: null,
+        content: null,
+        boardId: null,
+        userId: null,
+        createDate: null,
+        reparent: 0
+      },
+      isBtnClick: false,
+    }
+  },
+  components: {
+    WriteRereply: import('@/components/WriteRereply'),
+  },
   computed: {
+
+  },
+  methods: {
+    isRereplyClick(){
+      if(this.isBtnClick === false) this.isBtnClick = true
+      else this.isBtnClick = false
+    },
 
   }
 }

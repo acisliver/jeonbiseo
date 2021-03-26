@@ -1,12 +1,12 @@
 <template>
-  <div class="WriteReply">
+  <div class="WriteRereply">
     <v-textarea
-        v-model="reply.content"
+        v-model="rereply.content"
         filled
         rows="4"
         height="100"
     ></v-textarea>
-    <v-btn @click="saveReply(reply)">댓글쓰기</v-btn>
+    <v-btn @click="saveRereply(reply, reply.id)">저장</v-btn>
   </div>
 </template>
 
@@ -14,10 +14,16 @@
 import axios from "axios";
 
 export default {
-  name: "WriteReply",
+  name: "WriteRereply",
+  props: {
+    reply: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
-      reply: {
+      rereply: {
         id: null,
         content: null,
         boardId: null,
@@ -28,16 +34,17 @@ export default {
     }
   },
   methods: {
-    saveReply(replyObj){
+    saveRereply(rereplyObj, parentId){
       let config = {
         headers: {
           token: localStorage.getItem('token')
         }
       }
-      this.reply.boardId = this.$route.params.boardId
-      console.log(replyObj)
+      this.replys.boardId = this.$route.params.boardId
+      rereplyObj.reparent = parentId
+      console.log(rereplyObj)
       axios
-          .post('/api/free-board/' + this.reply.boardId + '/reply', replyObj, config)
+          .post('/api/free-board/' + this.replys.boardId + '/reply', rereplyObj, config)
           .then(res => {
             alert('저장 완료')
             console.log(res)
@@ -48,7 +55,7 @@ export default {
             console.log(err)
           })
     }
-  },
+  }
 }
 </script>
 

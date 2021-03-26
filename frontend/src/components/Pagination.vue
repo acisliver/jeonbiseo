@@ -69,7 +69,7 @@ export default {
     pageSize: {
       type: Number,
       required: false,
-      default: 7
+      default: 10
     },
     boardName: {
       type: String,
