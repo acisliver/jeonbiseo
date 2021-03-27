@@ -28,6 +28,12 @@ public class Debate {
     @Lob //대용량 데이터
     private String content;
 
+    @Column(nullable = false)
+    private int good;
+
+    @Column(nullable = false)
+    private int notGood;
+
     private int count; //조회수
 
     @ManyToOne(fetch = FetchType.EAGER) //Many=Board, User=one -> 한명의 유저는 여러개의 게시글(board)를 쓸 수 있다.

@@ -86,13 +86,28 @@ public class FreeBoardApiController {
             return new ResponseDetailBoardDto<Board>(board,1);
         else
             return new ResponseDetailBoardDto<Board>(board,0);
-        
+
     }
 
     //자유 게시판 댓글삭제
     @DeleteMapping("/api/free-board/{freeId}/reply/{replyId}")
     public ResponseDto<Integer> replyDelete(@PathVariable int replyId){
         freeBoardService.deleteReply(replyId);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    //좋아요 버튼 클릭
+    @PutMapping("/api/free-board/{boardId}/good")
+    public ResponseDto<Integer> goodFreeBoard(@PathVariable int boardId){
+
+        freeBoardService.pressGood(boardId);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    //싫어요 버튼 클릭
+    @PutMapping("/api/free-board/{boardId}/not-good")
+    public ResponseDto<Integer> notGoodFreeboard(@PathVariable int boardId){
+        freeBoardService.pressNotGood(boardId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

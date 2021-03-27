@@ -38,6 +38,8 @@ public class FreeBoardService {
     public void writeBoard(Board board, User user) {
         board.setCount(0);
         board.setUser(user);
+        board.setGood(0);
+        board.setNotGood(0);
         freeBoardRepository.save(board);
     }
 
@@ -82,5 +84,13 @@ public class FreeBoardService {
         freeBoardReplyRepository.deleteById(replyId);
     }
 
+    @Transactional
+    public void pressGood(int boardId) {
+        freeBoardRepository.goodUp(boardId);
+    }
 
+    @Transactional
+    public void pressNotGood(int boardId) {
+        freeBoardRepository.notGoodUp(boardId);
+    }
 }

@@ -77,5 +77,18 @@ public class DebateBoardApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
+    //좋아요 버튼 클릭
+    @PutMapping("/api/free-board/{debateId}/good")
+    public ResponseDto<Integer> goodDebateBoard(@PathVariable int debateId){
+        debateBoardService.pressGood(debateId);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    //싫어요 버튼 클릭
+    @PutMapping("/api/free-board/{debateId}/not-good")
+    public ResponseDto<Integer> notGoodDebateBoard(@PathVariable int debateId){
+        debateBoardService.pressNotGood(debateId);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
 
 }

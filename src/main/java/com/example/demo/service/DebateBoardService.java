@@ -60,4 +60,14 @@ public class DebateBoardService {
     public void deleteDebateReply(int replyId) {
         debateReplyRepository.deleteById(replyId);
     }
+
+    @Transactional
+    public void pressGood(int debateId) {
+        debateBoardRepository.goodUp(debateId);
+    }
+
+    @Transactional
+    public void pressNotGood(int debateId) {
+        debateBoardRepository.notGoodUp(debateId);
+    }
 }
