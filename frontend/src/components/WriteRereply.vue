@@ -12,6 +12,7 @@
 
 <script>
 import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
   name: "WriteRereply",
@@ -33,6 +34,9 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState(['replys'])
+  },
   methods: {
     saveRereply(rereplyObj, parentId){
       let config = {
@@ -47,8 +51,8 @@ export default {
           .post('/api/free-board/' + this.replys.boardId + '/reply', rereplyObj, config)
           .then(res => {
             alert('저장 완료')
+            this.replys = res.data.detailBoard.replys
             console.log(res)
-
           })
           .catch(err => {
             alert('저장 실패')

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
-// import router from "@/router";
 
 Vue.use(Vuex)
 
@@ -18,6 +17,8 @@ export default new Vuex.Store({
     freeBody: null,
     debateHeader: null,
     debateBody: null,
+    detailBoard: null,
+    replys: null
   },
 
   getters:{
@@ -47,6 +48,11 @@ export default new Vuex.Store({
     setDebateHeader(state, debateHeader) {
       state.debateHeader = debateHeader
     },
+    setDetailBoard(state, detailBoard) {
+      state.detailBoard = detailBoard
+      console.log('setDetailBoard')
+      console.log(state.detailBoard)
+    }
   },
 
   actions: {
@@ -90,6 +96,20 @@ export default new Vuex.Store({
           .then(res => {
             commit('setDebateHeader', res.data)
             console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    },
+    getBoardContent({commit, state}, boardId){
+      const url = '/api/free-board/' + boardId
+      console.log(url)
+      axios
+          .get(url)
+          .then(res => {
+            commit('setDetailBoard', res.data.detailBoard)
+            console.log(res.data.detailBoard)
+            console.log(state.detailBoard)
           })
           .catch(err => {
             console.log(err)

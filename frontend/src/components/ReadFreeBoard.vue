@@ -1,6 +1,6 @@
 <template>
   <div class="ReadFreeBoard">
-    <v-container class="elevation-1 pa-2">
+    <v-container class="elevation-1 pa-2" :key="detailBoard">
       <v-card flat>
         <v-card-text>
           <v-row
@@ -11,31 +11,31 @@
                 color="grey"
                 class="mr-4"
             ></v-avatar>
-            <strong class="title">제목: {{ boardData.title }}</strong>
+            <strong class="title">제목: {{ detailBoard.title }}</strong>
             <v-spacer></v-spacer>
             <div>
               <v-icon>mdi-account</v-icon>
-              {{boardData.user.nickName}}
+              {{detailBoard.user.nickName}}
             </div>
           </v-row>
-          {{boardData.content}}
+          {{detailBoard.content}}
         </v-card-text>
       </v-card>
       <WriteReply></WriteReply>
-      <Reply :replys="boardData.replys"></Reply>
+      <Reply :replys="detailBoard.replys"></Reply>
     </v-container>
   </div>
 
 </template>
 
 <script>
-import axios from "axios";
+import { mapState, mapActions } from "vuex"
 
 export default {
   name: "ReadFreeBoard",
   data (){
     return{
-      boardData: null
+      replys: null
     }
   },
   components: {
@@ -43,42 +43,30 @@ export default {
     WriteReply: () => import('@/components/WriteReply')
   },
   computed: {
-
+    ...mapState(['detailBoard'])
   },
   methods: {
-    getBaordContent(){
-      const url = '/api/free-board/' + this.$route.params.boardId
-      console.log(url)
-      axios
-          .get(url)
-          .then(res => {
-            console.log(res)
-            this.boardData = res.data.detailBoard
-          })
-          .catch(err => {
-            console.log(err)
-          })
-    },
-    replaceContent(content){
-      let contentArray = content.split('\n')
-      console.log(contentArray)
-      let htmls = ''
-      contentArray.forEach( content => {
-        htmls += <p>content</p>
-        console.log(content)
-      })
-
-      return this.stringToHTML(htmls)
-    },
-    stringToHTML(str) {
-      let dom = document.createElement('div');
-      dom.innerHTML = str;
-      return dom;
-    }
+    ...mapActions(['getBoardContent']),
+    // replaceContent(content){
+    //   let contentArray = content.split('\n')
+    //   console.log(contentArray)
+    //   let htmls = ''
+    //   contentArray.forEach( content => {
+    //     htmls += <p>content</p>
+    //     console.log(content)
+    //   })
+    //
+    //   return this.stringToHTML(htmls)
+    // },
+    // stringToHTML(str) {
+    //   let dom = document.createElement('div');
+    //   dom.innerHTML = str;
+    //   return dom;
+    // }
   },
   created() {
-    this.getBaordContent()
-  }
+    this.getBoardContent(this.$route.params.boardId)
+  },
 }
 </script>
 

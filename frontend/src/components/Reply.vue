@@ -5,6 +5,7 @@
           class="elevation-1 ma-1"
           v-for="reply in replys"
           :key="reply.id"
+          @updateReplys = "fromWriteReply"
       >
         <v-card-text>
           <v-row class="mb-4" align="center">
@@ -56,6 +57,11 @@ export default {
 
   },
   methods: {
+    fromWriteReply(newRelpys){
+      this.$emit("updateReplys", newRelpys)
+      this.replys = newRelpys
+      console.log(newRelpys)
+    },
     isRereplyClick(){
       if(this.isBtnClick === false) this.isBtnClick = true
       else this.isBtnClick = false

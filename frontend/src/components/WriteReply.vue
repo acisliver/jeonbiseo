@@ -24,7 +24,8 @@ export default {
         userId: null,
         createDate: null,
         reparent: 0
-      }
+      },
+      replys: null
     }
   },
   methods: {
@@ -35,13 +36,12 @@ export default {
         }
       }
       this.reply.boardId = this.$route.params.boardId
-      console.log(replyObj)
       axios
           .post('/api/free-board/' + this.reply.boardId + '/reply', replyObj, config)
           .then(res => {
             alert('저장 완료')
+            this.$emit("updateReplys", res.data.detailBoard.replys)
             console.log(res)
-
           })
           .catch(err => {
             alert('저장 실패')
