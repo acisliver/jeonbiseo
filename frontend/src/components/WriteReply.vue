@@ -5,8 +5,9 @@
         filled
         rows="4"
         height="100"
+        class="mb-3"
     ></v-textarea>
-    <v-btn @click="saveReply(reply)">댓글쓰기</v-btn>
+    <v-btn @click="saveReply(reply)" class="float-right">댓글저장</v-btn>
   </div>
 </template>
 

@@ -16,8 +16,8 @@
           </v-row>
           <v-col>
             {{ reply.content }}
-            <v-btn class="float-right" @click="isRereplyClick()">대댓글</v-btn>
           </v-col>
+          <v-btn @click="isRereplyClick()" class="float-right">대댓글</v-btn>
         </v-card-text>
         <WriteRereply :reply="reply"></WriteRereply>
       </v-card>

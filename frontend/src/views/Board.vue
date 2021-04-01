@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style scoped>
+.board{
+  text-align: center;
+}
 a{
   font-weight: bold;
   text-decoration: none;

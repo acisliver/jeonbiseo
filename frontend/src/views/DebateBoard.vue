@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapState,mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: "DebateBoard",
@@ -17,13 +17,12 @@ export default {
     Pagination: () => import('@/components/Pagination')
   },
   computed: {
-    ...mapState(['debateHeader'])
-  },
-  methods: {
-    ...mapActions(['getDebateHeader'])
+    ...mapState({
+      debateHeader: state => state.boardStore.debateHeader
+    })
   },
   created() {
-    this.getDebateHeader()
+    this.$store.dispatch('boardStore/getDebateHeader')
   }
 }
 </script>

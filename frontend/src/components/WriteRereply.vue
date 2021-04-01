@@ -35,7 +35,9 @@ export default {
     }
   },
   computed: {
-    ...mapState(['replys'])
+    ...mapState({
+      rereply: state => state.boardStore.replys
+    })
   },
   methods: {
     saveRereply(rereplyObj, parentId){

@@ -1,6 +1,6 @@
 <template>
   <div class="ReadFreeBoard">
-    <v-container class="elevation-1 pa-2" :key="detailBoard">
+    <v-container class="elevation-1 pa-2 ma-2" :key="detailBoard">
       <v-card flat>
         <v-card-text>
           <v-row
@@ -15,21 +15,25 @@
             <v-spacer></v-spacer>
             <div>
               <v-icon>mdi-account</v-icon>
-              {{detailBoard.user.nickName}}
+              {{ detailBoard.user.nickName }}
             </div>
           </v-row>
           {{detailBoard.content}}
         </v-card-text>
       </v-card>
-      <WriteReply></WriteReply>
-      <Reply :replys="detailBoard.replys"></Reply>
+      <v-col>
+        <WriteReply></WriteReply>
+      </v-col>
+      <v-col>
+        <Reply :replys="detailBoard.replys"></Reply>
+      </v-col>
     </v-container>
   </div>
 
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex"
+import { mapState } from "vuex"
 
 export default {
   name: "ReadFreeBoard",
@@ -43,10 +47,11 @@ export default {
     WriteReply: () => import('@/components/WriteReply')
   },
   computed: {
-    ...mapState(['detailBoard'])
+    ...mapState({
+      detailBoard: state => state.boardStore.detailBoard
+    })
   },
   methods: {
-    ...mapActions(['getBoardContent']),
     // replaceContent(content){
     //   let contentArray = content.split('\n')
     //   console.log(contentArray)
@@ -65,11 +70,13 @@ export default {
     // }
   },
   created() {
-    this.getBoardContent(this.$route.params.boardId)
+    this.$store.dispatch("boardStore/getBoardContent", this.$route.params.boardId)
   },
 }
 </script>
 
 <style scoped>
-
+.ReadFreeBoard{
+  text-align: center;
+}
 </style>

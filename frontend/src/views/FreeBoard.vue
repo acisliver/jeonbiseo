@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { mapState,mapActions } from 'vuex'
+import { mapState } from 'vuex'
+
 
 export default {
   name: "FreeBoard",
@@ -17,13 +18,12 @@ export default {
     Pagination: () => import('@/components/Pagination')
   },
   computed: {
-    ...mapState(['freeHeader'])
-  },
-  methods: {
-    ...mapActions(['getFreeHeader'])
+    ...mapState({
+      freeHeader: state => state.boardStore.freeHeader
+    })
   },
   created() {
-    this.getFreeHeader()
+    this.$store.dispatch("boardStore/getFreeHeader")
   }
 }
 </script>

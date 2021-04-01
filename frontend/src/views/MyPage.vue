@@ -41,16 +41,18 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 
+const userStore = "userStore"
+
 export default {
   name: "MyPage",
   computed: {
-    ...mapState(['userInfo']),
+    ...mapState(userStore, ['userInfo']),
     username() {
       return this.$route.params.username
     }
   },
   methods: {
-    ...mapActions(['getUserInfo'])
+    ...mapActions(userStore, ['getUserInfo'])
   },
   created() {
     // this.getUserInfo()
