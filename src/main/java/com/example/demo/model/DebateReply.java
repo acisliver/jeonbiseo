@@ -36,5 +36,22 @@ public class DebateReply {
     private User user;
 
     @CreationTimestamp
-    private Timestamp credateDate;
+    private Timestamp createDate;
+
+    //부모노드 확인
+    @Column(nullable = false)
+    private int reparent;
+
+    //깊이
+    @Column(nullable = false)
+    private int redepth;
+
+    //순서
+    @Column(nullable = false)
+    private int reorder;
+
+    //찬성, 반대, negative
+    @Column(nullable = false)
+    private String prosAndConsAndNegative;
+
 }

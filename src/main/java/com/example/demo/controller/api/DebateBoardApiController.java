@@ -1,6 +1,7 @@
 package com.example.demo.controller.api;
 
 import com.example.demo.config.auth.PrincipalDetails;
+import com.example.demo.dto.DebateReplySaveRequestDto;
 import com.example.demo.dto.ReplySaveRequestDto;
 import com.example.demo.dto.ResponseDetailBoardDto;
 import com.example.demo.dto.ResponseDto;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class DebateBoardApiController {
 
     @Autowired
@@ -63,10 +64,10 @@ public class DebateBoardApiController {
     }
 
     //토론게시판 댓글달기
-    @PostMapping("/api/debate/{debateId}/reply}")
-    public ResponseDto<Integer> addDebateReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
+    @PostMapping("/api/debate/{debateId}/reply")
+    public ResponseDto<Integer> addDebateReply(@RequestBody DebateReplySaveRequestDto debateReplySaveRequestDto,
                                                @AuthenticationPrincipal PrincipalDetails principalDetails){
-        debateBoardService.writeDebateReply(replySaveRequestDto,principalDetails.getUser().getId());
+        debateBoardService.writeDebateReply(debateReplySaveRequestDto,principalDetails.getUser().getId());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
