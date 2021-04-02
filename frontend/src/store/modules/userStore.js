@@ -3,6 +3,8 @@ import axios from "axios";
 export default {
     namespaced: true,
     state: {
+        isLogin: false,
+        isLoginError: false,
         userInfo: {
             userName: "Test1",
             password: "1234",
@@ -13,7 +15,20 @@ export default {
 
     },
     mutations: {
-        setUserInfo: (state, userInfoObj) => state.userInfo = userInfoObj
+        setUserInfo: (state, userInfoObj) => state.userInfo = userInfoObj,
+        loginSuccess(state) {
+            state.isLogin = true
+            state.isLoginError = false
+        },
+        loginError(state) {
+            state.isLoginError = true
+            state.isLogin = false
+        },
+        logout(state) {
+            state.isLogin = false
+            state.isLoginError = false
+            localStorage.removeItem("token")
+        },
     },
     actions: {
         getUserInfo({commit}){
@@ -26,6 +41,18 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
+        },
+        loginAction({commit}, statusOk){
+            if(statusOk === 200){
+                commit("loginSuccess")
+            }
+            else if(statusOk === 204 ){
+                commit('loginError')
+            }
+        },
+        logoutAction({commit}) {
+            commit('logout')
+            // router.push({ name: "Home" })
         },
     }
 }

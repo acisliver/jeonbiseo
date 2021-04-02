@@ -16,8 +16,8 @@ export default {
     mutations: {
         setFreeHeader: (state, freeHeader) => state.freeHeader = freeHeader,
         setDebateHeader: (state, debateHeader) => state.debateHeader = debateHeader,
-        setDetailBoard: (state, detailBoard) => state.detailBoard = detailBoard
-
+        setDetailBoard: (state, detailBoard) => state.detailBoard = detailBoard,
+        setReplys: (state, replys) => state.replys = replys
     },
 
     actions: {
@@ -43,15 +43,14 @@ export default {
                     console.log(err)
                 })
         },
-        getBoardContent({commit, state}, boardId){
+        getBoardContent({commit}, boardId){
             const url = '/api/free-board/' + boardId
             console.log(url)
             axios
                 .get(url)
                 .then(res => {
                     commit('setDetailBoard', res.data.detailBoard)
-                    console.log(res.data.detailBoard)
-                    console.log(state.detailBoard)
+                    commit('setReplys', res.data.detailBoard.replys)
                 })
                 .catch(err => {
                     console.log(err)

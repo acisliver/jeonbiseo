@@ -5,7 +5,6 @@
           class="elevation-1 ma-1"
           v-for="reply in replys"
           :key="reply.id"
-          @updateReplys = "fromWriteReply"
       >
         <v-card-text>
           <v-row class="mb-4" align="center">
@@ -17,8 +16,9 @@
           <v-col>
             {{ reply.content }}
           </v-col>
-          <v-btn @click="isRereplyClick()" class="float-right">대댓글</v-btn>
+          <v-btn @click="addRereplyArea()" class="">대댓글</v-btn>
         </v-card-text>
+        <component v-bind:is="textArea"></component>
         <WriteRereply :reply="reply"></WriteRereply>
       </v-card>
 
@@ -28,17 +28,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
+import WriteRereply from "@/components/WriteRereply";
 
 export default {
   name: "Reply",
-  props: {
-    replys: {
-      type: Array,
-      required: true
-    }
-  },
   data(){
     return {
+      textArea: null,
       rereply: {
         id: null,
         content: null,
@@ -47,24 +44,20 @@ export default {
         createDate: null,
         reparent: 0
       },
-      isBtnClick: false,
+
     }
   },
   components: {
-    WriteRereply: import('@/components/WriteRereply'),
+    // WriteRereply: import('@/components/WriteRereply'),
   },
   computed: {
-
+    ...mapState({
+      replys: state => state.boardStore.replys,
+    })
   },
   methods: {
-    fromWriteReply(newRelpys){
-      this.$emit("updateReplys", newRelpys)
-      this.replys = newRelpys
-      console.log(newRelpys)
-    },
-    isRereplyClick(){
-      if(this.isBtnClick === false) this.isBtnClick = true
-      else this.isBtnClick = false
+    addRereplyArea(){
+      this.textArea = WriteRereply
     },
 
   }

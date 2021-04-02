@@ -25,7 +25,7 @@
         <WriteReply></WriteReply>
       </v-col>
       <v-col>
-        <Reply :replys="detailBoard.replys"></Reply>
+        <Reply></Reply>
       </v-col>
     </v-container>
   </div>

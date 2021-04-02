@@ -90,7 +90,9 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isLogin']),
+    ...mapState({
+      isLogin: state => state.userStore.isLogin
+    }),
     pageCount () {
       if (this.header === null ){
         return 1;

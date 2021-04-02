@@ -31,13 +31,13 @@
                   <router-link :to="{
                     name: 'MyPage',
                     params: {
-                      username: this.$store.state.userInfo.userName
+                      username: userInfo.userName
                     }
                 }">마이페이지</router-link></v-list-item-title>
               </v-list-item>
               <v-list-item>
                 <v-list-item-title
-                    @click="$store.dispatch('logoutAction')"
+                    @click="$store.dispatch('userStore/logoutAction')"
                 ><router-link :to="{name: 'Home'}">로그아웃</router-link></v-list-item-title>
               </v-list-item>
             </v-list>
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import{ mapState, mapActions } from 'vuex'
+import{ mapState } from 'vuex'
 
 export default {
   name: "AppBar",
@@ -59,10 +59,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isLogin', 'isLoginError'])
+    ...mapState({
+      userInfo: state => state.userStore.userInfo,
+      isLogin: state => state.userStore.isLogin,
+      isLoginError: state => state.userStore.isLoginError
+    })
   },
   methods: {
-    ...mapActions(['logoutAction'])
+
   }
 }
 </script>

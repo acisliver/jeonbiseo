@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import axios from "axios"
 
 export default {
@@ -67,10 +67,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isLoginError', 'isLogin']),
+    ...mapState({
+      isLogin: state => state.userStore.isLogin,
+      isLoginError: state => state.userStore.isLoginError
+    }),
   },
   methods: {
-    ...mapActions(['loginAction', 'logoutAction']),
     login(loginObj) {
       axios
           .post("/login",loginObj)
@@ -79,7 +81,7 @@ export default {
             if(statusOk===200){
               localStorage.setItem("token", res.headers.token)
               this.$router.push({name:'Home'})
-              this.$store.dispatch('loginAction', statusOk)
+              this.$store.dispatch('userStore/loginAction', statusOk)
             }
             else if(statusOk===204){
               this.failLogin = true
