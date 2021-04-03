@@ -18,8 +18,7 @@
           </v-col>
           <v-btn @click="addRereplyArea()" class="">대댓글</v-btn>
         </v-card-text>
-        <component v-bind:is="textArea"></component>
-        <WriteRereply :reply="reply"></WriteRereply>
+        <component :is="textArea" :reply="reply"></component>
       </v-card>
 
     </v-container>
@@ -29,7 +28,7 @@
 
 <script>
 import { mapState } from "vuex"
-import WriteRereply from "@/components/WriteRereply";
+import WriteRereply from "@/components/WriteRereply"
 
 export default {
   name: "Reply",
@@ -53,12 +52,14 @@ export default {
   computed: {
     ...mapState({
       replys: state => state.boardStore.replys,
-    })
+    }),
   },
   methods: {
     addRereplyArea(){
       this.textArea = WriteRereply
     },
+  },
+  created() {
 
   }
 }
