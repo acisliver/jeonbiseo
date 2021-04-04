@@ -2,7 +2,7 @@ package com.example.demo.controller.api;
 
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.ReplySaveRequestDto;
-import com.example.demo.dto.ResponseDetailBoardDto;
+import com.example.demo.dto.ResponseDetailFreeBoardDto;
 import com.example.demo.dto.ResponseDto;
 import com.example.demo.model.Board;
 import com.example.demo.service.FreeBoardService;
@@ -29,12 +29,12 @@ public class FreeBoardApiController {
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
     @GetMapping({"/api/free-board/{freeId}"})
     public @ResponseBody
-    ResponseDetailBoardDto<Board> viewBoard(@PathVariable int freeId){
+    ResponseDetailFreeBoardDto<Board> viewBoard(@PathVariable int freeId){
         Board board = freeBoardService.viewBoard(freeId);
         if(board != null)
-            return new ResponseDetailBoardDto<Board>(board,1);
+            return new ResponseDetailFreeBoardDto<Board>(board,1);
         else
-            return new ResponseDetailBoardDto<Board>(board,0);
+            return new ResponseDetailFreeBoardDto<Board>(board,0);
     }
 
     //자유게시판 글쓰기를 통해 작성 한 글 저장 버튼을 눌렀을 때
@@ -42,21 +42,6 @@ public class FreeBoardApiController {
     @PostMapping("/api/free-board/write/save")
     public ResponseDto<Integer> boardSave(@RequestBody Board board,
                                           @AuthenticationPrincipal PrincipalDetails principalDetails){
-        System.out.println(board.getTitle());
-        System.out.println(board.getContent());
-        System.out.println("prin"+principalDetails.toString());
-        if(principalDetails.getUser()!=null){
-            System.out.println("진입");
-            System.out.println("1111111111111111111111111111111");
-            System.out.println("Board username:"+principalDetails.getUser().getUserName());
-            System.out.println("Board password:"+principalDetails.getUser().getPassword());
-            System.out.println("Board nickname:"+principalDetails.getUser().getNickName());
-        }else{
-            System.out.println("진입 못함");
-            System.out.println("2222222222222222222222222222222");
-            System.out.println("user가 존재하지 않는다.");
-        }
-
         freeBoardService.writeBoard(board,principalDetails.getUser());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
@@ -77,15 +62,15 @@ public class FreeBoardApiController {
 
     //자유게시판 댓글달기
     @PostMapping("/api/free-board/{freeId}/reply")
-    public ResponseDetailBoardDto<Board> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
-                                         @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public ResponseDetailFreeBoardDto<Board> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
+                                                      @AuthenticationPrincipal PrincipalDetails principalDetails){
         freeBoardService.writeReply(replySaveRequestDto, principalDetails.getUser().getId());
 
         Board board = freeBoardService.viewBoard(replySaveRequestDto.getBoardId());
         if(board != null)
-            return new ResponseDetailBoardDto<Board>(board,1);
+            return new ResponseDetailFreeBoardDto<Board>(board,1);
         else
-            return new ResponseDetailBoardDto<Board>(board,0);
+            return new ResponseDetailFreeBoardDto<Board>(board,0);
 
     }
 

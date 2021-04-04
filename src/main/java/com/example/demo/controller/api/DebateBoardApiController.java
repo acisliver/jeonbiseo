@@ -2,15 +2,15 @@ package com.example.demo.controller.api;
 
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.DebateReplySaveRequestDto;
-import com.example.demo.dto.ReplySaveRequestDto;
-import com.example.demo.dto.ResponseDetailBoardDto;
+import com.example.demo.dto.PercentageDto;
+import com.example.demo.dto.ResponseDetailDebateBoardDto;
 import com.example.demo.dto.ResponseDto;
 import com.example.demo.model.Debate;
+import com.example.demo.model.Statistic;
 import com.example.demo.service.DebateBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,16 +28,17 @@ public class DebateBoardApiController {
         return debateHeader;
     }
 
-
     //글을 눌렀을 때, 해당 글을 볼 수 있도록
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
     @GetMapping({"/api/debate/{debateId}"})
-    public @ResponseBody ResponseDetailBoardDto<Debate> viewDebate(@PathVariable int debateId){
+    public @ResponseBody
+    ResponseDetailDebateBoardDto<Debate, PercentageDto> viewDebate(@PathVariable int debateId){
         Debate debate = debateBoardService.viewDebate(debateId);
+        PercentageDto percentageDto = debateBoardService.viewStatistic(debateId);
         if(debate != null)
-            return new ResponseDetailBoardDto<Debate>(debate,1);
+            return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,1);
         else
-            return new ResponseDetailBoardDto<Debate>(debate,0);
+            return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,0);
     }
 
     //토론 글쓰기를 통해 작성 한 글 저장 버튼을 눌렀을 때
@@ -49,7 +50,6 @@ public class DebateBoardApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
-
     //토론 게시글 삭제
     @DeleteMapping("/api/debate/{debateId}")
     public ResponseDto<Integer> debateDelete(@PathVariable int debateId){
@@ -57,6 +57,7 @@ public class DebateBoardApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
+    //게시판 수정
     @PutMapping("/api/debate/{debateId}")
     public ResponseDto<Integer> debateUpdate(@PathVariable int debateId, @RequestBody Debate debate){
         debateBoardService.updateBoard(debateId, debate);
@@ -65,10 +66,17 @@ public class DebateBoardApiController {
 
     //토론게시판 댓글달기
     @PostMapping("/api/debate/{debateId}/reply")
-    public ResponseDto<Integer> addDebateReply(@RequestBody DebateReplySaveRequestDto debateReplySaveRequestDto,
-                                               @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public ResponseDetailDebateBoardDto<Debate, PercentageDto> addDebateReply(@RequestBody DebateReplySaveRequestDto debateReplySaveRequestDto,
+                                                                          @AuthenticationPrincipal PrincipalDetails principalDetails){
         debateBoardService.writeDebateReply(debateReplySaveRequestDto,principalDetails.getUser().getId());
-        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+
+
+        Debate debate = debateBoardService.viewDebate(debateReplySaveRequestDto.getDebateBoardId());
+        PercentageDto percentageDto = debateBoardService.viewStatistic(debateReplySaveRequestDto.getDebateBoardId());
+        if(debate != null)
+            return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,1);
+        else
+            return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,0);
     }
 
     //토론 게시판 댓글삭제
