@@ -1,12 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.DebateReplySaveRequestDto;
-import com.example.demo.model.Debate;
-import com.example.demo.model.DebateReply;
-import com.example.demo.model.Reply;
-import com.example.demo.model.User;
+import com.example.demo.model.*;
 import com.example.demo.repository.DebateReplyRepository;
 import com.example.demo.repository.DebateBoardRepository;
+import com.example.demo.repository.StatisticRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +17,8 @@ public class DebateBoardService {
     private DebateBoardRepository debateBoardRepository;
     @Autowired
     private DebateReplyRepository debateReplyRepository;
+    @Autowired
+    private StatisticRepository statisticRepository;
 
     @Transactional
     public List<Debate> postList(){
@@ -33,9 +33,27 @@ public class DebateBoardService {
 
     @Transactional
     public void writeDebate(Debate debate, User user) {
+        //토론 게시글 작성
         debate.setCount(0);
         debate.setUser(user);
+        debate.setGood(0);
+        debate.setNotGood(0);
         debateBoardRepository.save(debate);
+
+        //객체는 call by reference이기 때문에 db에 생성된 id값을 가져 올 수 있다.
+        System.out.println("sout de:"+debate.getId());
+
+        //통계 게시글에 맞는 통계 db 생성
+        //id는 1부터 시작해서 1씩 증가하므로 0보다 큰지 비교
+        if(debate.getId() > 0) {
+            Statistic statistic = new Statistic();
+            statistic.setDebateId(debate.getId());
+            statistic.setPres(0);
+            statistic.setCons(0);
+            statistic.setNegative(0);
+            statisticRepository.save(statistic);
+        }
+
     }
 
     @Transactional
