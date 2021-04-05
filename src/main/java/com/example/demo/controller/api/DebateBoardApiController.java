@@ -35,7 +35,7 @@ public class DebateBoardApiController {
     ResponseDetailDebateBoardDto<Debate, PercentageDto> viewDebate(@PathVariable int debateId){
         Debate debate = debateBoardService.viewDebate(debateId);
         PercentageDto percentageDto = debateBoardService.viewStatistic(debateId);
-        if(debate != null)
+        if((debate != null) && (percentageDto != null))
             return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,1);
         else
             return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,0);
@@ -69,11 +69,9 @@ public class DebateBoardApiController {
     public ResponseDetailDebateBoardDto<Debate, PercentageDto> addDebateReply(@RequestBody DebateReplySaveRequestDto debateReplySaveRequestDto,
                                                                           @AuthenticationPrincipal PrincipalDetails principalDetails){
         debateBoardService.writeDebateReply(debateReplySaveRequestDto,principalDetails.getUser().getId());
-
-
         Debate debate = debateBoardService.viewDebate(debateReplySaveRequestDto.getDebateBoardId());
         PercentageDto percentageDto = debateBoardService.viewStatistic(debateReplySaveRequestDto.getDebateBoardId());
-        if(debate != null)
+        if((debate != null) && (percentageDto != null))
             return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,1);
         else
             return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,0);
