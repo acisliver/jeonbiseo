@@ -23,7 +23,7 @@ public class Statistic {
     private int debateId;
 
     @Column(nullable = false)
-    private int pres;
+    private int pros;
 
     @Column(nullable = false)
     private int cons;

@@ -10,8 +10,8 @@ public interface DebateReplyRepository extends JpaRepository<DebateReply,Integer
 
     //insert를 할 것이기 때문에 @Modifying 필요, @Modifying는 int만 반활 할 수 있다.
     @Modifying
-    @Query(value = "INSERT INTO debatereply(userID, debateId, content, createDate,reparent, redepth, reorder, prosAndConsAndNegative) VALUE(?1,?2,?3,now(),?4,?5,?6,?7)",nativeQuery = true)
-    int debateReplySave(int userId, int boardId, String content,int reparent, int redepth, int reorder, String prosAndConsAndNegative);
+    @Query(value = "INSERT INTO debatereply(userId, debateId, content, createDate,reparent, redepth, reorder, prosAndCons) VALUE(?1,?2,?3,now(),?4,?5,?6,?7)",nativeQuery = true)
+    int debateReplySave(int userId, int boardId, String content,int reparent, int redepth, int reorder, String prosAndCons);
 
     @Modifying
     @Query(value = "Update  debatereply Set reorder = reorder+1 WHERE reorder >= ?1", nativeQuery = true)

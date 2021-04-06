@@ -52,6 +52,6 @@ public class DebateReply {
 
     //찬성, 반대, negative
     @Column(nullable = false)
-    private String prosAndConsAndNegative;
+    private String prosAndCons;
 
 }

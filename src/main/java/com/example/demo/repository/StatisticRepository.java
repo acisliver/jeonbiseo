@@ -20,8 +20,8 @@ public interface StatisticRepository extends JpaRepository<Statistic, Integer> {
     Statistic search(int debateId);
 
     @Modifying
-    @Query(value = "Update  statistic Set pres = pres+1 WHERE  debateId= ?1", nativeQuery = true)
-    int increasePres(int debateId);
+    @Query(value = "Update  statistic Set pros = pros+1 WHERE  debateId= ?1", nativeQuery = true)
+    int increasePros(int debateId);
 
     @Modifying
     @Query(value = "Update  statistic Set cons = cons+1 WHERE  debateId= ?1", nativeQuery = true)

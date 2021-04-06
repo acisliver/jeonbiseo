@@ -74,11 +74,12 @@
       </div>
 
       <v-divider/>
-
+      
       <!--    통계-->
       <div class="DebateStatistics">
       </div>
       <v-divider/>
+
 
       <!--    의견들-->
       <div class="DebateOpinion">

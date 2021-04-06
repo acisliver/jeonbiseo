@@ -88,14 +88,14 @@ public class DebateBoardApiController {
     //좋아요 버튼 클릭
     @PutMapping("/api/debate/{debateId}/good")
     public ResponseDto<Integer> goodDebateBoard(@PathVariable int debateId){
-        debateBoardService.pressGood(debateId);
+        debateBoardService.pressGoodNum(debateId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //싫어요 버튼 클릭
     @PutMapping("/api/debate/{debateId}/not-good")
     public ResponseDto<Integer> notGoodDebateBoard(@PathVariable int debateId){
-        debateBoardService.pressNotGood(debateId);
+        debateBoardService.pressBadNum(debateId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
