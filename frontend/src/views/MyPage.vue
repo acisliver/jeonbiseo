@@ -39,15 +39,23 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+
+const userStore = "userStore"
 
 export default {
   name: "MyPage",
   computed: {
-    ...mapState(['userInfo']),
+    ...mapState(userStore, ['userInfo']),
     username() {
       return this.$route.params.username
     }
+  },
+  methods: {
+    ...mapActions(userStore, ['getUserInfo'])
+  },
+  created() {
+    // this.getUserInfo()
   }
 }
 </script>

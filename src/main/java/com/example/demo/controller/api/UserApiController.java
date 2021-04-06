@@ -31,7 +31,7 @@ public class UserApiController {
     @PostMapping("api/signup")
     public ResponseDto<Integer> save(@RequestBody User user) {
         User checkSignUp = userService.signUpApi(user);
-        if(checkSignUp != null){
+        if(checkSignUp != null) {
             System.out.printf("회원가입 완료");
             return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
         }

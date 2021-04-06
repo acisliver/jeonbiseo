@@ -3,11 +3,14 @@
     <v-container>
 
       <v-row align="center">
-        <v-app-bar-title type="button" @click="$router.push({ name: 'Home'})">전비서</v-app-bar-title>
+        <v-app-bar-title type="button" @click="$router.push({ name: 'Home'})"><span style="color: #1976d2">전</span>비서</v-app-bar-title>
         <v-spacer />
         <v-toolbar-items class="hidden-sm-and-down">
           <router-link to="/">홈</router-link>
-          <router-link to="/about">About</router-link>
+<!--          <router-link to="/about">About</router-link>-->
+          <router-link to="/compare">비교</router-link>
+          <router-link to="/recommend">추천</router-link>
+          <router-link to="/board">게시판</router-link>
           <router-link v-if="!isLogin" to="/login" >로그인</router-link>
           <router-link v-if="!isLogin" to="/signup">회원가입</router-link>
           <v-menu offset-y v-if="isLogin">
@@ -19,22 +22,22 @@
                   v-on="on"
                   icon
               >
-                <v-icon color="green lighten-2">mdi-dialpad</v-icon>
+                <v-icon color="black">mdi-dialpad</v-icon>
               </v-btn>
             </template>
-            <v-list>
+            <v-list class="loginedBtn">
               <v-list-item>
                 <v-list-item-title>
                   <router-link :to="{
                     name: 'MyPage',
                     params: {
-                      username: this.$store.state.userInfo.userName
+                      username: userInfo.userName
                     }
                 }">마이페이지</router-link></v-list-item-title>
               </v-list-item>
               <v-list-item>
                 <v-list-item-title
-                    @click="$store.dispatch('logoutAction')"
+                    @click="$store.dispatch('userStore/logoutAction')"
                 ><router-link :to="{name: 'Home'}">로그아웃</router-link></v-list-item-title>
               </v-list-item>
             </v-list>
@@ -47,7 +50,7 @@
 </template>
 
 <script>
-import{ mapState, mapActions } from 'vuex'
+import{ mapState } from 'vuex'
 
 export default {
   name: "AppBar",
@@ -56,10 +59,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isLogin', 'isLoginError'])
+    ...mapState({
+      userInfo: state => state.userStore.userInfo,
+      isLogin: state => state.userStore.isLogin,
+      isLoginError: state => state.userStore.isLoginError
+    })
   },
   methods: {
-    ...mapActions(['logoutAction'])
+
   }
 }
 </script>
@@ -81,28 +88,28 @@ export default {
     padding: 10px;
 
     &.router-link-exact-active {
-       color: #42b983;
+       color: #1976d2;
      }
   }
 }
 
 //마이페이지
-#list-item-23 > div > a{
+.loginedBtn a{
   text-decoration: none;
   font-weight: bold;
   color: #2c3e50;
   padding: 10px;
 
   &.router-link-exact-active {
-    color: #42b983;
+    color: #1976d2;
   }
 }
 
 //로그아웃
-#list-item-25 > div > a{
+.loginedBtn a{
   text-decoration: none;
   font-weight: bold;
-  color: #2c3e50;
+  color: black;
   padding: 10px;
 
 }

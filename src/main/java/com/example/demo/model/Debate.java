@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Board {
+public class Debate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,10 +43,10 @@ public class Board {
     // 하나의 게시글은 여러개의 reply를 가질 수 있다.
     //FetchType.EAGER= 즉시로딩, FetchType.LAZY= 지연로딩
     //연관관계 주인이 아니기 때문에(난 FK가 아니다.) mappedBy이기 때문에 DB에 칼럼을 만들지 않는다. join을 통해 reply에서 정보를 가져온다.
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)//CascadeType.REMOVE은 게시글 삭제시 댓글삭제
-    @JsonIgnoreProperties({"board"}) //무한참조 방지. reply클래스에서 다시 board를 호출하기때문에 무한참조가 발생 할 수 있다.
-    @OrderBy("reorder ASC")
-    private List<Reply> replys;
+    @OneToMany(mappedBy = "debate", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)//CascadeType.REMOVE은 게시글 삭제시 댓글삭제
+    @JsonIgnoreProperties({"debate"}) //무한참조 방지. reply클래스에서 다시 board를 호출하기때문에 무한참조가 발생 할 수 있다.
+    @OrderBy("id desc")
+    private List<DebateReply> debateReplies;
 
     @CreationTimestamp
     private Timestamp createDate;

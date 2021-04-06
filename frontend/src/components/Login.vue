@@ -22,6 +22,9 @@
             </v-text-field>
             <v-text-field
                 v-model="password"
+                :append-icon="isShow ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="isShow ? 'text' : 'password'"
+                @click:append="isShow = !isShow"
                 label="비밀번호"
             >
             </v-text-field>
@@ -36,15 +39,22 @@
             <v-btn @click="$router.push({ name:'SignUp' })" >회원가입</v-btn>
           </div>
         </v-card>
+        <v-alert
+            dense
+            outlined
+            type="error"
+            v-show="failLogin"
+        >
+          아이디나 비밀번호가 틀렸습니다
+        </v-alert>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import axios from "axios";
-import store from "@/store"
+import { mapState } from 'vuex'
+import axios from "axios"
 
 export default {
   name: "Login",
@@ -52,21 +62,30 @@ export default {
     return{
       userName: null,
       password: null,
+      isShow: false,
+      failLogin: false
     }
   },
   computed: {
-    ...mapState(['isLoginError', 'isLogin']),
+    ...mapState({
+      isLogin: state => state.userStore.isLogin,
+      isLoginError: state => state.userStore.isLoginError
+    }),
   },
   methods: {
-    ...mapActions(['loginAction', 'logoutAction']),
     login(loginObj) {
-      console.log(loginObj)
       axios
           .post("/login",loginObj)
           .then(res => {
-            console.log(res)
-            let statusOk = res.data.status
-            store.dispatch('loginAction', statusOk)
+            let statusOk = res.status
+            if(statusOk===200){
+              localStorage.setItem("token", res.headers.token)
+              this.$router.push({name:'Home'})
+              this.$store.dispatch('userStore/loginAction', statusOk)
+            }
+            else if(statusOk===204){
+              this.failLogin = true
+            }
           })
           .catch(err => {
             console.log(err)

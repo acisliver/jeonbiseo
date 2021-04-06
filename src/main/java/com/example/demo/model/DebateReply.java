@@ -5,16 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Reply {
+public class DebateReply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +27,8 @@ public class Reply {
 
     //한 게시물에는 여러개의 답글이 있을 수 있다.
     @ManyToOne
-    @JoinColumn(name = "boardId")
-    private Board board;
+    @JoinColumn(name = "debateId")
+    private Debate debate;
 
     //한 유저는 여러개의 답글을 달 수 있다.
     @ManyToOne
@@ -34,17 +36,5 @@ public class Reply {
     private User user;
 
     @CreationTimestamp
-    private Timestamp createDate;
-
-    //부모노드 확인
-    @Column(nullable = false)
-    private int reparent;
-
-    //깊이
-    @Column(nullable = false)
-    private int redepth;
-
-    //순서
-    @Column(nullable = false)
-    private int reorder;
+    private Timestamp credateDate;
 }
