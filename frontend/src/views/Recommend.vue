@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend">
+  <div class="Recommend">
     <h2>추천</h2>
   </div>
 </template>

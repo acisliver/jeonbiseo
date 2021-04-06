@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss">
 #app {
-  text-align: center;
+
 }
 
 

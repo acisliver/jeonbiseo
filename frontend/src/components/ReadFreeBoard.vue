@@ -11,7 +11,7 @@
                 color="grey"
                 class="mr-4"
             ></v-avatar>
-            <strong class="title">제목: {{ detailBoard.title }}</strong>
+            <strong class="title">주제: {{ detailBoard.title }}</strong>
             <v-spacer></v-spacer>
             <div>
               <v-icon>mdi-account</v-icon>

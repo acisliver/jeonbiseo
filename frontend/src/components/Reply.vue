@@ -16,11 +16,11 @@
           <v-col>
             {{ reply.content }}
           </v-col>
-          <v-btn @click="addRereplyArea()" class="">대댓글</v-btn>
+          <v-btn @click="reply.isrereply = true">대댓글</v-btn>
         </v-card-text>
-        <component :is="textArea" :reply="reply"></component>
+        <WriteRereply v-if="reply.isrereply" :reply="reply"></WriteRereply>
+<!--        <component :is="reply.rereplyComponent" :reply="reply"></component>-->
       </v-card>
-
     </v-container>
   </div>
 
@@ -28,13 +28,14 @@
 
 <script>
 import { mapState } from "vuex"
-import WriteRereply from "@/components/WriteRereply"
+// import WriteRereply from "@/components/WriteRereply"
 
 export default {
   name: "Reply",
   data(){
     return {
-      textArea: null,
+      previousRereplyObj: null,
+      rereplys: null,
       rereply: {
         id: null,
         content: null,
@@ -47,7 +48,7 @@ export default {
     }
   },
   components: {
-    // WriteRereply: import('@/components/WriteRereply'),
+    WriteRereply: import('@/components/WriteRereply'),
   },
   computed: {
     ...mapState({
@@ -55,9 +56,21 @@ export default {
     }),
   },
   methods: {
-    addRereplyArea(){
-      this.textArea = WriteRereply
-    },
+  //   addRereplyArea(replyObj){
+  //     // const pro = this.previousRereplyObj
+  //     //클릭된 reply 객체에 컴포넌트 추가
+  //     replyObj.rereplyComponent = WriteRereply
+  //     console.log(replyObj.rereplyComponent)
+  //     //
+  //     // if(pro === null){
+  //     //
+  //     // }
+  //     // else{
+  //     //
+  //     // }
+  //     //다른 대댓글 클릭시 이전 컴포넌트 삭제를 위한 객체 저장
+  //     this.previousRereplyObj = replyObj
+  //   },
   },
   created() {
 

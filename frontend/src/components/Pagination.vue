@@ -86,7 +86,13 @@ export default {
       }
     },
     clickReadBtn(id){
-      this.$router.push({ name: 'ReadFreeBoard' ,params: { boardId: id}})
+      const boardName = this.boardName
+      let componentName = ''
+      if (boardName === 'FreeBoard') componentName = 'ReadFreeBoard'
+      else if(boardName === 'DebateBoard') componentName = 'ReadDebateBoard'
+      console.log(boardName)
+      console.log(componentName)
+      this.$router.push({ name: componentName ,params: { boardId: id}})
     }
   },
   computed: {

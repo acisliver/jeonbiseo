@@ -10,7 +10,9 @@ export default {
     },
 
     getters: {
-
+        getReplys({state}){
+            return state.boardStore.replys
+        }
     },
 
     mutations: {
@@ -56,5 +58,18 @@ export default {
                     console.log(err)
                 })
         },
+        getDebateContent({commit}, boardId){
+            const url = '/api/debate/' + boardId
+            console.log(url)
+            axios
+                .get(url)
+                .then(res => {
+                    commit('setDetailBoard', res.data.detailBoard)
+                    commit('setReplys', res.data.detailBoard.replys)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }
 }
