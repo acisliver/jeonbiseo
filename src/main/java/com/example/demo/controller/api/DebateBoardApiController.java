@@ -75,6 +75,7 @@ public class DebateBoardApiController {
             return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,1);
         else
             return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,0);
+
     }
 
     //토론 게시판 댓글삭제
