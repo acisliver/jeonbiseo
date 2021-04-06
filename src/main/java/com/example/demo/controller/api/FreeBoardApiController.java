@@ -85,14 +85,14 @@ public class FreeBoardApiController {
     @PutMapping("/api/free-board/{boardId}/good")
     public ResponseDto<Integer> goodFreeBoard(@PathVariable int boardId){
 
-        freeBoardService.pressGood(boardId);
+        freeBoardService.pressGoodNum(boardId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     //싫어요 버튼 클릭
     @PutMapping("/api/free-board/{boardId}/not-good")
     public ResponseDto<Integer> notGoodFreeboard(@PathVariable int boardId){
-        freeBoardService.pressNotGood(boardId);
+        freeBoardService.pressBadNum(boardId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

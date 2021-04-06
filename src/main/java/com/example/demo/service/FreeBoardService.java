@@ -38,8 +38,8 @@ public class FreeBoardService {
     public void writeBoard(Board board, User user) {
         board.setCount(0);
         board.setUser(user);
-        board.setGood(0);
-        board.setNotGood(0);
+        board.setGoodNum(0);
+        board.setBadNum(0);
         freeBoardRepository.save(board);
     }
 
@@ -85,12 +85,12 @@ public class FreeBoardService {
     }
 
     @Transactional
-    public void pressGood(int boardId) {
-        freeBoardRepository.goodUp(boardId);
+    public void pressGoodNum(int boardId) {
+        freeBoardRepository.goodNum(boardId);
     }
 
     @Transactional
-    public void pressNotGood(int boardId) {
-        freeBoardRepository.notGoodUp(boardId);
+    public void pressBadNum(int boardId) {
+        freeBoardRepository.badNum(boardId);
     }
 }

@@ -29,10 +29,10 @@ public class Debate {
     private String content;
 
     @Column(nullable = false)
-    private int good;
+    private int goodNum;
 
     @Column(nullable = false)
-    private int notGood;
+    private int badNum;
 
     private int count; //조회수
 

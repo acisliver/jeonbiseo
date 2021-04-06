@@ -75,7 +75,6 @@
 
     <!--    통계-->
     <div class="DebateStatistics">
-      <chart :chartdata=""></chart>
     </div>
     <v-divider/>
 
@@ -124,7 +123,7 @@ import axios from "axios";
 export default {
   name: "ReadDebateBoard",
   components: {
-    chart: import("@/components/chart")
+    //chart: import("@/components/chart")
   },
   data: () => ({
     chartData: {

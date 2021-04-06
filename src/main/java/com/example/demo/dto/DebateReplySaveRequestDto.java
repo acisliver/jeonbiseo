@@ -11,5 +11,5 @@ public class DebateReplySaveRequestDto {
     private String content;
     private int reparentId;
     private int debateBoardId;
-    private String prosAndConsAndNegative;
+    private String prosAndCons;
 }

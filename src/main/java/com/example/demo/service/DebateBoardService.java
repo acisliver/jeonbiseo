@@ -37,14 +37,14 @@ public class DebateBoardService {
     public PercentageDto viewStatistic(int debateId) {
         Statistic statistic = statisticRepository.search(debateId);
         if(statistic != null){
-            double pres = statistic.getPres();
+            double pros = statistic.getPros();
             double cons = statistic.getCons();
             //double negative = statistic.getNegative();
             double sum = 0 ;
 
-            sum = pres + cons;
+            sum = pros + cons;
 
-            double precentagePres = (pres/sum) * 100;
+            double precentagePres = (pros/sum) * 100;
             double precentageCons = (cons/sum) * 100;
             //double precentageNegative = ( negative/sum) * 100;
 
@@ -60,8 +60,8 @@ public class DebateBoardService {
         //토론 게시글 작성
         debate.setCount(0);
         debate.setUser(user);
-        debate.setGood(0);
-        debate.setNotGood(0);
+        debate.setGoodNum(0);
+        debate.setBadNum(0);
         debateBoardRepository.save(debate);
 
         //객체는 call by reference이기 때문에 db에 생성된 id값을 가져 올 수 있다.
@@ -72,7 +72,7 @@ public class DebateBoardService {
         if(debate.getId() > 0) {
             Statistic statistic = new Statistic();
             statistic.setDebateId(debate.getId());
-            statistic.setPres(0);
+            statistic.setPros(0);
             statistic.setCons(0);
             statistic.setNegative(0);
             statisticRepository.save(statistic);
@@ -109,22 +109,24 @@ public class DebateBoardService {
 
             //update에서 미룬 위치에 공간이 하나 확보 되므로, 해당 위치에 데이터 저장
             debateReplyRepository.debateReplySave(userId,debateReplySaveRequestDto.getDebateBoardId(), debateReplySaveRequestDto.getContent()
-                    ,debateReplySaveRequestDto.getReparentId(),1,parentDebateReply.getReorder()+1, debateReplySaveRequestDto.getProsAndConsAndNegative());
+                    ,debateReplySaveRequestDto.getReparentId(),1,parentDebateReply.getReorder()+1, debateReplySaveRequestDto.getProsAndCons());
 
         }
         else{//일반댓글일때
             debateReplyRepository.update(0);
+
             debateReplyRepository.debateReplySave(userId, debateReplySaveRequestDto.getDebateBoardId(), debateReplySaveRequestDto.getContent()
-                    ,debateReplySaveRequestDto.getReparentId(),0,0, debateReplySaveRequestDto.getProsAndConsAndNegative());
+                    ,debateReplySaveRequestDto.getReparentId(),0,0, debateReplySaveRequestDto.getProsAndCons());
         }
 
         //게시물 찬성, 반대, 반박(부정)
         //id가 null이면 변수에 담을 수 없어 오류가 발생. 때문에 if 안에 변수 선언
         if(debateReplySaveRequestDto.getDebateBoardId() > 0){
-            String pcn = debateReplySaveRequestDto.getProsAndConsAndNegative();
+            String pcn = debateReplySaveRequestDto.getProsAndCons();
+            System.out.println("qweqwe"+pcn);
             int id = debateReplySaveRequestDto.getDebateBoardId();
-            if(pcn.equals("Pres") || pcn.equals("pres"))
-                statisticRepository.increasePres(id);
+            if(pcn.equals("Pros") || pcn.equals("pros"))
+                statisticRepository.increasePros(id);
             else if(pcn.equals("Cons") || pcn.equals("cons"))
                 statisticRepository.increaseCons(id);
             else if(pcn.equals("Negative") || pcn.equals("negative"))
@@ -139,13 +141,13 @@ public class DebateBoardService {
     }
 
     @Transactional
-    public void pressGood(int debateId) {
-        debateBoardRepository.goodUp(debateId);
+    public void pressGoodNum(int debateId) {
+        debateBoardRepository.goodNum(debateId);
     }
 
     @Transactional
-    public void pressNotGood(int debateId) {
-        debateBoardRepository.notGoodUp(debateId);
+    public void pressBadNum(int debateId) {
+        debateBoardRepository.badNum(debateId);
     }
 
 }
