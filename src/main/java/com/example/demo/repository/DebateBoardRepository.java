@@ -14,10 +14,10 @@ public interface DebateBoardRepository extends JpaRepository<Debate,Integer> {
     Optional<Debate> deleteById(int id);
 
     @Modifying
-    @Query(value = "update board set good= good +1 where ?1",nativeQuery = true)
+    @Query(value = "update debate set goodNum= goodNum +1 where id = ?1",nativeQuery = true)
     void goodNum(int boardId);
 
     @Modifying
-    @Query(value = "update board set notGood= notGood +1 where ?1",nativeQuery = true)
+    @Query(value = "update debate set badNum = badNum +1 where id = ?1",nativeQuery = true)
     void badNum(int boardId);
 }

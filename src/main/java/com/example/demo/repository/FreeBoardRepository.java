@@ -17,11 +17,11 @@ public interface FreeBoardRepository extends JpaRepository<Board,Integer> {
     Optional<Board> deleteById(int id);
 
     @Modifying
-    @Query(value = "update board set good= good +1 where ?1",nativeQuery = true)
+    @Query(value = "update board set goodNum= goodNum +1 where id = ?1",nativeQuery = true)
     void goodNum(int boardId);
 
     @Modifying
-    @Query(value = "update board set notGood= notGood +1 where ?1",nativeQuery = true)
+    @Query(value = "update board set badNum= badNum +1 where id = ?1",nativeQuery = true)
     void badNum(int boardId);
 
     //id, title, nickname
