@@ -39,16 +39,16 @@ public class DebateBoardService {
         if(statistic != null){
             double pres = statistic.getPres();
             double cons = statistic.getCons();
-            double negative = statistic.getNegative();
+            //double negative = statistic.getNegative();
             double sum = 0 ;
 
-            sum = pres + cons + negative;
+            sum = pres + cons;
 
             double precentagePres = (pres/sum) * 100;
             double precentageCons = (cons/sum) * 100;
-            double precentageNegative = ( negative/sum) * 100;
+            //double precentageNegative = ( negative/sum) * 100;
 
-            PercentageDto percentageDto = new PercentageDto(precentagePres, precentageCons, precentageNegative);
+            PercentageDto percentageDto = new PercentageDto(precentagePres, precentageCons);
             return percentageDto;
 
         }

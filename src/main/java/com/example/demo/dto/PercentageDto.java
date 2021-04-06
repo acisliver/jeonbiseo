@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class PercentageDto {
     Double precentagePres;
     Double precentageCons;
-    Double precentageNegative;
+    //Double precentageNegative;
 }
