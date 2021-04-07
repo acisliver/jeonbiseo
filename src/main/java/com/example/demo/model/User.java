@@ -35,9 +35,6 @@ public class User {
     @Column(nullable = false, length = 50)
     private String nickName;
 
-    //@ColumnDefault("'user'")
-    //private String role; //Enum을 쓰면 도메인을 설정 할 수 있기 때문에, Enum을 쓰는것이 좋다.
-
     @Enumerated(EnumType.STRING)
     private RoleType role; //enum 타입으로 설정한 RoleType을 사용
 

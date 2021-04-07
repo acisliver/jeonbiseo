@@ -94,7 +94,7 @@ public class DebateBoardApiController {
 
     //싫어요 버튼 클릭
     @PutMapping("/api/debate/{debateId}/badNum")
-    public ResponseDto<Integer> notGoodDebateBoard(@PathVariable int debateId){
+    public ResponseDto<Integer> badDebateBoard(@PathVariable int debateId){
         debateBoardService.pressBadNum(debateId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }

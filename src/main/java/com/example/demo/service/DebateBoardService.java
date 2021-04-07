@@ -64,9 +64,6 @@ public class DebateBoardService {
         debate.setBadNum(0);
         debateBoardRepository.save(debate);
 
-        //객체는 call by reference이기 때문에 db에 생성된 id값을 가져 올 수 있다.
-        System.out.println("sout de:"+debate.getId());
-
         //통계 게시글에 맞는 통계 db 생성
         //id는 1부터 시작해서 1씩 증가하므로 0보다 큰지 비교
         if(debate.getId() > 0) {
@@ -123,7 +120,6 @@ public class DebateBoardService {
         //id가 null이면 변수에 담을 수 없어 오류가 발생. 때문에 if 안에 변수 선언
         if(debateReplySaveRequestDto.getDebateBoardId() > 0){
             String pcn = debateReplySaveRequestDto.getProsAndCons();
-            System.out.println("qweqwe"+pcn);
             int id = debateReplySaveRequestDto.getDebateBoardId();
             if(pcn.equals("Pros") || pcn.equals("pros"))
                 statisticRepository.increasePros(id);

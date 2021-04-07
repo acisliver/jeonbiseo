@@ -16,11 +16,6 @@ public class UserService {
 
     @Autowired
     private BCryptPasswordEncoder encoder;
-//
-//    @Transactional(readOnly = true)
-//    public User login(User user){
-//        return userRepository.loginQuery(user.getUserName(),user.getPassword());
-//    }
 
     @Transactional
     public User signUpApi(User user){

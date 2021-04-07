@@ -91,7 +91,7 @@ public class FreeBoardApiController {
 
     //싫어요 버튼 클릭
     @PutMapping("/api/free-board/{boardId}/badNum")
-    public ResponseDto<Integer> notGoodFreeboard(@PathVariable int boardId){
+    public ResponseDto<Integer> badFreeboard(@PathVariable int boardId){
         freeBoardService.pressBadNum(boardId);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }

@@ -15,19 +15,6 @@ public class UserApiController {
     @Autowired
     UserService userService;
 
-//    @PostMapping("/login")
-//    public ResponseDto<Integer> 로그인(@RequestBody User user){
-//        User checkLogin= userService.login(user);
-//        if(checkLogin != null) {
-//            System.out.printf("로그인 완료");
-//            return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
-//        }
-//        else{
-//            System.out.printf("로그인 실패");
-//            return new ResponseDto<Integer>(HttpStatus.NO_CONTENT.value(), 0);
-//        }
-//    }
-
     @PostMapping("api/signup")
     public ResponseDto<Integer> save(@RequestBody User user) {
         User checkSignUp = userService.signUpApi(user);
