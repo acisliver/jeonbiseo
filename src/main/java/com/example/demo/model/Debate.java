@@ -45,7 +45,7 @@ public class Debate {
     //연관관계 주인이 아니기 때문에(난 FK가 아니다.) mappedBy이기 때문에 DB에 칼럼을 만들지 않는다. join을 통해 reply에서 정보를 가져온다.
     @OneToMany(mappedBy = "debate", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)//CascadeType.REMOVE은 게시글 삭제시 댓글삭제
     @JsonIgnoreProperties({"debate"}) //무한참조 방지. reply클래스에서 다시 board를 호출하기때문에 무한참조가 발생 할 수 있다.
-    @OrderBy("id desc")
+    @OrderBy("id asc")
     private List<DebateReply> debateReplies;
 
     @CreationTimestamp
