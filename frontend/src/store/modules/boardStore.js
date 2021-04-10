@@ -65,7 +65,8 @@ export default {
                 .get(url)
                 .then(res => {
                     commit('setDetailBoard', res.data.detailBoard)
-                    commit('setReplys', res.data.detailBoard.replys)
+                    commit('setReplys', res.data.detailBoard.debateReplies)
+                    console.log(res.data.detailBoard)
                 })
                 .catch(err => {
                     console.log(err)

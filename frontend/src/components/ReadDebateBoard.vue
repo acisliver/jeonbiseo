@@ -74,7 +74,7 @@
       </div>
 
       <v-divider/>
-      
+
       <!--    통계-->
       <div class="DebateStatistics">
       </div>
@@ -90,22 +90,29 @@
           <v-timeline-item
               v-for="reply in replys"
               :key="reply.replyId"
-              :color="reply.prosAndCons === 'pros' ? 'blue' : 'red'"
+              :color="setReplyColor(reply.prosAndCons)"
               :left="reply.prosAndCons === 'pros'"
               :right="reply.prosAndCons === 'cons'"
               fill-dot
           >
+            <span slot="opposite"> <v-icon>mdi-account</v-icon>{{reply.user.nickName}} </span>
             <v-card
-                :color="reply.prosAndCons === 'pros' ? 'blue' : 'red'"
+                :color="setReplyColor(reply.prosAndCons)"
                 dark
             >
-              <v-card-title class="title">
-                {{ reply.title }}
+              <v-card-title class="title" v-if="reply.prosAndCons==='pros'">
+                찬성
+              </v-card-title>
+              <v-card-title class="title" v-if="reply.prosAndCons==='cons'">
+                반대
+              </v-card-title>
+              <v-card-title class="title" v-if="reply.prosAndCons==='negetive'">
+                중립
               </v-card-title>
               <v-card-text class="white text--primary">
                 <p> {{ reply.content }}</p>
                 <v-btn
-                    :color="reply.prosAndCons === 'pros' ? 'blue' : 'red'"
+                    :color="setReplyColor(reply.prosAndCons)"
                     class="mx-0"
                     outlined
                 >
@@ -192,6 +199,11 @@ export default {
     })
   },
   methods: {
+    setReplyColor(prosAndCons){
+      if(prosAndCons === 'pros') return 'blue';
+      else if(prosAndCons === 'cons') return 'red';
+      else return '#000000'
+    },
     saveReply(replyObj){
       if(replyObj.content === '' || replyObj.content === null) {
         alert("내용을 입력해주세요")
@@ -207,13 +219,14 @@ export default {
           token: localStorage.getItem('token')
         }
       }
-      this.reply.boardId = this.$route.params.boardId
+      this.reply.debateBoardId = this.$route.params.boardId
       axios
           .post('/api/debate/' + this.reply.boardId + '/reply', replyObj, config)
           .then(res => {
             alert('저장 완료')
             this.$emit("updateReplys", res.data.detailBoard.replys)
             console.log(res)
+            this.$router.go()
           })
           .catch(err => {
             alert('저장 실패')

@@ -43,6 +43,7 @@ export default {
             alert('저장 완료')
             this.$emit("updateReplys", res.data.detailBoard.replys)
             console.log(res)
+            this.$router.go()
           })
           .catch(err => {
             alert('저장 실패')
