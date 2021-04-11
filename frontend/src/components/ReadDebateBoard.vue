@@ -223,7 +223,7 @@ export default {
       axios
           .post('/api/debate/' + this.reply.boardId + '/reply', replyObj, config)
           .then(res => {
-            alert('저장 완료')
+            // alert('저장 완료')
             this.$emit("updateReplys", res.data.detailBoard.replys)
             console.log(res)
             this.$router.go()
