@@ -1,5 +1,6 @@
 package com.example.demo.controller.api;
 
+import com.example.demo.Exception.OverDueDateException;
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.DebateReplySaveRequestDto;
 import com.example.demo.dto.PercentageDto;
@@ -20,6 +21,14 @@ public class DebateBoardApiController {
 
     @Autowired
     private DebateBoardService debateBoardService;
+
+    @ExceptionHandler(OverDueDateException.class)
+    public ResponseDto<Integer> OverDueDate(){
+        //에러를 실행
+        System.out.println("오류 실행");
+        return new ResponseDto<Integer>(HttpStatus.BAD_REQUEST.value(), 0);
+    }
+
 
     @GetMapping("/api/debate-header")
     public @ResponseBody
@@ -66,9 +75,9 @@ public class DebateBoardApiController {
 
     //토론게시판 댓글달기
     @PostMapping("/api/debate/{debateId}/reply")
-    public ResponseDetailDebateBoardDto<Debate, PercentageDto> addDebateReply(@RequestBody DebateReplySaveRequestDto debateReplySaveRequestDto,
+    public ResponseDetailDebateBoardDto<Debate, PercentageDto>  addDebateReply(@RequestBody DebateReplySaveRequestDto debateReplySaveRequestDto,
                                                                           @AuthenticationPrincipal PrincipalDetails principalDetails){
-        debateBoardService.writeDebateReply(debateReplySaveRequestDto,principalDetails.getUser().getId());
+        debateBoardService.writeDebateReply (debateReplySaveRequestDto,principalDetails.getUser().getId());
         Debate debate = debateBoardService.viewDebate(debateReplySaveRequestDto.getDebateBoardId());
         PercentageDto percentageDto = debateBoardService.viewStatistic(debateReplySaveRequestDto.getDebateBoardId());
         if((debate != null) && (percentageDto != null))

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.Exception.OverDueDateException;
 import com.example.demo.dto.DebateReplySaveRequestDto;
 import com.example.demo.dto.PercentageDto;
 import com.example.demo.model.*;
@@ -10,7 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static java.lang.Integer.parseInt;
 
 @Service
 public class DebateBoardService {
@@ -20,6 +26,8 @@ public class DebateBoardService {
     private DebateReplyRepository debateReplyRepository;
     @Autowired
     private StatisticRepository statisticRepository;
+
+
 
     @Transactional
     public List<Debate> postList(){
@@ -95,6 +103,41 @@ public class DebateBoardService {
 
     @Transactional
     public void writeDebateReply(DebateReplySaveRequestDto debateReplySaveRequestDto, int userId) {
+        Date creatDate= null;
+        Date timezoneDate=null;
+        Timestamp timestamp=null;
+        int compare=0;
+
+        //데이터 비교와 매핑을 위해 SimpleDateFormat사용
+        SimpleDateFormat simpleTimeZon=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        //보더를 찾아옴
+        Optional<Debate>debate=debateBoardRepository.findById(debateReplySaveRequestDto.getDebateBoardId());
+
+        //timezone 서울의 데이터를 받아옴
+        TimeZone timeZone=TimeZone.getTimeZone("Asia/Seoul");
+        simpleTimeZon.setTimeZone(timeZone);
+
+        //timestamp에 서버의 creatdate날짜를 가져옴
+        timestamp=debate.get().getCreateDate();
+
+        try {
+            //date에 값을 세팅
+            creatDate = simpleDateFormat.parse(timestamp+"");
+            creatDate.setDate(creatDate.getDate()+3);
+
+            timezoneDate=simpleDateFormat.parse(simpleTimeZon.format(new Date())+"");
+
+            //timezone과 create데이터를 비교 후 반환 -1보다 크면 기간이 지나지 않음
+            compare=timezoneDate.compareTo(creatDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //비교값이 최종날을 넘으면 Exception을 던져서 사용을 중단시킴
+        if(-1<compare){
+            throw new OverDueDateException("날이 지났습니다.");
+        }
 
         //부모가 있을때 즉 대댓글일때
         if(debateReplySaveRequestDto.getReparentId()!= 0){
@@ -128,6 +171,7 @@ public class DebateBoardService {
             else if(pcn.equals("Negative") || pcn.equals("negative"))
                 statisticRepository.increaseNegative(id);
         }
+
 
     }
 
