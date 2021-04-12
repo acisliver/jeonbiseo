@@ -33,10 +33,17 @@
                 depressed
                 large
                 block
+                class="mb-2"
                 @click="login({userName, password})"
             >로그인
             </v-btn>
-            <v-btn @click="$router.push({ name:'SignUp' })" >회원가입</v-btn>
+            <v-btn
+                large
+                block
+                @click="$router.push({ name:'SignUp' })"
+            >
+              회원가입
+            </v-btn>
           </div>
         </v-card>
         <v-alert

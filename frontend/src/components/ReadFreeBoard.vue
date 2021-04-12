@@ -1,6 +1,6 @@
 <template>
-  <div class="ReadFreeBoard">
-    <v-container class="elevation-1 pa-2 ma-2" :key="detailBoard">
+  <div class="wrap">
+    <div class="ReadFreeBoard container elevation-1 pa-2 ma-2" :key="detailBoard">
       <v-card flat>
         <v-card-text>
           <v-row
@@ -27,9 +27,8 @@
       <v-col>
         <Reply></Reply>
       </v-col>
-    </v-container>
+    </div>
   </div>
-
 </template>
 
 <script>
@@ -76,7 +75,11 @@ export default {
 </script>
 
 <style scoped>
+.wrap{
+  display: flex;
+  justify-content: center;
+}
 .ReadFreeBoard{
-  text-align: center;
+  /*text-align: center;*/
 }
 </style>

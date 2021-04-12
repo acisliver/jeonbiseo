@@ -13,10 +13,13 @@
               {{ reply.user.nickName }}
             </div>
           </v-row>
-          <v-col>
+          <v-row class="ma-2">
             {{ reply.content }}
-          </v-col>
-          <v-btn @click="reply.isrereply = true">대댓글</v-btn>
+          </v-row>
+          <v-row class="save-btn-parent">
+            <v-btn class="ma-3" @click="reply.isrereply = true">대댓글</v-btn>
+          </v-row>
+
         </v-card-text>
         <WriteRereply v-if="reply.isrereply" :reply="reply"></WriteRereply>
 <!--        <component :is="reply.rereplyComponent" :reply="reply"></component>-->
@@ -79,5 +82,8 @@ export default {
 </script>
 
 <style scoped>
-
+  .save-btn-parent{
+    display: flex;
+    justify-content: flex-end;
+  }
 </style>

@@ -1,5 +1,7 @@
 <template>
-<h2>비교</h2>
+  <div class="compare">
+    <h2>비교</h2>
+  </div>
 </template>
 
 <script>
@@ -9,5 +11,7 @@ export default {
 </script>
 
 <style scoped>
-
+.compare{
+  text-align: center;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div clss="wrap">
+  <div class="wrap">
     <div class="ReadDebateBoard container elevation-1 pa-2 ma-2">
   <!--    토론 내용-->
       <div class="debatesummary">
@@ -20,7 +20,7 @@
                 {{ detailBoard.user.nickName }}
               </div>
             </v-row>
-            {{detailBoard.content}}
+            {{ detailBoard.content }}
           </v-card-text>
         </v-card>
       </div>
@@ -32,7 +32,7 @@
         <v-radio-group
             v-model="reply.prosAndCons"
             row
-            class="flex-center"
+            class="radio-group"
         >
           <v-radio
               value="pros"
@@ -68,7 +68,7 @@
             height="100"
             class="mb-3 mt-3"
         ></v-textarea>
-        <div class="BtnGroup">
+        <div class="btn-group">
           <v-btn @click="saveReply(reply)" class="mb-2">의견저장</v-btn>
         </div>
       </div>
@@ -110,14 +110,19 @@
                 중립
               </v-card-title>
               <v-card-text class="white text--primary">
-                <p> {{ reply.content }}</p>
-                <v-btn
-                    :color="setReplyColor(reply.prosAndCons)"
-                    class="mx-0"
-                    outlined
-                >
-                  의견쓰기
-                </v-btn>
+                <v-row class="pa-2">
+                  <p> {{ reply.content }}</p>
+                </v-row>
+                <v-row class="save-btn-parent">
+                  <v-btn
+                      :color="setReplyColor(reply.prosAndCons)"
+                      class="mx-0"
+                      outlined
+                  >
+                    의견쓰기
+                  </v-btn>
+                </v-row>
+
               </v-card-text>
             </v-card>
           </v-timeline-item>
@@ -241,8 +246,24 @@ export default {
 </script>
 
 <style lang="scss">
-  .flex-center {
+  .wrap{
     display: flex;
     justify-content: center;
+  }
+  .radio-group{
+    display: flex;
+    justify-content: center;
+  }
+  .v-input--radio-group__input{
+    display: flex;
+    justify-content: center;
+  }
+  .btn-group{
+    display: flex;
+    justify-content: flex-end;
+  }
+  .save-btn-parent{
+    display: flex;
+    justify-content: flex-end;
   }
 </style>
