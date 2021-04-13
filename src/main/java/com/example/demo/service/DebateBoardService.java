@@ -45,8 +45,8 @@ public class DebateBoardService {
     public PercentageDto viewStatistic(int debateId) {
         Statistic statistic = statisticRepository.search(debateId);
         if(statistic != null){
-            double pros = statistic.getPros();
-            double cons = statistic.getCons();
+            int pros = statistic.getPros();
+            int cons = statistic.getCons();
             //double negative = statistic.getNegative();
             double sum = 0 ;
 
@@ -56,7 +56,7 @@ public class DebateBoardService {
             double precentageCons = (cons/sum) * 100;
             //double precentageNegative = ( negative/sum) * 100;
 
-            PercentageDto percentageDto = new PercentageDto(precentagePres, precentageCons);
+            PercentageDto percentageDto = new PercentageDto(pros, cons, precentagePres, precentageCons);
             return percentageDto;
 
         }
@@ -120,6 +120,7 @@ public class DebateBoardService {
         simpleTimeZon.setTimeZone(timeZone);
 
         //timestamp에 서버의 creatdate날짜를 가져옴
+        System.out.println("debate!!"+debateReplySaveRequestDto.getDebateBoardId());
         timestamp=debate.get().getCreateDate();
 
         try {

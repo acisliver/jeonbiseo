@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.RequestUpdateUserInfoDto;
 import com.example.demo.model.RoleType;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
@@ -18,13 +19,26 @@ public class UserService {
     private BCryptPasswordEncoder encoder;
 
     @Transactional
-    public User signUpApi(User user){
-        String rawPassword=user.getPassword(); //입력한 password
-        String encPassword=encoder.encode(rawPassword); //해싱한 password
+    public User signUpApi(User user) {
+        String rawPassword = user.getPassword(); //입력한 password
+        String encPassword = encoder.encode(rawPassword); //해싱한 password
         user.setPassword(encPassword);
         user.setRole(RoleType.USER); //db의 정보 중 role만 자동적으로 입력이 되지 않기 때문에 넣어줘야 함.
         userRepository.save(user);
         return user;
 
+    }
+
+    @Transactional
+    public User updateUserInfo(RequestUpdateUserInfoDto requestUpdateUserInfoDto, int id) {
+
+        User persistanceUser = userRepository.searchIdQuery(id).orElseThrow(() -> {
+            return new IllegalArgumentException("회원찾기 실패");
+        });
+        String rawPassword = requestUpdateUserInfoDto.getPassword();
+        String encPassword = encoder.encode(rawPassword);
+        persistanceUser.setPassword(encPassword);
+        persistanceUser.setNickName(requestUpdateUserInfoDto.getNickName());
+        return persistanceUser;
     }
 }

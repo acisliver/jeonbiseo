@@ -77,6 +77,7 @@ public class DebateBoardApiController {
     @PostMapping("/api/debate/{debateId}/reply")
     public ResponseDetailDebateBoardDto<Debate, PercentageDto>  addDebateReply(@RequestBody DebateReplySaveRequestDto debateReplySaveRequestDto,
                                                                           @AuthenticationPrincipal PrincipalDetails principalDetails){
+        System.out.println("id는?"+debateReplySaveRequestDto);
         debateBoardService.writeDebateReply (debateReplySaveRequestDto,principalDetails.getUser().getId());
         Debate debate = debateBoardService.viewDebate(debateReplySaveRequestDto.getDebateBoardId());
         PercentageDto percentageDto = debateBoardService.viewStatistic(debateReplySaveRequestDto.getDebateBoardId());

@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,11 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PercentageDto {
-    int pros;
-    int cons;
-
-    Double precentagePres;
-    Double precentageCons;
-    //Double precentageNegative;
+public class RequestUpdateUserInfoDto {
+    private String userName;
+    private String nickName;
+    private String password;
 }

@@ -2,7 +2,7 @@ package com.example.demo.controller.api;
 
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.ReplySaveRequestDto;
-import com.example.demo.dto.ResponseDetailFreeBoardDto;
+import com.example.demo.dto.ResponseGenericDto;
 import com.example.demo.dto.ResponseDto;
 import com.example.demo.model.Board;
 import com.example.demo.service.FreeBoardService;
@@ -29,12 +29,12 @@ public class FreeBoardApiController {
     //수정 버튼을 눌렀을 때 board 정보를 가지고 갈 수 있도록 함
     @GetMapping({"/api/free-board/{freeId}"})
     public @ResponseBody
-    ResponseDetailFreeBoardDto<Board> viewBoard(@PathVariable int freeId){
+    ResponseGenericDto<Board> viewBoard(@PathVariable int freeId){
         Board board = freeBoardService.viewBoard(freeId);
         if(board != null)
-            return new ResponseDetailFreeBoardDto<Board>(board,1);
+            return new ResponseGenericDto<Board>(board,1);
         else
-            return new ResponseDetailFreeBoardDto<Board>(board,0);
+            return new ResponseGenericDto<Board>(board,0);
     }
 
     //자유게시판 글쓰기를 통해 작성 한 글 저장 버튼을 눌렀을 때
@@ -62,15 +62,15 @@ public class FreeBoardApiController {
 
     //자유게시판 댓글달기
     @PostMapping("/api/free-board/{freeId}/reply")
-    public ResponseDetailFreeBoardDto<Board> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
-                                                      @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public ResponseGenericDto<Board> addReply(@RequestBody ReplySaveRequestDto replySaveRequestDto,
+                                              @AuthenticationPrincipal PrincipalDetails principalDetails){
         freeBoardService.writeReply(replySaveRequestDto, principalDetails.getUser().getId());
 
         Board board = freeBoardService.viewBoard(replySaveRequestDto.getBoardId());
         if(board != null)
-            return new ResponseDetailFreeBoardDto<Board>(board,1);
+            return new ResponseGenericDto<Board>(board,1);
         else
-            return new ResponseDetailFreeBoardDto<Board>(board,0);
+            return new ResponseGenericDto<Board>(board,0);
 
     }
 
