@@ -4,7 +4,11 @@
 
     <core-view />
 
+    <pie-chart/>
+
     <core-footer />
+
+
   </v-app>
 </template>
 
@@ -15,7 +19,7 @@ export default {
     CoreAppBar: () => import('@/core/AppBar'),
     CoreView: () => import('@/core/View'),
     CoreFooter: () => import('@/core/Footer'),
-
+    PieChart: () => import('@/components/PieChart')
   }
 }
 </script>

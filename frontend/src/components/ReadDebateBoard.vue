@@ -20,10 +20,29 @@
                 {{ detailBoard.user.nickName }}
               </div>
             </v-row>
-            {{ detailBoard.content }}
+            <v-row>
+              {{ detailBoard.content }}
+            </v-row>
+            <v-row class="modify-btn-group">
+              <v-btn
+                  @click="updateDebate()"
+                  class="ma-0 mb-2"
+                  color="primary"
+              >수정</v-btn>
+
+              <v-btn
+                  @click="deleteDebate()"
+                  class="ma-0 mb-2 white--text"
+                  color="red"
+              >삭제</v-btn>
+            </v-row>
           </v-card-text>
         </v-card>
       </div>
+
+      <v-divider/>
+
+      <PieChart :chart-data-obj="this.$store.state.boardStore.chartData"></PieChart>
 
       <v-divider/>
 
@@ -135,11 +154,12 @@
 <script>
 import {mapState} from "vuex";
 import axios from "axios";
+import PieChart from "../components/PieChart.vue";
 
 export default {
   name: "ReadDebateBoard",
   components: {
-    // chart: import("@/components/chart")
+    PieChart: PieChart
   },
   data: () => ({
     chartData: {
@@ -209,6 +229,26 @@ export default {
       else if(prosAndCons === 'cons') return 'red';
       else return '#000000'
     },
+    updateDebate(){
+      console.log("updateDebate")
+    },
+    deleteDebate(){
+      console.log("deleteDebate")
+      let config = {
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      }
+      axios
+          .delete("/api/debate/" + this.$route.params.boardId, config)
+          .then(res => {
+            this.$router.push({path:"DebateBoard"})
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    },
     saveReply(replyObj){
       if(replyObj.content === '' || replyObj.content === null) {
         alert("내용을 입력해주세요")
@@ -263,6 +303,10 @@ export default {
     justify-content: flex-end;
   }
   .save-btn-parent{
+    display: flex;
+    justify-content: flex-end;
+  }
+  .modify-btn-group{
     display: flex;
     justify-content: flex-end;
   }

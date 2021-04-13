@@ -88,7 +88,7 @@ export default {
             if(statusOk===200){
               localStorage.setItem("token", res.headers.token)
               this.$router.push({name:'Home'})
-              this.$store.dispatch('userStore/loginAction', statusOk)
+              this.$store.dispatch('userStore/loginAction', statusOk, loginObj.userName)
             }
             else if(statusOk===204){
               this.failLogin = true

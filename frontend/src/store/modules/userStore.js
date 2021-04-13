@@ -16,9 +16,10 @@ export default {
     },
     mutations: {
         setUserInfo: (state, userInfoObj) => state.userInfo = userInfoObj,
-        loginSuccess(state) {
+        loginSuccess(state, userName) {
             state.isLogin = true
             state.isLoginError = false
+            state.userInfo.userName = userName
         },
         loginError(state) {
             state.isLoginError = true
@@ -42,9 +43,9 @@ export default {
                     console.log(err)
                 })
         },
-        loginAction({commit}, statusOk){
+        loginAction({commit}, statusOk, userName){
             if(statusOk === 200){
-                commit("loginSuccess")
+                commit("loginSuccess", userName)
             }
             else if(statusOk === 204 ){
                 commit('loginError')

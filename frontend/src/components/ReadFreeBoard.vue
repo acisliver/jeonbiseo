@@ -18,7 +18,7 @@
               {{ detailBoard.user.nickName }}
             </div>
           </v-row>
-          {{detailBoard.content}}
+          {{ detailBoard.content }}
         </v-card-text>
       </v-card>
       <v-col>

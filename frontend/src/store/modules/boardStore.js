@@ -6,7 +6,8 @@ export default {
         freeHeader: null,
         debateHeader: null,
         detailBoard: null,
-        replys: null
+        replys: null,
+        chartData: null
     },
 
     getters: {
@@ -19,7 +20,8 @@ export default {
         setFreeHeader: (state, freeHeader) => state.freeHeader = freeHeader,
         setDebateHeader: (state, debateHeader) => state.debateHeader = debateHeader,
         setDetailBoard: (state, detailBoard) => state.detailBoard = detailBoard,
-        setReplys: (state, replys) => state.replys = replys
+        setReplys: (state, replys) => state.replys = replys,
+        setChartData: (state, chartDataObj) => state.chartData = chartDataObj
     },
 
     actions: {
@@ -66,7 +68,9 @@ export default {
                 .then(res => {
                     commit('setDetailBoard', res.data.detailBoard)
                     commit('setReplys', res.data.detailBoard.debateReplies)
+                    commit('setChartData', res.data.percentageDto)
                     console.log(res.data.detailBoard)
+                    console.log(res.data.percentageDto)
                 })
                 .catch(err => {
                     console.log(err)
