@@ -51,6 +51,7 @@ public class UserApiController {
 
         if(user != null) {
             System.out.println("유저 데이터 비번"+user.getPassword());
+            //오류부분
             //db는 변경 되었지만, 사이트의 세션은 변경되지 않아서 세션 변경을 해 주어야함.
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     requestUpdateUserInfoDto.getUserName(), user.getPassword()));
