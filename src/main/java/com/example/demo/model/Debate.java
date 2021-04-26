@@ -48,6 +48,9 @@ public class Debate {
     @OrderBy("id asc")
     private List<DebateReply> debateReplies;
 
+    @Transient
+    private String clearTime;
+
     @CreationTimestamp
     private Timestamp createDate;
 }
