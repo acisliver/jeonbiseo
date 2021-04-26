@@ -49,7 +49,7 @@ public class Debate {
     private List<DebateReply> debateReplies;
 
     @Transient
-    private String clearTime;
+    private Timestamp clearTime;
 
     @CreationTimestamp
     private Timestamp createDate;
