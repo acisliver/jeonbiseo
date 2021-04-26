@@ -44,6 +44,7 @@ public class DebateBoardApiController {
     ResponseDetailDebateBoardDto<Debate, PercentageDto> viewDebate(@PathVariable int debateId){
         Debate debate = debateBoardService.viewDebate(debateId);
         PercentageDto percentageDto = debateBoardService.viewStatistic(debateId);
+        System.out.println(debate.getClearTime());
         if((debate != null) && (percentageDto != null))
             return new ResponseDetailDebateBoardDto<Debate, PercentageDto>(debate, percentageDto,1);
         else
