@@ -25,12 +25,6 @@
             </v-row>
             <v-row class="modify-btn-group">
               <v-btn
-                  @click="updateDebate()"
-                  class="ma-0 mb-2"
-                  color="primary"
-              >수정</v-btn>
-
-              <v-btn
                   @click="deleteDebate()"
                   class="ma-0 mb-2 white--text"
                   color="red"
@@ -39,6 +33,10 @@
           </v-card-text>
         </v-card>
       </div>
+
+      <v-divider/>
+
+      <Timer :deadline="this.$store.state.boardStore.detailBoard.clearTime"></Timer>
 
       <v-divider/>
 
@@ -94,12 +92,6 @@
 
       <v-divider/>
 
-      <!--    통계-->
-      <div class="DebateStatistics">
-      </div>
-      <v-divider/>
-
-
       <!--    의견들-->
       <div class="DebateOpinion">
         <v-timeline
@@ -154,12 +146,14 @@
 <script>
 import {mapState} from "vuex";
 import axios from "axios";
-import PieChart from "../components/PieChart.vue";
+import PieChart from "./PieChart";
+import Timer from  "./Timer"
 
 export default {
   name: "ReadDebateBoard",
   components: {
-    PieChart: PieChart
+    PieChart: PieChart,
+    Timer: Timer
   },
   data: () => ({
     chartData: {
@@ -229,9 +223,6 @@ export default {
       else if(prosAndCons === 'cons') return 'red';
       else return '#000000'
     },
-    updateDebate(){
-      console.log("updateDebate")
-    },
     deleteDebate(){
       console.log("deleteDebate")
       let config = {
@@ -242,10 +233,11 @@ export default {
       axios
           .delete("/api/debate/" + this.$route.params.boardId, config)
           .then(res => {
-            this.$router.push({path:"DebateBoard"})
+            this.$router.push({name: 'DebateBoard'})
             console.log(res)
           })
           .catch(err => {
+            alert("작성자만 게시글을 삭제할 수 있습니다.")
             console.log(err)
           })
     },

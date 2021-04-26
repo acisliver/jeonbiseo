@@ -7,7 +7,8 @@ export default {
         debateHeader: null,
         detailBoard: null,
         replys: null,
-        chartData: null
+        chartData: null,
+        deadline: null,
     },
 
     getters: {
@@ -21,7 +22,13 @@ export default {
         setDebateHeader: (state, debateHeader) => state.debateHeader = debateHeader,
         setDetailBoard: (state, detailBoard) => state.detailBoard = detailBoard,
         setReplys: (state, replys) => state.replys = replys,
-        setChartData: (state, chartDataObj) => state.chartData = chartDataObj
+        setChartData: (state, chartDataObj) => state.chartData = chartDataObj,
+        // setDeadline: (state, startDate) => {
+        //     let day = startDate.getDate()
+        //     day += 3
+        //     state.deadline = startDate.setDate(day)
+        //     console.log(state.deadline)
+        // }
     },
 
     actions: {
@@ -69,6 +76,7 @@ export default {
                     commit('setDetailBoard', res.data.detailBoard)
                     commit('setReplys', res.data.detailBoard.debateReplies)
                     commit('setChartData', res.data.percentageDto)
+                    // commit('setDeadline', res.data.detailBoard.createDate)
                     console.log(res.data.detailBoard)
                     console.log(res.data.percentageDto)
                 })
