@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestUpdateUserInfoDto {
-    private String userName;
     private String nickName;
     private String password;
 }

@@ -36,9 +36,22 @@ public class DebateBoardService {
 
     @Transactional
     public Debate viewDebate(int id){
-        return debateBoardRepository.findById(id).orElseThrow(() -> {
-            return new IllegalArgumentException("해당 글을 찾을 수 없다");
-        });
+        Date creatDate=null;
+        SimpleDateFormat simpleTimeZon=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Optional<Debate>debate=debateBoardRepository.findById(id);
+        String timestamp=debate.get().getCreateDate().toString();
+        try {
+            creatDate = simpleTimeZon.parse(timestamp+"");
+            creatDate.setDate(creatDate.getDate()+3);
+            System.out.println(creatDate.toString());
+            debate.get().setClearTime(creatDate.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        return debate.get();
     }
 
     @Transactional

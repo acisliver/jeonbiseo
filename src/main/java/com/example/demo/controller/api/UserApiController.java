@@ -48,20 +48,10 @@ public class UserApiController {
 
         //db변경
         User user = userService.updateUserInfo(requestUpdateUserInfoDto, principalDetails.getUser().getId());
-
-        if(user != null) {
-            System.out.println("유저 데이터"+user);
-            //db는 변경 되었지만, 사이트의 세션은 변경되지 않아서 세션 변경을 해 주어야함.
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    requestUpdateUserInfoDto.getUserName(), user.getPassword()));
-            System.out.println("----------1");
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            System.out.println("----------2");
-
+        if(user != null)
             return new ResponseGenericDto<User>(user, 1);
-        }else{
-            return new ResponseGenericDto<User>(user, 0);
-        }
+        else
+            return new ResponseGenericDto<User>(null, 0);
     }
 
 }
