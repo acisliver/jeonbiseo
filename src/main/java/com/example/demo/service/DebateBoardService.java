@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +31,7 @@ public class DebateBoardService {
 
 
 
+
     @Transactional
     public List<Debate> postList(){
         return debateBoardRepository.findAll();
@@ -36,20 +39,18 @@ public class DebateBoardService {
 
     @Transactional
     public Debate viewDebate(int id){
-        Date creatDate=null;
-        SimpleDateFormat simpleTimeZon=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         Optional<Debate>debate=debateBoardRepository.findById(id);
-        String timestamp=debate.get().getCreateDate().toString();
-        try {
-            creatDate = simpleTimeZon.parse(timestamp+"");
-            creatDate.setDate(creatDate.getDate()+3);
-            System.out.println(creatDate.toString());
-            debate.get().setClearTime(creatDate.toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Timestamp timestamp=debate.get().getCreateDate();
+        Timestamp clear=new Timestamp(System.currentTimeMillis());
+        clear.setYear(timestamp.getYear());
+        clear.setMonth(timestamp.getMonth());
+        clear.setDate(timestamp.getDate()+3);
+        clear.setHours(timestamp.getHours());
+        clear.setMinutes(timestamp.getMinutes());
+        clear.setSeconds(timestamp.getSeconds());
 
+        debate.get().setClearTime(clear);
 
         return debate.get();
     }
