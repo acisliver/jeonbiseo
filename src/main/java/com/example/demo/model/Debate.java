@@ -48,7 +48,6 @@ public class Debate {
     @OrderBy("id asc")
     private List<DebateReply> debateReplies;
 
-    @Transient
     private Timestamp clearTime;
 
     @CreationTimestamp
