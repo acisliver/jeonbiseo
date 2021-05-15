@@ -8,6 +8,8 @@ import com.example.demo.dto.ResponseGenericDto;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,14 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserApiController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserApiController.class);
+
     @Autowired
     UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
     @PostMapping("api/signup")
     public ResponseDto<Integer> save(@RequestBody User user) {
+        logger.info("회원가입 시도");
         User checkSignUp = userService.signUpApi(user);
         if(checkSignUp != null) {
             System.out.printf("회원가입 완료");
