@@ -2,6 +2,17 @@
 <configuration>
     <springProperty name="filePath" source="logging.file.path"/>
 
+    <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
+            <dataSource class="com.alibaba.druid.pool.DruidDataSource">
+                <driverClass>${spring.datasource.driver-class-name}</driverClass>
+                <url>${spring.datasource.url}</url>
+                <user>${spring.datasource.username}</user>
+                <password>${spring.datasource.password}</password>
+            </dataSource>
+        </connectionSource>
+    </appender>
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -45,5 +56,6 @@
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="APP_FILE"/>
         <appender-ref ref="ERROR_FILE"/>
+        <appender-ref ref="DB"/>
     </root>
 </configuration>
