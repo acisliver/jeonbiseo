@@ -32,14 +32,14 @@ public class UserApiController {
 
     @PostMapping("api/signup")
     public ResponseDto<Integer> save(@RequestBody User user) {
-        logger.info("회원가입 시도");
+        logger.info("[INFO]회원가입 시도");
         User checkSignUp = userService.signUpApi(user);
         if(checkSignUp != null) {
-            System.out.printf("회원가입 완료");
+            logger.info("[INFO]회원가입 완료");
             return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
         }
         else {
-            System.out.printf("회원가입 실패");
+            logger.error("[ERROR]회원가입 실패");
             return new ResponseDto<Integer>(HttpStatus.NO_CONTENT.value(), 0);
         }
     }
@@ -48,12 +48,17 @@ public class UserApiController {
     public ResponseGenericDto<User> updateUser(@RequestBody RequestUpdateUserInfoDto requestUpdateUserInfoDto,
                                                @AuthenticationPrincipal PrincipalDetails principalDetails){
 
+        logger.info("[INFO]유저정보 update 시도");
         //db변경
         User user = userService.updateUserInfo(requestUpdateUserInfoDto, principalDetails.getUser().getId());
-        if(user != null)
+        if(user != null) {
+            logger.info("[INFO]유저정보 update 성공");
             return new ResponseGenericDto<User>(user, 1);
-        else
+        }
+        else {
+            logger.error("[ERROR]유저정보 update 실패");
             return new ResponseGenericDto<User>(null, 0);
+        }
     }
 
 }

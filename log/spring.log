@@ -1,0 +1,32 @@
+2021-05-17 10:46:54.245  INFO 13776 --- [restartedMain] c.e.d.DemoApplication                    : Starting DemoApplication using Java 13.0.2 on DESKTOP-A9O3JUC with PID 13776 (C:\Users\Kang\springproject\jeonbiseo\out\production\classes started by kangseongbeom in C:\Users\Kang\springproject\jeonbiseo)
+2021-05-17 10:46:54.288  INFO 13776 --- [restartedMain] c.e.d.DemoApplication                    : No active profile set, falling back to default profiles: default
+2021-05-17 10:46:54.432  INFO 13776 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-05-17 10:46:54.432  INFO 13776 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-05-17 10:46:56.634  INFO 13776 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-05-17 10:46:56.936  INFO 13776 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 268 ms. Found 6 JPA repository interfaces.
+2021-05-17 10:46:57.786  INFO 13776 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$53186941] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-05-17 10:46:57.877  INFO 13776 --- [restartedMain] .w.s.a.s.AnnotationActionEndpointMapping : Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2021-05-17 10:46:58.677  INFO 13776 --- [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2021-05-17 10:46:58.701  INFO 13776 --- [restartedMain] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2021-05-17 10:46:58.702  INFO 13776 --- [restartedMain] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-05-17 10:46:58.931  INFO 13776 --- [restartedMain] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2021-05-17 10:46:58.932  INFO 13776 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4497 ms
+2021-05-17 10:46:59.366  INFO 13776 --- [restartedMain] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-05-17 10:46:59.560  INFO 13776 --- [restartedMain] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.28.Final
+2021-05-17 10:46:59.995  INFO 13776 --- [restartedMain] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-05-17 10:47:00.357  INFO 13776 --- [restartedMain] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2021-05-17 10:47:01.583  INFO 13776 --- [restartedMain] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2021-05-17 10:47:01.629  INFO 13776 --- [restartedMain] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-05-17 10:47:04.258  INFO 13776 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-05-17 10:47:04.272  INFO 13776 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-05-17 10:47:04.401  INFO 13776 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-05-17 10:47:06.142  INFO 13776 --- [restartedMain] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2580d3f3, org.springframework.security.web.context.SecurityContextPersistenceFilter@226ed1a2, org.springframework.security.web.header.HeaderWriterFilter@e2f6863, org.springframework.web.filter.CorsFilter@7cdcbf6e, org.springframework.security.web.authentication.logout.LogoutFilter@4b285e96, com.example.demo.config.jwt.JwtAuthenticationFilter@14f25ee2, com.example.demo.config.jwt.JwtAuthotizationFilter@6421bab8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1d25c1a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@66bed8f4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@55bb5cd6, org.springframework.security.web.session.SessionManagementFilter@779379a7, org.springframework.security.web.access.ExceptionTranslationFilter@ef39524, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1de9e483]
+2021-05-17 10:47:06.487  INFO 13776 --- [restartedMain] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-17 10:47:06.653  INFO 13776 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2021-05-17 10:47:08.014  INFO 13776 --- [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-17 10:47:08.048  INFO 13776 --- [restartedMain] c.e.d.DemoApplication                    : Started DemoApplication in 15.006 seconds (JVM running for 19.647)
+2021-05-17 10:47:38.989  INFO 13776 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-17 10:47:38.989  INFO 13776 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2021-05-17 10:47:38.991  INFO 13776 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2021-05-17 10:48:08.196  WARN 13776 --- [http-nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+2021-05-17 10:48:13.928  INFO 13776 --- [http-nio-8080-exec-3] c.e.d.c.a.UserApiController              : 회원가입 시도
