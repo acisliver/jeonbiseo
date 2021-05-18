@@ -28,6 +28,6 @@ spring:
 
 logging:
   file:
-    path: C:\Users\Kang\springproject\jeonbiseo\log
+    path: C:\Users\Kang\springproject\jeonbiseo\log #자신의 컴퓨터에 맞게 설정
   config:
     classpath: logback-spring.xml
