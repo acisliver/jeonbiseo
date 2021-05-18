@@ -8,6 +8,8 @@ import com.example.demo.dto.ResponseGenericDto;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,21 +25,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserApiController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserApiController.class);
+
     @Autowired
     UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
     @PostMapping("api/signup")
     public ResponseDto<Integer> save(@RequestBody User user) {
+        logger.info("[INFO]회원가입 시도");
         User checkSignUp = userService.signUpApi(user);
         if(checkSignUp != null) {
-            System.out.printf("회원가입 완료");
+            logger.info("[INFO]회원가입 완료");
             return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
         }
         else {
-            System.out.printf("회원가입 실패");
+            logger.error("[ERROR]회원가입 실패");
             return new ResponseDto<Integer>(HttpStatus.NO_CONTENT.value(), 0);
         }
     }
@@ -46,12 +48,17 @@ public class UserApiController {
     public ResponseGenericDto<User> updateUser(@RequestBody RequestUpdateUserInfoDto requestUpdateUserInfoDto,
                                                @AuthenticationPrincipal PrincipalDetails principalDetails){
 
+        logger.info("[INFO]유저정보 update 시도");
         //db변경
         User user = userService.updateUserInfo(requestUpdateUserInfoDto, principalDetails.getUser().getId());
-        if(user != null)
+        if(user != null) {
+            logger.info("[INFO]유저정보 update 성공");
             return new ResponseGenericDto<User>(user, 1);
-        else
+        }
+        else {
+            logger.error("[ERROR]유저정보 update 실패");
             return new ResponseGenericDto<User>(null, 0);
+        }
     }
 
 }

@@ -25,3 +25,9 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+
+logging:
+  file:
+    path: C:\Users\Kang\springproject\jeonbiseo\log
+  config:
+    classpath: logback-spring.xml
