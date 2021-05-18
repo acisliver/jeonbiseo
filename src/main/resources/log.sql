@@ -7,7 +7,7 @@ COMMIT;
 
 BEGIN;
 CREATE TABLE logging_event
-(
+  (
     timestmp         BIGINT NOT NULL,
     formatted_message  TEXT NOT NULL,
     logger_name       VARCHAR(254) NOT NULL,
@@ -23,27 +23,27 @@ CREATE TABLE logging_event
     caller_method     VARCHAR(254) NOT NULL,
     caller_line       CHAR(4) NOT NULL,
     event_id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
+  );
 COMMIT;
 
 BEGIN;
 CREATE TABLE logging_event_property
-(
+  (
     event_id	      BIGINT NOT NULL,
     mapped_key        VARCHAR(254) NOT NULL,
     mapped_value      TEXT,
     PRIMARY KEY(event_id, mapped_key),
     FOREIGN KEY (event_id) REFERENCES logging_event(event_id)
-);
+  );
 COMMIT;
 
 BEGIN;
 CREATE TABLE logging_event_exception
-(
+  (
     event_id         BIGINT NOT NULL,
     i                SMALLINT NOT NULL,
     trace_line       VARCHAR(254) NOT NULL,
     PRIMARY KEY(event_id, i),
     FOREIGN KEY (event_id) REFERENCES logging_event(event_id)
-);
+  );
 COMMIT;

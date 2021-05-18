@@ -29,3 +29,5 @@ spring:
 logging:
   file:
     path: C:\Users\Kang\springproject\jeonbiseo\log
+  config:
+    classpath: logback-spring.xml

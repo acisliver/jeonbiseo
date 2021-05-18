@@ -1,61 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <springProperty name="filePath" source="logging.file.path"/>
 
-    <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+<!-- 30초마다 설정 파일의 변경을 확인하고, 파일이 변경되면 다시 로딩 -->
+<configuration scan="true" scanPeriod="30 seconds">
+    <!-- logback이 정상 종료되도록 -->
+    <shutdownHook/>
+
+    <!-- console에 로그 -->
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %40logger{0} - %C - %replace(%msg){'[\r\n]+',
+                ''} %n</Pattern> -->
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger] - %replace(%msg){'[\r\n]+', ''} %n</Pattern>
+        </layout>
+    </appender>
+
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>5MB</totalSizeCap>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>3MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>[%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="DbAppender" class="ch.qos.logback.classic.db.DBAppender">
         <connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
             <dataSource class="com.alibaba.druid.pool.DruidDataSource">
-                <driverClass>${spring.datasource.driver-class-name}</driverClass>
-                <url>${spring.datasource.url}</url>
-                <user>${spring.datasource.username}</user>
-                <password>${spring.datasource.password}</password>
+                <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
+                <username>user</username>
+                <password>1234</password>
+                <url>jdbc:mysql://localhost:3306/jeonbiseodb?serverTimezone=Asia/Seoul</url>
             </dataSource>
         </connectionSource>
-    </appender>
-
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <appender name="APP_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${filePath}/app.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${filePath}/app.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>1GB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <maxHistory>10</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${filePath}/error.log</file>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
         </filter>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${filePath}/error-%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>100MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <maxHistory>30</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
     </appender>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="APP_FILE"/>
-        <appender-ref ref="ERROR_FILE"/>
+        <appender-ref ref="FILE"/>
         <appender-ref ref="DB"/>
     </root>
+
 </configuration>
