@@ -219,8 +219,8 @@ export default {
   },
   methods: {
     setReplyColor(prosAndCons){
-      if(prosAndCons === 'pros') return 'blue';
-      else if(prosAndCons === 'cons') return 'red';
+      if(prosAndCons === 'pros') return 'blue'
+      else if(prosAndCons === 'cons') return 'red'
       else return '#000000'
     },
     deleteDebate(){

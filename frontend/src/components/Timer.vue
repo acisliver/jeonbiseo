@@ -1,23 +1,12 @@
 <template>
   <div class="timer pa-3">
     <div class="text-center" v-if="currentTime">
-<!--      <span v-if="days">-->
-<!--        Days: {{ days }}<br/>-->
-<!--      </span>-->
-<!--      <span v-if="hours">-->
-<!--        Hours: {{ hours | formatTime }} <br/>-->
-<!--      </span>-->
-<!--      Minutes: {{ minutes | formatTime }} <br/>-->
-<!--      Seconds: {{ seconds | formatTime }} <br/>-->
-
-<!--      <br/>-->
+      <div>남은 토론시간</div>
       <span v-if="days">{{ days }}</span
       >:<span v-if="hours">{{ hours | formatTime }}:</span><span>{{ minutes | formatTime }}:{{ seconds | formatTime }}</span><br />
     </div>
     <div class="text-center" v-if="!currentTime">
       만료된 토론입니다
-<!--      <span>{{ days }}</span-->
-<!--        >:<span v-if="hours">{{ hours | formatTime }}:</span><span>{{ minutes | formatTime }}:{{ seconds | formatTime }}</span>-->
     </div>
   </div>
 </template>

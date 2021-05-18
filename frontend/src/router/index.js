@@ -24,6 +24,8 @@ const ReadFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../com
 const ReadDebateBoard = () => import(/* webpackChunkName: "board-group" */ '../components/ReadDebateBoard');
 const Compare = () => import(/* webpackChunkName: "compare" */ '../views/Compare');
 const Recommend = () => import(/* webpackChunkName: "recommend" */ '../views/Recommend');
+const OS = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/OS');
+
 
 // const rejectAuthUser = (to, from, next) =>{
 //   if(store.state.isLogin){
@@ -123,6 +125,11 @@ const routes = [
     path: '/recommend',
     name: 'Recommend',
     component: Recommend
+  },
+  {
+    path: '/recommend/os',
+    name: 'OS',
+    component: OS
   }
 ]
 
