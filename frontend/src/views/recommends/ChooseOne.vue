@@ -11,13 +11,29 @@
       >
         <v-card
             :color="item.backgroundColor"
+            @click="chooseOne(item.name)"
         >
           <img :src="require(`../../assets/${item.img}`)">
         </v-card>
         {{item.name}}
       </div>
     </div>
-    <div class="next-btn"><v-btn color="primary">건너뛰기</v-btn></div>
+    <div class="next-btn">
+      <v-btn
+          v-if="nextPageName === 'End'"
+          color="primary"
+          @click="$router.push({name:nextPageName})"
+      >
+        마치기
+      </v-btn>
+      <v-btn
+          v-else
+          color="primary"
+          @click="$router.push({name:nextPageName})"
+      >
+        건너뛰기
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -25,14 +41,30 @@
 export default {
   name: "ChooseOne",
   props:{
-    categoryName:{
+    categoryName: {
       type:String,
       required: true
     },
     //이미지, 카테고리 별 이름 넣기
-    categoryObj:{
+    categoryObj: {
       type: Object,
       required: true
+    },
+    nextPageName: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    chooseOne(choosedOne){
+      let recObj = localStorage.getItem('recommendObj')
+
+      recObj = recObj ? JSON.parse(recObj) : {}
+      recObj[this.categoryName] = choosedOne
+      localStorage.setItem('recommendObj', JSON.stringify(recObj))
+
+      if(this.nextPageName === "End") return
+      else this.$router.push({name: this.nextPageName})
     }
   }
 }
@@ -50,6 +82,8 @@ export default {
   .card{
     width: 15rem;
     height: 15rem;
+  }
+  .card:hover{
   }
   .card-group img{
     width: 15rem;

@@ -1,6 +1,6 @@
 <template>
   <div class="os container">
-    <chose-one category-name="OS" :category-obj="osObj"></chose-one>
+    <chose-one category-name="os" :category-obj="osObj" next-page-name="Size"></chose-one>
   </div>
 </template>
 
