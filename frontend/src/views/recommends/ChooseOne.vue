@@ -22,7 +22,7 @@
       <v-btn
           v-if="nextPageName === 'End'"
           color="primary"
-          @click="$router.push({name:nextPageName})"
+          @click="$router.push({name:'End'})"
       >
         마치기
       </v-btn>

@@ -15,18 +15,18 @@ export default {
       networkObj: {
         small: {
           name: 'Wi-Fi',
-          img: "apple.png",
-          backgroundColor: "black"
+          img: "wifi.png",
+          backgroundColor: "white"
         },
         middle: {
           name: '5G',
-          img: "apple.png",
-          backgroundColor: "black"
+          img: "5g.png",
+          backgroundColor: "white"
         },
         large: {
           name: 'LTE',
-          img: "apple.png",
-          backgroundColor: "black"
+          img: "lte.png",
+          backgroundColor: "white"
         }
       }
     }

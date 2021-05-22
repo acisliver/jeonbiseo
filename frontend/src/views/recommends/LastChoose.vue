@@ -1,28 +1,33 @@
 <template>
-  <div class="network container">
-    <chose-one category-name="pen" :category-obj="networkObj" next-page-name="Portability"></chose-one>
+  <div class="size container">
+    <chose-one category-name="lastChose" :category-obj="sizeObj" next-page-name="End"></chose-one>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Network",
+  name: "LastChoose",
   components: {
     ChoseOne: ()=> import("./ChooseOne")
   },
   data(){
     return {
-      networkObj: {
+      sizeObj: {
         small: {
-          name: '필기용',
+          name: '작은 사이즈',
           img: "apple.png",
           backgroundColor: "black"
         },
         middle: {
-          name: '영상시청용',
+          name: '중간 사이즈',
           img: "apple.png",
           backgroundColor: "black"
         },
+        large: {
+          name: '큰 사이즈',
+          img: "apple.png",
+          backgroundColor: "black"
+        }
       }
     }
   }
@@ -30,7 +35,7 @@ export default {
 </script>
 
 <style scoped>
-.network{
+.size{
   text-align: center;
 }
 </style>

@@ -14,20 +14,15 @@ export default {
     return {
       networkObj: {
         small: {
-          name: 'Wi-Fi',
-          img: "apple.png",
+          name: '휴대용',
+          img: "out.jpg",
           backgroundColor: "black"
         },
         middle: {
-          name: '5G',
-          img: "apple.png",
+          name: '집콕',
+          img: "in.jpg",
           backgroundColor: "black"
         },
-        large: {
-          name: 'LTE',
-          img: "apple.png",
-          backgroundColor: "black"
-        }
       }
     }
   }
