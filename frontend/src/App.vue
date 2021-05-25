@@ -4,8 +4,6 @@
 
     <core-view />
 
-    <pie-chart/>
-
     <core-footer />
 
 
@@ -19,7 +17,6 @@ export default {
     CoreAppBar: () => import('@/core/AppBar'),
     CoreView: () => import('@/core/View'),
     CoreFooter: () => import('@/core/Footer'),
-    PieChart: () => import('@/components/PieChart')
   }
 }
 </script>
