@@ -19,10 +19,10 @@ public class CompareController {
     @Autowired
     CompareService compareService;
 
-    @PostMapping("/api/compare/save")
-    public void compareSave(){
-        compareService.saveCompare();;
-    }
+//    @PostMapping("/api/compare/save")
+//    public void compareSave(){
+//        compareService.saveCompare();;
+//    }
 
     @GetMapping("/api/compare/view")
     public List<Application> viewCompare(){

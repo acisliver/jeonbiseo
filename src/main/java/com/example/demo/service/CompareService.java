@@ -20,10 +20,10 @@ public class CompareService {
     @Autowired
     CompareRepository compareRepository;
 
-    @Transactional
-    public void saveCompare(){
-        compareESRepository.deleteAll();
-    }
+//    @Transactional
+//    public void saveCompare(){
+//        compareESRepository.deleteAll();
+//    }
 
     @Transactional
     public List<Application> getAll() {
