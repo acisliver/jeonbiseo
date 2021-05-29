@@ -2,28 +2,25 @@ package com.example.demo.controller.api;
 
 
 import com.example.demo.dto.SearchTermDto;
-import com.example.demo.service.RecommendService;
-import lombok.RequiredArgsConstructor;
+import com.example.demo.service.ItemRecommendService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-public class RecommendApiController {
+public class ItemRecommendApiController {
 
     @Autowired
-    private RecommendService recommendService;
+    private ItemRecommendService itemRecommendService;
 
-  @PostMapping("api/recommend")
+  @PostMapping("api/item-recommend")
     public void recommend(@RequestBody SearchTermDto searchTermDto){
-      int getItemId = recommendService.searchItemId(searchTermDto);
+      int getItemId = itemRecommendService.searchItemId(searchTermDto);
       if(getItemId > 0){
-          List<String> recommendItemsName = recommendService.searchRecommendItem(getItemId);
+          List<String> recommendItemsName = itemRecommendService.searchRecommendItem(getItemId);
           System.out.println("아이템"+recommendItemsName);
       }
   }
