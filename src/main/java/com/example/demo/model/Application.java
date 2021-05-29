@@ -18,7 +18,24 @@ public class Application {
     @Lob //대용량 데이터
     private String url;
 
+    @Column
     private String brand;
 
+    @Column
     private String productName;
+
+    @Column
+    private String os;
+
+    @Column
+    private String appWeight;
+
+    @Column
+    private String appSize;
+
+    @Column
+    private String usePen;
+
+    @Column
+    private String network;
 }

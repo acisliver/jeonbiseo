@@ -16,4 +16,7 @@ public interface CompareRepository extends JpaRepository<Application, Integer> {
 
     @Query(value = "SELECT productName FROM application WHERE id = ?1", nativeQuery = true)
     String searchApplication(int id);
+
+    @Query(value = "SELECT * FROM application WHERE os = ?1 and appWeight = ?2 and appSize = ?3 and usePen = ?4 and network = ?5 ", nativeQuery = true)
+    List<Application> fitCriteriaItems(String os, String appWeight, String appSize, String usePen, String network);
 }
