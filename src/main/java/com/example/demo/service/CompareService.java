@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.model.Application;
 import com.example.demo.model.ESApplication;
 import com.example.demo.repository.CompareESRepository;
-import com.example.demo.repository.CompareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
