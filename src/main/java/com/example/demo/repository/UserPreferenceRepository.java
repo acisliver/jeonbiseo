@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.Application;
 import com.example.demo.model.UserPreference;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -10,4 +11,8 @@ public interface UserPreferenceRepository extends JpaRepository<UserPreference, 
     @Modifying
     @Query(value = "INSERT INTO userpreference(userId, applicationId, preference) VALUE(?1, ?2, ?3)",nativeQuery = true)
     void insertPreferenceOfItem(int userId, int applicationId, double preference);
+
+    @Modifying
+    @Query(value = "Update  userpreference Set preference = preference + ?1 WHERE applicationId= ?2 and userId =?3", nativeQuery = true)
+    void increacePrefernce(double plusPreference, int applicationId, int userId);
 }

@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestUserPreferenceDto {
-    private String os;
-    private String appWeight;
-    private String appSize;
-    private String usePen;
-    private String network;
+    private String os; //ios, android
+    private String appWeight; //무거움, 가벼움
+    private String appSize; //큼, 작음
+    private String usePen; //가능, 불가능
+    private String network; //LTE, Bluetooth
 }
