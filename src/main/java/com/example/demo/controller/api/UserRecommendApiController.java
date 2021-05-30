@@ -4,7 +4,9 @@ package com.example.demo.controller.api;
 import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.RequestUserPreferenceDto;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import com.example.demo.dto.SearchTermDto;
 import com.example.demo.model.UserPreference;
@@ -21,10 +23,6 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -41,33 +39,30 @@ public class UserRecommendApiController {
 
     }
 
-    //MySql의 데이터를 csv파일로 convert한 후 download
+    //MySql의 데이터를 csv파일로 만든 후 data 디렉토리에 저장
     @GetMapping("api/export")
-    public void exportToCSV(HttpServletResponse response) throws IOException {
-        response.setContentType("text/csv");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-        String currentDateTime = dateFormatter.format(new Date());
+    public void exportToCSV() throws IOException {
 
-        String headerKey = "Content-Dispostition";
-        String headervalue = "attachment; filename=users_" + currentDateTime + ".csv";
+        ICsvBeanWriter csvWriter = null;
+        try {
+            List<UserPreference> userPreferenceList = userRecommendService.listAll();
 
-        response.setHeader(headerKey, headervalue);
+            csvWriter =
+                    new CsvBeanWriter(new OutputStreamWriter(new FileOutputStream("src/main/data/userpreference")), CsvPreference.STANDARD_PREFERENCE);
 
-        List<UserPreference> userPreferenceList = userRecommendService.listAll();
+            String[] nameMapping = {"userId", "applicationId", "preference"};
 
-        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        //csv 파일 헤더정보
-        //String[] csvHeader = {"ID", "User ID", "Application ID", "Preference"};
-        String[] nameMapping = {"id", "userId", "applicationId", "preference"};
+            for (UserPreference userPreference: userPreferenceList){
+                csvWriter.write(userPreference, nameMapping);
+            }
 
-        //csv헤더 세팅
-        //csvWriter.writeHeader(csvHeader);
-
-        for (UserPreference userPreference: userPreferenceList){
-            csvWriter.write(userPreference, nameMapping);
         }
-
-        csvWriter.close();
+        catch (Exception e){
+           e.printStackTrace();
+        }
+        finally {
+            csvWriter.close();
+        }
     }
 
 }
