@@ -35,7 +35,7 @@ public class UserRecommendService {
         //사용자 취향에 맞는 전자기기가 있을 때
        if(fitItems != null){
             for(int i = 0; i<fitItems.size(); i++){
-                double plusPreference= 0.1;
+                int plusPreference= 10;
                 userPreferenceRepository.increacePrefernce(plusPreference, fitItems.get(i).getId(), userId);
             }
         }

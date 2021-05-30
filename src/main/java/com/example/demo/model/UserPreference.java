@@ -25,6 +25,6 @@ public class UserPreference {
     private int applicationId;
 
     @Column
-    private double preference;
+    private int preference;
 
 }
