@@ -41,6 +41,7 @@ public class UserRecommendApiController {
 
     }
 
+    //MySql의 데이터를 csv파일로 convert한 후 download
     @GetMapping("api/export")
     public void exportToCSV(HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
@@ -55,10 +56,12 @@ public class UserRecommendApiController {
         List<UserPreference> userPreferenceList = userRecommendService.listAll();
 
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        String[] csvHeader = {"ID", "User ID", "Application ID", "Preference"};
+        //csv 파일 헤더정보
+        //String[] csvHeader = {"ID", "User ID", "Application ID", "Preference"};
         String[] nameMapping = {"id", "userId", "applicationId", "preference"};
 
-        csvWriter.writeHeader(csvHeader);
+        //csv헤더 세팅
+        //csvWriter.writeHeader(csvHeader);
 
         for (UserPreference userPreference: userPreferenceList){
             csvWriter.write(userPreference, nameMapping);
