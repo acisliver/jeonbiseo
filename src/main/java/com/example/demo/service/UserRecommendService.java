@@ -51,8 +51,8 @@ public class UserRecommendService {
 
         System.out.println("맞는 기종" + fitItems);
 
-        //사용자 취향에 맞는 전자기기가 있을 때
-        int plusPreference = 1;
+        //사용자 취향에 맞는 전자기기가 있을 때 application의 개수만큼 더함
+        int plusPreference = 20;
         if (fitItems != null) {
             for (int i = 0; i < fitItems.size(); i++) {
                 userPreferenceRepository.increacePrefernce(plusPreference, fitItems.get(i).getId(), userId);
@@ -132,9 +132,26 @@ public class UserRecommendService {
             for(UserPreference userPreference: userPreferenceList){
 
                 //현재 비교하는 userId와 userPreference의 userId가 같다면
-                //preference값을 float으로 변환하여 userPreference객체에 저장
+                //선호도의 비율을 10% 단위로 나누어 1~5까지 매핑
                 if(currentId == userPreference.getUserId()){
-                    userPreference.setPreference(5 * userPreference.getPreference()/totalPreference);
+                    int percent = 10 * userPreference.getPreference()/totalPreference;
+                    switch (percent){
+                        case 0:
+                            userPreference.setPreference(1);
+                            break;
+                        case 1:
+                            userPreference.setPreference(2);
+                            break;
+                        case 2:
+                            userPreference.setPreference(3);
+                            break;
+                        case 3:
+                            userPreference.setPreference(4);
+                            break;
+                        default:
+                            userPreference.setPreference(5);
+                            break;
+                    }
                 }
                 //userPreference의 userId가 바뀌었다면
                 //currentId를 바꾼다
@@ -143,7 +160,24 @@ public class UserRecommendService {
                 else{
                     currentId = userPreference.getUserId();
                     totalPreference = totalPreferenceMap.get(currentId);
-                    userPreference.setPreference(5 * userPreference.getPreference()/totalPreference);
+                    int percent = 10 * userPreference.getPreference()/totalPreference;
+                    switch (percent){
+                        case 0:
+                            userPreference.setPreference(1);
+                            break;
+                        case 1:
+                            userPreference.setPreference(2);
+                            break;
+                        case 2:
+                            userPreference.setPreference(3);
+                            break;
+                        case 3:
+                            userPreference.setPreference(4);
+                            break;
+                        default:
+                            userPreference.setPreference(5);
+                            break;
+                    }
                 }
             }
 
