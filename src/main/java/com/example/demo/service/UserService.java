@@ -38,7 +38,7 @@ public class UserService {
         userRepository.save(user);
 
         //user 선호도 초기화
-        int initPreference = 10;
+        int initPreference = 1;
         List<Application> numberOfApplication = compareRepository.findAll();
         for(int i=0;i<numberOfApplication.size(); i++){
             System.out.println("apllication"+i);

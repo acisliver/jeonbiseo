@@ -49,7 +49,6 @@ public class UserRecommendApiController {
                         @AuthenticationPrincipal PrincipalDetails principalDetails){
         userRecommendService.findPreferenceItem(requestUserPreferenceDto, principalDetails.getUser().getId());
 
-
     }
 
     //MySql의 데이터를 csv파일로 만든 후 data 디렉토리에 저장
