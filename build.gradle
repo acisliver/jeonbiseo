@@ -48,7 +48,26 @@ dependencies {
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     // https://mvnrepository.com/artifact/net.sf.supercsv/super-csv
     implementation group: 'net.sf.supercsv', name: 'super-csv', version: '2.4.0'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-math3
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
+
+    // https://mvnrepository.com/artifact/org.apache.mahout/mahout-core
+    implementation group: 'org.apache.mahout', name: 'mahout-core', version: '0.9'
+
+    // https://mvnrepository.com/artifact/org.apache.mahout/mahout-integration
+    implementation group: 'org.apache.mahout', name: 'mahout-integration', version: '0.13.0'
+
+    // https://mvnrepository.com/artifact/org.apache.mahout/mahout-math
+    implementation group: 'org.apache.mahout', name: 'mahout-math', version: '0.13.0'
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
 
 
 

@@ -26,6 +26,6 @@ public class UserPreference {
 
     //UserRecommendApiController의 dataToCSV의 로직에 의해 int를 float으로 바꿈
     @Column
-    private float preference;
+    private int preference;
 
 }
