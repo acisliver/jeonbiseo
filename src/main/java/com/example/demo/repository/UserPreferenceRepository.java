@@ -10,9 +10,9 @@ public interface UserPreferenceRepository extends JpaRepository<UserPreference, 
 
     @Modifying
     @Query(value = "INSERT INTO userpreference(userId, applicationId, preference) VALUE(?1, ?2, ?3)",nativeQuery = true)
-    void insertPreferenceOfItem(int userId, int applicationId, double preference);
+    void insertPreferenceOfItem(int userId, int applicationId, int preference);
 
     @Modifying
     @Query(value = "Update  userpreference Set preference = preference + ?1 WHERE applicationId= ?2 and userId =?3", nativeQuery = true)
-    void increacePrefernce(double plusPreference, int applicationId, int userId);
+    void increacePrefernce(int plusPreference, int applicationId, int userId);
 }
