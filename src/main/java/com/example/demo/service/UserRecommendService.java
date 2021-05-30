@@ -4,6 +4,7 @@ import com.example.demo.dto.RequestUserPreferenceDto;
 import com.example.demo.model.Application;
 import com.example.demo.model.UserPreference;
 import com.example.demo.repository.UserPreferenceRepository;
+import org.apache.hadoop.mapreduce.v2.app.webapp.App;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
@@ -26,11 +27,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserRecommendService {
+
 
     @Autowired
     private CompareRepository compareRepository;
@@ -45,17 +46,48 @@ public class UserRecommendService {
     @Transactional
     public void findPreferenceItem(RequestUserPreferenceDto requestUserPreferenceDto, int userId) {
         System.out.println("dto는" + requestUserPreferenceDto);
-        List<Application> fitItems = compareRepository.fitCriteriaItems(requestUserPreferenceDto.getOs(),
-                requestUserPreferenceDto.getAppWeight(), requestUserPreferenceDto.getAppSize(),
-                requestUserPreferenceDto.getUsePen(), requestUserPreferenceDto.getNetwork());
 
-        System.out.println("맞는 기종" + fitItems);
+        ArrayList<Application> allSeletApllicateId=new ArrayList();
+
+        allSeletApllicateId.addAll(compareRepository.findByOs(requestUserPreferenceDto.getOs()));
+        allSeletApllicateId.addAll(compareRepository.findByAppWeight(requestUserPreferenceDto.getAppWeight()));
+        allSeletApllicateId.addAll(compareRepository.findByAppSize(requestUserPreferenceDto.getAppSize()));
+        allSeletApllicateId.addAll(compareRepository.findByusePen(requestUserPreferenceDto.getUsePen()));
+        allSeletApllicateId.addAll(compareRepository.findByNetwork(requestUserPreferenceDto.getNetwork()));
+
+        Collections.sort(allSeletApllicateId,new UserComparator());
+        System.out.println("정렬 확인"+allSeletApllicateId);
+//        List<Application> fitItems = compareRepository.fitCriteriaItems(requestUserPreferenceDto.getOs(),
+//                requestUserPreferenceDto.getAppWeight(), requestUserPreferenceDto.getAppSize(),
+//                requestUserPreferenceDto.getUsePen(), requestUserPreferenceDto.getNetwork());
+
+        //System.out.println("맞는 기종" + fitItems);
 
         //사용자 취향에 맞는 전자기기가 있을 때 application의 개수만큼 더함
         int plusPreference = 20;
-        if (fitItems != null) {
-            for (int i = 0; i < fitItems.size(); i++) {
-                userPreferenceRepository.increacePrefernce(plusPreference, fitItems.get(i).getId(), userId);
+        if (allSeletApllicateId != null) {
+            int count=0;
+            int beforeId=allSeletApllicateId.get(0).getId();
+            for (int i = 0; i < allSeletApllicateId.size(); i++) {
+                if(beforeId!=allSeletApllicateId.get(i).getId()){
+                    beforeId=allSeletApllicateId.get(i).getId();
+                    count=0;
+                }
+                else{
+                    count+=1;
+                }
+                if(count>2) {
+                    if(userPreferenceRepository.findByUserIdAndApplicationId(userId,beforeId)==null){
+                        UserPreference userPreference=new UserPreference();
+                        userPreference.setUserId(userId);
+                        userPreference.setApplicationId(beforeId);
+                        userPreference.setPreference(plusPreference);
+                        userPreferenceRepository.save(userPreference);
+                    }
+                    else{
+                        userPreferenceRepository.increacePrefernce(plusPreference, allSeletApllicateId.get(i).getId(), userId);
+                    }
+                }
             }
         }
     }
@@ -193,5 +225,16 @@ public class UserRecommendService {
         finally {
             csvWriter.close();
         }
+    }
+}
+
+class UserComparator implements Comparator<Application>{
+
+
+    @Override
+    public int compare(Application o1, Application o2) {
+        if(o1.getId()>o2.getId()) return 1;
+        if(o1.getId()<o2.getId()) return -1;
+        return 0;
     }
 }

@@ -38,13 +38,13 @@ public class UserService {
         userRepository.save(user);
 
         //user 선호도 초기화
-        int initPreference = 1;
-        List<Application> numberOfApplication = compareRepository.findAll();
-        for(int i=0;i<numberOfApplication.size(); i++){
-            System.out.println("apllication"+i);
-            userPreferenceRepository.insertPreferenceOfItem(user.getId(),
-                    numberOfApplication.get(i).getId(), initPreference);
-        }
+//        int initPreference = 1;
+//        List<Application> numberOfApplication = compareRepository.findAll();
+//        for(int i=0;i<numberOfApplication.size(); i++){
+//            System.out.println("apllication"+i);
+//            userPreferenceRepository.insertPreferenceOfItem(user.getId(),
+//                    numberOfApplication.get(i).getId(), initPreference);
+//        }
 
         return user;
 

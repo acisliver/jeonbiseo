@@ -15,4 +15,6 @@ public interface UserPreferenceRepository extends JpaRepository<UserPreference, 
     @Modifying
     @Query(value = "Update  userpreference Set preference = preference + ?1 WHERE applicationId= ?2 and userId =?3", nativeQuery = true)
     void increacePrefernce(int plusPreference, int applicationId, int userId);
+
+    UserPreference findByUserIdAndApplicationId(int userId,int applicationId);
 }
