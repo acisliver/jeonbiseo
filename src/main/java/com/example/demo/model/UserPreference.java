@@ -24,7 +24,8 @@ public class UserPreference {
     @Column
     private int applicationId;
 
+    //UserRecommendApiController의 dataToCSV의 로직에 의해 int를 float으로 바꿈
     @Column
-    private int preference;
+    private float preference;
 
 }
