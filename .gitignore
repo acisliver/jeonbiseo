@@ -37,3 +37,6 @@ out/
 ### VS Code ###
 .vscode/
 /src/main/resources/static/
+
+/src/main/data/
+src/main/data/
