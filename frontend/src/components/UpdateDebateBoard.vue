@@ -1,5 +1,5 @@
 <template>
-
+  <div class="update-debate-board"></div>
 </template>
 
 <script>
