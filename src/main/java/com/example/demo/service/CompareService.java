@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.model.Application;
 import com.example.demo.model.ESApplication;
+import com.example.demo.model.UserPreference;
 import com.example.demo.repository.CompareESRepository;
+import com.example.demo.repository.UserPreferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class CompareService {
     CompareESRepository compareESRepository;
     @Autowired
     CompareRepository compareRepository;
+
+    @Autowired
+    UserPreferenceRepository userPreferenceRepository;
 
 //    @Transactional
 //    public void saveCompare(){
@@ -35,7 +40,13 @@ public class CompareService {
     }
 
     @Transactional
-    public Optional<Application> findApplication(String searchTerm) {
-        return compareRepository.findById(Integer.parseInt(searchTerm));
+    public Optional<Application> findApplication(String searchTerm, Integer id) {
+        int plusPreference = 20;
+        Optional<Application> searchItem=compareRepository.findById(Integer.parseInt(searchTerm));
+       if(id!=null){
+           UserPreference userPreference=userPreferenceRepository.findByUserIdAndApplicationId(id,searchItem.get().getId());
+           userPreference.setPreference(userPreference.getPreference()+plusPreference);
+       }
+        return searchItem;
     }
 }
