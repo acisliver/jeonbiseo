@@ -4,14 +4,18 @@ import com.example.demo.dto.RequestUserPreferenceDto;
 import com.example.demo.model.Application;
 import com.example.demo.model.UserPreference;
 import com.example.demo.repository.UserPreferenceRepository;
+import lombok.Getter;
 import org.apache.hadoop.mapreduce.v2.app.webapp.App;
+import org.apache.mahout.cf.taste.common.Refreshable;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.recommender.AbstractRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
+import org.apache.mahout.cf.taste.recommender.IDRescorer;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
@@ -22,6 +26,8 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,6 +38,9 @@ import java.util.*;
 @Service
 public class UserRecommendService {
 
+    @Getter
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private CompareRepository compareRepository;
@@ -93,12 +102,12 @@ public class UserRecommendService {
     }
 
     @Transactional
-    public List<RecommendedItem> userRecommender() throws IOException, TasteException {
+    public List<RecommendedItem> userRecommender(String id) throws IOException, TasteException {
         DataModel model = new FileDataModel(new File("src/main/data/userpreference.csv"));
         UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
-        UserNeighborhood neighborhood = new NearestNUserNeighborhood(2, similarity, model);
+        UserNeighborhood neighborhood = new NearestNUserNeighborhood(5, similarity, model);
         Recommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
-        List<RecommendedItem> recommendations = recommender.recommend(1, 1);
+        List<RecommendedItem> recommendations = recommender.recommend(Integer.parseInt(id), 1);
         if(recommendations.size()==0) {
             System.out.println("***************************");
             System.out.printf("Nothing");
@@ -118,6 +127,7 @@ public class UserRecommendService {
         ICsvBeanWriter csvWriter = null;
         try {
             List<UserPreference> userPreferenceList = this.listAll();
+
 
             csvWriter =
                     new CsvBeanWriter(new OutputStreamWriter(new FileOutputStream("src/main/data/userpreference.csv")), CsvPreference.STANDARD_PREFERENCE);
@@ -163,6 +173,7 @@ public class UserRecommendService {
             //userPreference만큼 반복
             for(UserPreference userPreference: userPreferenceList){
 
+                em.detach(userPreference);
                 //현재 비교하는 userId와 userPreference의 userId가 같다면
                 //선호도의 비율을 10% 단위로 나누어 1~5까지 매핑
                 if(currentId == userPreference.getUserId()){

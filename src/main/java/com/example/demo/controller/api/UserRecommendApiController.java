@@ -27,10 +27,7 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.elasticsearch.client.ml.job.config.DataDescription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
@@ -62,10 +59,10 @@ public class UserRecommendApiController {
     }
 
     @GetMapping("/api/user_recommend")
-    public List<RecommendedItem> userRecommender() {
+    public List<RecommendedItem> userRecommender(@RequestParam String id) {
         List<RecommendedItem> recommendations = null;
         try {
-            recommendations = userRecommendService.userRecommender();
+            recommendations = userRecommendService.userRecommender(id);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TasteException e) {
