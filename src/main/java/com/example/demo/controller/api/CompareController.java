@@ -33,7 +33,7 @@ public class CompareController {
     }
 
     @GetMapping("/api/compare/select")
-    public Optional<Application> selectApplication(@RequestParam("sqlid") String sqlId,@RequestParam("id") Integer id){
+    public Optional<Application> selectApplication(@RequestParam("sqlid") String sqlId,@RequestParam(value="id",required = false) Integer id){
         return compareService.findApplication(sqlId,id);
     }
 }
