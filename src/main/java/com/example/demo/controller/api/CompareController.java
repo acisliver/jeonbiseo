@@ -1,14 +1,14 @@
 package com.example.demo.controller.api;
 
+import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.dto.KategorieDto;
-import com.example.demo.dto.SearchTermDto;
 import com.example.demo.model.Application;
 import com.example.demo.model.ESApplication;
 import com.example.demo.service.CompareService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +40,10 @@ public class CompareController {
     }
 
     @GetMapping("/api/compare/select")
-    public Optional<Application> selectApplication(@RequestParam("sqlid") String sqlId,@RequestParam(value="id",required = false) Integer id){
-        return compareService.findApplication(sqlId,id);
+    public Optional<Application> selectApplication(@RequestParam("sqlid") String sqlId,@AuthenticationPrincipal PrincipalDetails principalDetails){
+        System.out.println(principalDetails);
+        Optional<PrincipalDetails> principalDetails1=Optional.ofNullable(principalDetails);
+        System.out.println(principalDetails1.isPresent());
+        return compareService.findApplication(sqlId,principalDetails1);
     }
 }

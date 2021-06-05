@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.model.Application;
 import com.example.demo.model.ESApplication;
 import com.example.demo.model.UserPreference;
@@ -40,16 +41,15 @@ public class CompareService {
     }
 
     @Transactional
-    public Optional<Application> findApplication(String searchTerm, Integer id) {
+    public Optional<Application> findApplication(String searchTerm, Optional<PrincipalDetails> id) {
         int plusPreference = 20;
         Optional<Application> searchItem=compareRepository.findById(Integer.parseInt(searchTerm));
-       if(id!=null){
-           UserPreference userPreference=userPreferenceRepository.findByUserIdAndApplicationId(id,searchItem.get().getId());
-           Optional<UserPreference> userPreferenceOptional=Optional.empty();
-           userPreferenceOptional.ofNullable(userPreference);
+       if(id.isPresent()){
+           UserPreference userPreference=userPreferenceRepository.findByUserIdAndApplicationId(id.get().getUser().getId(),searchItem.get().getId());
+           Optional<UserPreference> userPreferenceOptional=Optional.ofNullable(userPreference);
            if(!userPreferenceOptional.isPresent()){
                UserPreference makeUserPreference=new UserPreference();
-               makeUserPreference.setUserId(id);
+               makeUserPreference.setUserId(id.get().getUser().getId());
                makeUserPreference.setApplicationId(searchItem.get().getId());
                makeUserPreference.setPreference(plusPreference);
                userPreferenceRepository.save(makeUserPreference);
@@ -57,7 +57,6 @@ public class CompareService {
            else{
                userPreference.setPreference(userPreference.getPreference()+plusPreference);
            }
-
        }
         return searchItem;
     }
