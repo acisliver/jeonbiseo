@@ -2,7 +2,6 @@ package com.example.demo.controller.api;
 
 import com.example.demo.dto.KategorieDto;
 import com.example.demo.dto.SearchTermDto;
-import com.example.demo.dto.TestDto;
 import com.example.demo.model.Application;
 import com.example.demo.model.ESApplication;
 import com.example.demo.service.CompareService;
