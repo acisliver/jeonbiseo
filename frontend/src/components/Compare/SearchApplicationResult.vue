@@ -80,12 +80,12 @@ export default {
       ]
     }
   },
-  props: {
-    // searchResult: {
-    //   type: Array,
-    //   default: []
-    // }
-  }
+  // props: {
+  //   // searchResult: {
+  //   //   type: Array,
+  //   //   default: []
+  //   // }
+  // }
 }
 </script>
 

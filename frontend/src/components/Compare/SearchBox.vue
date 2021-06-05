@@ -126,15 +126,15 @@ export default {
     //카테고리 선택
     sendSelectedList(){
       const url = "/api/compare/list"
-      let config = {
-        headers: {
-          // token: localStorage.getItem('token')
-        }
-      }
+      // let config = {
+      //   headers: {
+      //     // token: localStorage.getItem('token')
+      //   }
+      // }
       const body = this.selectedList
       console.log(body)
       axios
-          .post(url, body, config)
+          .post(url, body)
           .then(res => console.log(res))
           .catch(e => console.log(e))
     },
