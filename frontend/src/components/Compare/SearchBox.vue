@@ -1,12 +1,17 @@
 <template>
   <div class="search-box">
-    <v-card elevation="2">
+    <v-card elevation="1">
       <v-card-text>
         <div class="container">
-          <div class="row">
+          <div class="row flex-column">
             <v-text-field
                 v-model="searchWord"
                 label="검색어"
+                filled
+                dense
+                rounded
+                :append-icon="'mdi-magnify'"
+                @click:append="searchApplication(searchWord)"
             ></v-text-field>
             <v-checkbox
                 v-model="selectedList"
@@ -29,7 +34,7 @@
             <v-checkbox
                 v-model="selectedList"
                 label="전용터치펜"
-                value="userPen"
+                value="usePen"
                 hide-details
             ></v-checkbox>
             <v-checkbox
@@ -80,15 +85,16 @@
                 value="screenRatio"
                 hide-details
             ></v-checkbox>
+            <v-btn
+                width="0.5em"
+                class="ma-2"
+                @click="sendSelectedList"
+            >
+              적용
+            </v-btn>
           </div>
         </div>
       </v-card-text>
-      <v-btn
-          class="ma-2"
-          @click="sendSelectedList"
-      >
-        적용
-      </v-btn>
     </v-card>
   </div>
 </template>
@@ -105,13 +111,32 @@ export default {
     }
   },
   methods: {
+    //검색어로 검색
+    searchApplication(searchWord){
+      console.log(searchWord)
+      const url = "/api/compare/search"
+      const params = `?searchWord=${searchWord}`
+      axios
+          .get(url + params)
+          .then(res => {
+            console.log(res)
+          })
+          .catch(e => console.log(e))
+    },
+    //카테고리 선택
     sendSelectedList(){
-      const url = ""
+      const url = "/api/compare/list"
+      let config = {
+        headers: {
+          // token: localStorage.getItem('token')
+        }
+      }
       const body = this.selectedList
       console.log(body)
-      axios.post(url, body)
-        .then(res => console.log(res))
-        .catch(e => console.log(e))
+      axios
+          .post(url, body, config)
+          .then(res => console.log(res))
+          .catch(e => console.log(e))
     },
 
   }

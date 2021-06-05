@@ -1,7 +1,7 @@
 <template>
   <div class="compare">
-    <v-container>
-      <h2>전자기기 비교</h2>
+    <v-container class="align-stretch">
+      <h2 style="margin: 1rem">전자기기 비교</h2>
       <v-row>
         <v-col
           cols="9"
@@ -13,11 +13,13 @@
         >
           <search-box/>
         </v-col>
-        <search-application-result/>
+        <v-col
+            cols="12"
+        >
+          <search-application-result/>
+        </v-col>
       </v-row>
     </v-container>
-
-
   </div>
 </template>
 

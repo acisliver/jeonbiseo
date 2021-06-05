@@ -1,10 +1,9 @@
 <template>
-  <div class="comparing-application container">
+  <div class="comparing-application">
     <v-card
-        elevation="2"
-        style="height: inherit"
+        elevation="1"
     >
-      비교중인 전자기기
+      비교중인 상품
     </v-card>
   </div>
 </template>
@@ -17,6 +16,11 @@ export default {
 
     }
   },
+  methods: {
+    inComparing(){
+
+    }
+  }
 
 }
 </script>
