@@ -49,8 +49,15 @@ public class CompareService {
            userPreferenceOptional.ofNullable(userPreference);
            if(!userPreferenceOptional.isPresent()){
                UserPreference makeUserPreference=new UserPreference();
+               makeUserPreference.setUserId(id);
+               makeUserPreference.setApplicationId(searchItem.get().getId());
+               makeUserPreference.setPreference(plusPreference);
+               userPreferenceRepository.save(makeUserPreference);
            }
-           userPreference.setPreference(userPreference.getPreference()+plusPreference);
+           else{
+               userPreference.setPreference(userPreference.getPreference()+plusPreference);
+           }
+
        }
         return searchItem;
     }
