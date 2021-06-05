@@ -1,5 +1,6 @@
 package com.example.demo.controller.api;
 
+import com.example.demo.dto.KategorieDto;
 import com.example.demo.dto.SearchTermDto;
 import com.example.demo.dto.TestDto;
 import com.example.demo.model.Application;
@@ -23,8 +24,8 @@ public class CompareController {
 //        compareService.saveCompare();;
 //    }
     @PostMapping("/api/compare/list")
-    public void makeKategoriePreference(@RequestBody TestDto testDto){
-        System.out.println(testDto.getSelectedList());
+    public void makeKategoriePreference(@RequestBody KategorieDto kategorieDto){
+        System.out.println(kategorieDto.getSelectedList());
     }
 
     @GetMapping("/api/compare/view")

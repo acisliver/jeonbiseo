@@ -5,6 +5,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class TestDto {
+public class KategorieDto {
     public List<String> selectedList;
 }
