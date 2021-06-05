@@ -26,9 +26,9 @@ public class CompareController {
         return compareService.getAll();
     }
 
-    @PostMapping("/api/compare/search")
-    public List<ESApplication> search(@RequestBody SearchTermDto searchTermDto){
-        List<ESApplication> applications=compareService.search(searchTermDto.getSearchTerm());
+    @GetMapping("/api/compare/search/{searchWord}")
+    public List<ESApplication> search(@RequestParam("searchWord") String searchWord){
+        List<ESApplication> applications=compareService.search(searchWord);
         return applications;
     }
 
