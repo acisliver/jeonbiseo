@@ -131,7 +131,7 @@ export default {
       //     // token: localStorage.getItem('token')
       //   }
       // }
-      const body = this.selectedList
+      const body =  this.selectedList
       console.log(body)
       axios
           .post(url, body)
