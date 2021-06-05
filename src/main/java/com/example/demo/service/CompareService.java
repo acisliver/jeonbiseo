@@ -45,6 +45,11 @@ public class CompareService {
         Optional<Application> searchItem=compareRepository.findById(Integer.parseInt(searchTerm));
        if(id!=null){
            UserPreference userPreference=userPreferenceRepository.findByUserIdAndApplicationId(id,searchItem.get().getId());
+           Optional<UserPreference> userPreferenceOptional=Optional.empty();
+           userPreferenceOptional.ofNullable(userPreference);
+           if(!userPreferenceOptional.isPresent()){
+               UserPreference makeUserPreference=new UserPreference();
+           }
            userPreference.setPreference(userPreference.getPreference()+plusPreference);
        }
         return searchItem;

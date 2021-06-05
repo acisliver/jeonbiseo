@@ -25,6 +25,6 @@ public class ESApplication {
     private String url;
     @Field(type = FieldType.Text, fielddata = true)
     private String brand;
-    @Field(type = FieldType.Text, fielddata = true)
+    @Field(type = FieldType.Text, fielddata = true,name="productname")
     private String productName;
 }
