@@ -133,7 +133,6 @@
                     의견쓰기
                   </v-btn>
                 </v-row>
-
               </v-card-text>
             </v-card>
           </v-timeline-item>

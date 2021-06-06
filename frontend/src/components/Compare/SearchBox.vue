@@ -101,12 +101,13 @@
 
 <script>
 import axios from "axios";
+// import {mapActions} from "vuex"
 
 export default {
   name: "SearchBox",
   data() {
     return {
-      selectedList: [],
+      selectedList: ['os', 'appWeight', 'appSize', 'usePen', 'network', 'ramSize', 'hddSize', 'batterySize', 'frontCamera', 'backCamera', 'speakerNum', 'screenRatio'],
       searchWord: "",
     }
   },
@@ -131,8 +132,7 @@ export default {
       //     // token: localStorage.getItem('token')
       //   }
       // }
-      const body =  this.selectedList
-      console.log(body)
+      const body = { "selectedList": JSON.stringify(this.selectedList)}
       axios
           .post(url, body)
           .then(res => console.log(res))

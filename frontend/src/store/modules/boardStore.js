@@ -37,7 +37,7 @@ export default {
                 .get('/api/free-header')
                 .then(res => {
                     commit('setFreeHeader', res.data.reverse())
-                    console.log(res.data);
+                    console.log(res.data)
                 })
                 .catch(err => {
                     console.log(err)
