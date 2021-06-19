@@ -1,14 +1,43 @@
 <template>
   <div class="compare">
-    <h2>비교</h2>
+    <v-container class="align-stretch">
+      <h2 style="margin: 1rem">전자기기 비교</h2>
+      <v-row>
+        <v-col
+          cols="9"
+        >
+          <comparing-appliaction></comparing-appliaction>
+        </v-col>
+        <v-col
+          cols="3"
+        >
+          <search-box/>
+        </v-col>
+        <v-col
+            cols="12"
+        >
+          <search-application-result/>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "Compare",
-}
+  components:{
+    SearchBox: () => import("../components/Compare/SearchBox"),
+    ComparingAppliaction: () => import("../components/Compare/ComparingApplication"),
+    SearchApplicationResult: () => import("../components/Compare/SearchApplicationResult")
+  },
+  data() {
+    return {
 
+    };
+  }
+}
 </script>
 
 <style scoped>

@@ -36,7 +36,6 @@ public class DebateBoardService {
 
     @Transactional
     public Debate viewDebate(int id){
-
         Optional<Debate>debate=debateBoardRepository.findById(id);
         return debate.get();
     }
@@ -142,8 +141,6 @@ public class DebateBoardService {
             else if(pcn.equals("Negative") || pcn.equals("negative"))
                 statisticRepository.increaseNegative(id);
         }
-
-
     }
 
     @Transactional
