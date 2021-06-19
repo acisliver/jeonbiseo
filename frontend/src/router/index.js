@@ -24,6 +24,14 @@ const ReadFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../com
 const ReadDebateBoard = () => import(/* webpackChunkName: "board-group" */ '../components/ReadDebateBoard');
 const Compare = () => import(/* webpackChunkName: "compare" */ '../views/Compare');
 const Recommend = () => import(/* webpackChunkName: "recommend" */ '../views/Recommend');
+const OS = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/OS');
+const Size = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Size');
+const Network = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Network');
+const Portability = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Portability');
+const Pen = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Pen');
+const RecommendItem = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/RecommendItem');
+
+
 
 // const rejectAuthUser = (to, from, next) =>{
 //   if(store.state.isLogin){
@@ -123,6 +131,35 @@ const routes = [
     path: '/recommend',
     name: 'Recommend',
     component: Recommend
+  },
+  {
+    path: '/recommend/os',
+    name: 'OS',
+    component: OS
+  },
+  {
+    path: '/recommend/size',
+    name: 'Size',
+    component: Size
+  },{
+    path: '/recommend/network',
+    name: 'Network',
+    component: Network
+  },
+  {
+    path: '/recommend/pen',
+    name: 'Pen',
+    component: Pen
+  },
+  {
+    path: '/recommend/protability',
+    name: 'Portability',
+    component: Portability
+  },
+  {
+    path: '/recommend/recommend-item',
+    name: 'RecommendItem',
+    component: RecommendItem
   }
 ]
 

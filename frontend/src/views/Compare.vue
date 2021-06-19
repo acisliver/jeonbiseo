@@ -5,9 +5,10 @@
 </template>
 
 <script>
-  export default {
-    name: "Compare"
-  }
+export default {
+  name: "Compare",
+}
+
 </script>
 
 <style scoped>
