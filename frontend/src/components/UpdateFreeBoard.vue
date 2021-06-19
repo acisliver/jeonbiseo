@@ -1,5 +1,5 @@
 <template>
-  <div class="update-free-board"></div>
+
 </template>
 
 <script>

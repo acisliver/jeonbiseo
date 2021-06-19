@@ -81,7 +81,6 @@ export default {
   },
   methods: {
     login(loginObj) {
-      console.log(loginObj)
       axios
           .post("/login",loginObj)
           .then(res => {

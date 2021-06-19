@@ -6,6 +6,7 @@
 
     <core-footer />
 
+
   </v-app>
 </template>
 
@@ -24,5 +25,6 @@ export default {
 #app {
 
 }
+
 
 </style>
