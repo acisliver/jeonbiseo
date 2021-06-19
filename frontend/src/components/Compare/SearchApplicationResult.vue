@@ -8,14 +8,17 @@
             v-for="result in testResults"
             :key="result.id"
             draggable="true"
-            ondragstart="inCompare()"
+            @click="inCompare"
         >
           <img
               width="200px"
               height="auto"
               :src="result.url"
+              @click="inCompare"
           >
-          <div>{{result.productName}}</div>
+          <div
+              @click="inCompare"
+          >{{result.productName}}</div>
         </v-card>
       </v-row>
     </v-card>
@@ -80,12 +83,19 @@ export default {
       ]
     }
   },
-  // props: {
-  //   // searchResult: {
-  //   //   type: Array,
-  //   //   default: []
-  //   // }
-  // }
+  methods: {
+    //event propagation 활용
+    //클릭 시 img나 div가 target이 됨
+    //div만 target이 되어야 해서 최상위에서 데이터 처리
+    inCompare(event) {
+      const target = event.currentTarget.innerText
+      //텍스트에세 이벤트핸들링 함수가 발생했을 경우
+      if (target !== ""){
+        this.$emit("comparing", this.testResults.find(el => el.productName === target))
+        console.log(this.testResults.find(el => el.productName === target))
+      }
+    }
+  }
 }
 </script>
 

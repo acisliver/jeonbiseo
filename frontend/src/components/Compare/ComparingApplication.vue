@@ -4,7 +4,21 @@
         elevation="1"
         height="600px"
     >
-      비교중인 상품
+      <v-row>
+        <v-card
+            v-for="result in comparingProducts"
+            :key="result.id"
+            draggable="true"
+
+        >
+          <img
+              width="200px"
+              height="auto"
+              :src="result.url"
+          >
+          <div>{{result.productName}}</div>
+        </v-card>
+      </v-row>
     </v-card>
   </div>
 </template>
@@ -14,13 +28,16 @@ export default {
   name: "ComparingApplication",
   data() {
     return {
-
+    }
+  },
+  props: {
+    comparingProducts: {
+      type: Array,
+      required: true
     }
   },
   methods: {
-    inComparing(){
 
-    }
   }
 
 }

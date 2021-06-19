@@ -6,7 +6,7 @@
         <v-col
           cols="9"
         >
-          <comparing-appliaction></comparing-appliaction>
+          <comparing-appliaction :comparing-products="comparingProducts"/>
         </v-col>
         <v-col
           cols="3"
@@ -16,7 +16,7 @@
         <v-col
             cols="12"
         >
-          <search-application-result/>
+          <search-application-result @comparing="getProduct"/>
         </v-col>
       </v-row>
     </v-container>
@@ -27,15 +27,21 @@
 
 export default {
   name: "Compare",
+  data(){
+    return {
+      comparingProducts: []
+    }
+  },
   components:{
     SearchBox: () => import("../components/Compare/SearchBox"),
     ComparingAppliaction: () => import("../components/Compare/ComparingApplication"),
     SearchApplicationResult: () => import("../components/Compare/SearchApplicationResult")
   },
-  data() {
-    return {
-
-    };
+  methods: {
+    getProduct(data) {
+      this.comparingProducts.push(data)
+      console.log(data)
+    }
   }
 }
 </script>
