@@ -7,9 +7,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/jeonbiseodb?serverTimezone=Asia/Seoul
-    username: user
-    password: 1234
+    url:  ${db.url}
+    username: ${db.username}
+    password: ${db.password}
 
   jpa:
     open-in-view: true
@@ -26,8 +26,4 @@ spring:
     serialization:
       fail-on-empty-beans: false
 
-logging:
-  file:
-    path: C:\Users\Kang\springproject\jeonbiseo\log #자신의 컴퓨터에 맞게 설정
-  config:
-    classpath: logback-spring.xml
+logging.level.org.springframework.data.elasticsearch.client.WIRE: trace
