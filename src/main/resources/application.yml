@@ -27,3 +27,9 @@ spring:
       fail-on-empty-beans: false
 
 logging.level.org.springframework.data.elasticsearch.client.WIRE: trace
+
+logging:
+  file:
+    path: ${log.path}
+  config:
+    classpath: logback-spring.xml
