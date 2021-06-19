@@ -29,7 +29,7 @@ const Size = () => import(/* webpackChunkName: "recommend" */ '../views/recommen
 const Network = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Network');
 const Portability = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Portability');
 const Pen = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Pen');
-
+const RecommendItem = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/RecommendItem');
 
 
 
@@ -155,6 +155,11 @@ const routes = [
     path: '/recommend/protability',
     name: 'Portability',
     component: Portability
+  },
+  {
+    path: '/recommend/recommend-item',
+    name: 'RecommendItem',
+    component: RecommendItem
   }
 ]
 

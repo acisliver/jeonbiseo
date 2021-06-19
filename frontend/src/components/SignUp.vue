@@ -1,4 +1,4 @@
-<template>
+  <template>
   <v-container class="fill-height" style="max-width: 700px">
     <v-row justify="center">
       <v-col
