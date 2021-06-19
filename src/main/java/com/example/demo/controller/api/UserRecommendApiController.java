@@ -58,7 +58,7 @@ public class UserRecommendApiController {
         }
     }
 
-    @GetMapping("/api/user_recommend")
+    @GetMapping("/api/recommend-result")
     public List<RecommendedItem> userRecommender(@RequestParam String id) {
         List<RecommendedItem> recommendations = null;
         try {
