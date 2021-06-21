@@ -30,7 +30,7 @@ const Network = () => import(/* webpackChunkName: "recommend" */ '../views/recom
 const Portability = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Portability');
 const Pen = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Pen');
 const RecommendItem = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/RecommendItem');
-
+const R = ()  => import(/* webpackChunkName: "recommend" */ '../components/Recommend/RecommendResult');
 
 
 // const rejectAuthUser = (to, from, next) =>{
@@ -160,6 +160,11 @@ const routes = [
     path: '/recommend/recommend-item',
     name: 'RecommendItem',
     component: RecommendItem
+  },
+  {
+    path: '/recommend/recommend-result',
+    name: 'RecommendResult',
+    component: R
   }
 ]
 

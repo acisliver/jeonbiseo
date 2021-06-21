@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.RequestUserPreferenceDto;
 import com.example.demo.model.Application;
+import com.example.demo.model.User;
 import com.example.demo.model.UserPreference;
 import com.example.demo.repository.UserPreferenceRepository;
 import lombok.Getter;
@@ -53,7 +54,7 @@ public class UserRecommendService {
     }
 
     @Transactional
-    public void findPreferenceItem(RequestUserPreferenceDto requestUserPreferenceDto, int userId) {
+    public void getPreferenceItem(RequestUserPreferenceDto requestUserPreferenceDto, int userId) {
         System.out.println("dto는" + requestUserPreferenceDto);
 
         ArrayList<Application> allSeletApllicateId=new ArrayList();
@@ -102,12 +103,12 @@ public class UserRecommendService {
     }
 
     @Transactional
-    public List<RecommendedItem> userRecommender(String id) throws IOException, TasteException {
+    public List<RecommendedItem> userRecommender(User user) throws IOException, TasteException {
         DataModel model = new FileDataModel(new File("src/main/data/userpreference.csv"));
         UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
         UserNeighborhood neighborhood = new NearestNUserNeighborhood(5, similarity, model);
         Recommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
-        List<RecommendedItem> recommendations = recommender.recommend(Integer.parseInt(id), 1);
+        List<RecommendedItem> recommendations = recommender.recommend(user.getId(), 1);
         if(recommendations.size()==0) {
             System.out.println("***************************");
             System.out.printf("Nothing");

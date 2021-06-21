@@ -1,6 +1,7 @@
 <template>
   <div class="recommend-result container">
     <div class="card-group container">
+
       <div
           v-for="item in result"
           :key="item"
@@ -9,9 +10,9 @@
           style="font-size: 1.5rem;"
       >
         <v-card>
-          <img :src="require(`../../assets/5g.png`)">
+          <img width="200px" height="auto" :src="item.url">
         </v-card>
-        {{item.name}}
+        {{item.productName}}
       </div>
     </div>
     <div class="next-btn">
@@ -46,8 +47,17 @@ export default {
 
   },
   mounted() {
-    axios.get("/api/recommend-result")
-        .then(res => this.result = res)
+    let config = {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    }
+    axios.get("/api/recommend-result", config)
+        .then(res => {
+          axios.get("/api/compare/select?sqlid=" + res.data.itemID)
+              .then(res2 => this.result = res2.data)
+              .catch(e => console.log(e))
+        })
         .catch(e =>console.log(e))
   }
 }

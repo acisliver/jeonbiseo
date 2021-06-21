@@ -5,7 +5,7 @@
     >
       <v-row>
         <v-card
-            v-for="result in testResults"
+            v-for="result in searchResult"
             :key="result.id"
             draggable="true"
             @click="inCompare"
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "SearchApplicationResult",
   data() {
@@ -83,6 +85,11 @@ export default {
       ]
     }
   },
+  props: {
+    searchResult: {
+      type: Array,
+    }
+  },
   methods: {
     //event propagation 활용
     //클릭 시 img나 div가 target이 됨
@@ -91,9 +98,14 @@ export default {
       const target = event.currentTarget.innerText
       //텍스트에세 이벤트핸들링 함수가 발생했을 경우
       if (target !== ""){
-        this.$emit("comparing", this.testResults.find(el => el.productName === target))
-        console.log(this.testResults.find(el => el.productName === target))
+        const selectedProduct = this.searchResult.find(el => el.productName === target)
+        // this.$emit("comparing", selectedProduct)
+        console.log(selectedProduct)
+        axios.get("/api/compare/select?sqlid=" + selectedProduct.sqlId)
+            .then(res => this.$emit("comparing", res.data))
+            .catch(e => console.log(e))
       }
+
     }
   }
 }

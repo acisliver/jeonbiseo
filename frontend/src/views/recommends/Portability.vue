@@ -1,6 +1,6 @@
 <template>
   <div class="network container">
-    <chose-one category-name="portability" :category-obj="networkObj" next-page-name="End"></chose-one>
+    <chose-one category-name="portability" :category-obj="networkObj" next-page-name="RecommendResult"></chose-one>
   </div>
 </template>
 

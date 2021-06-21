@@ -2,7 +2,6 @@
   <div class="comparing-application">
     <v-card
         elevation="1"
-        height="600px"
     >
       <v-row>
         <v-card
@@ -17,6 +16,12 @@
               :src="result.url"
           >
           <div>{{result.productName}}</div>
+          <div>{{result.brand}}</div>
+          <div>{{result.os}}</div>
+          <div>사이즈 {{result.appSize}}</div>
+          <div>무게 {{result.appWeight}}</div>
+          <div>{{result.network}}</div>
+          <div>펜사용 {{result.usePen}}</div>
         </v-card>
       </v-row>
     </v-card>

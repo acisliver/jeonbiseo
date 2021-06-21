@@ -11,6 +11,7 @@ import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import com.example.demo.dto.SearchTermDto;
 import com.example.demo.model.Application;
+import com.example.demo.model.User;
 import com.example.demo.model.UserPreference;
 import com.example.demo.service.ItemRecommendService;
 import com.example.demo.service.UserRecommendService;
@@ -41,10 +42,11 @@ public class UserRecommendApiController {
     @Autowired
     private UserRecommendService userRecommendService;
 
-    @PostMapping("api/user-recommend")
+    //
+    @PostMapping("api/get-preference")
     public void recommend(@RequestBody RequestUserPreferenceDto requestUserPreferenceDto,
                         @AuthenticationPrincipal PrincipalDetails principalDetails){
-        userRecommendService.findPreferenceItem(requestUserPreferenceDto, principalDetails.getUser().getId());
+        userRecommendService.getPreferenceItem(requestUserPreferenceDto, principalDetails.getUser().getId());
 
     }
 
@@ -59,10 +61,11 @@ public class UserRecommendApiController {
     }
 
     @GetMapping("/api/recommend-result")
-    public List<RecommendedItem> userRecommender(@RequestParam String id) {
+    public List<RecommendedItem> userRecommender(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        User user = principalDetails.getUser();
         List<RecommendedItem> recommendations = null;
         try {
-            recommendations = userRecommendService.userRecommender(id);
+            recommendations = userRecommendService.userRecommender(user);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TasteException e) {
