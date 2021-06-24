@@ -33,13 +33,7 @@ export default {
   name: "RecommendResult",
   data() {
     return {
-      result: [
-        {
-          url: "",
-          productName: "dfs"
-        },
-
-      ]
+      result: []
     }
   },
   methods: {},
