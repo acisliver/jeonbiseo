@@ -10,7 +10,7 @@
           style="font-size: 1.5rem;"
       >
         <v-card>
-          <img width="200px" height="auto" :src="item.url">
+          <img width="300px" height="auto" :src="item.url">
         </v-card>
         {{item.productName}}
       </div>

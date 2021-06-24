@@ -11,7 +11,7 @@
 
         >
           <img
-              width="200px"
+              width="300px"
               height="auto"
               :src="result.url"
           >
