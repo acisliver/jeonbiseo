@@ -95,13 +95,18 @@ export default {
     //클릭 시 img나 div가 target이 됨
     //div만 target이 되어야 해서 최상위에서 데이터 처리
     inCompare(event) {
+      let config = {
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      }
       const target = event.currentTarget.innerText
       //텍스트에세 이벤트핸들링 함수가 발생했을 경우
       if (target !== ""){
         const selectedProduct = this.searchResult.find(el => el.productName === target)
         // this.$emit("comparing", selectedProduct)
         console.log(selectedProduct)
-        axios.get("/api/compare/select?sqlid=" + selectedProduct.sqlId)
+        axios.get("/api/compare/select?sqlid=" + selectedProduct.sqlId, config)
             .then(res => this.$emit("comparing", res.data))
             .catch(e => console.log(e))
       }

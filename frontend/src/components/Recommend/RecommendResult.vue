@@ -35,11 +35,9 @@ export default {
     return {
       result: [
         {
-          name: '1'
+          url: "",
+          productName: "dfs"
         },
-        {
-          name: '2'
-        }
       ]
     }
   },
