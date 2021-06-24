@@ -12,7 +12,7 @@
         <v-card>
           <img width="300px" height="auto" :src="item.url">
         </v-card>
-        {{item.productName}}
+        {{ item.productName }}
       </div>
     </div>
     <div class="next-btn">
@@ -31,19 +31,18 @@ import axios from "axios";
 
 export default {
   name: "RecommendResult",
-  data(){
+  data() {
     return {
       result: [
         {
           url: "",
           productName: "dfs"
         },
+
       ]
     }
   },
-  methods: {
-
-  },
+  methods: {},
   mounted() {
     let config = {
       headers: {
@@ -52,34 +51,39 @@ export default {
     }
     axios.get("/api/recommend-result", config)
         .then(res => {
-          this.result = res.data
+          this.result.push(res.data)
           console.log(res.data)
         })
-        .catch(e =>console.log(e))
+        .catch(e => console.log(e))
   }
 }
 </script>
 
 <style scoped>
-.container h2{
+.container h2 {
   padding-bottom: 8rem;
 }
-.card-group{
+
+.card-group {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.card{
+
+.card {
   width: 15rem;
   height: 15rem;
 }
-.card:hover{
+
+.card:hover {
 }
-.card-group img{
+
+.card-group img {
   width: 15rem;
   height: 15rem;
 }
-.next-btn{
+
+.next-btn {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
