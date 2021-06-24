@@ -52,9 +52,7 @@ export default {
     }
     axios.get("/api/recommend-result", config)
         .then(res => {
-          axios.get("/api/compare/select?sqlid=" + res.data.itemID)
-              .then(res2 => this.result = res2.data)
-              .catch(e => console.log(e))
+          this.result = res.data
         })
         .catch(e =>console.log(e))
   }
