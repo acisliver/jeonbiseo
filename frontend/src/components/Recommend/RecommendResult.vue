@@ -53,6 +53,7 @@ export default {
     axios.get("/api/recommend-result", config)
         .then(res => {
           this.result = res.data
+          console.log(res.data)
         })
         .catch(e =>console.log(e))
   }
