@@ -6,17 +6,13 @@ import com.example.demo.model.User;
 import com.example.demo.model.UserPreference;
 import com.example.demo.repository.UserPreferenceRepository;
 import lombok.Getter;
-import org.apache.hadoop.mapreduce.v2.app.webapp.App;
-import org.apache.mahout.cf.taste.common.Refreshable;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
-import org.apache.mahout.cf.taste.impl.recommender.AbstractRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
-import org.apache.mahout.cf.taste.recommender.IDRescorer;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
@@ -42,6 +38,7 @@ public class UserRecommendService {
     @Getter
     @PersistenceContext
     private EntityManager em;
+
 
     @Autowired
     private CompareRepository compareRepository;
@@ -103,7 +100,7 @@ public class UserRecommendService {
     }
 
     @Transactional
-    public List<RecommendedItem> userRecommender(User user) throws IOException, TasteException {
+    public Optional<Application> userRecommender(User user) throws IOException, TasteException {
         DataModel model = new FileDataModel(new File("src/main/data/userpreference.csv"));
         UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
         UserNeighborhood neighborhood = new NearestNUserNeighborhood(5, similarity, model);
@@ -120,7 +117,7 @@ public class UserRecommendService {
             System.out.printf(String.valueOf(recommendedItem));
             System.out.println("\n***************************");
         }
-        return recommendations;
+        return compareRepository.findById(Integer.parseInt(String.valueOf(recommendations.get(0).getItemID())));
     }
 
     @Transactional
