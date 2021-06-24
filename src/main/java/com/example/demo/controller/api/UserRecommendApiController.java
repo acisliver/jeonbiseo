@@ -27,6 +27,8 @@ import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.elasticsearch.client.ml.job.config.DataDescription;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.supercsv.io.CsvBeanWriter;
@@ -36,6 +38,7 @@ import org.supercsv.prefs.CsvPreference;
 import java.util.HashMap;
 import java.util.List;
 
+@EnableScheduling
 @RestController
 public class UserRecommendApiController {
 
@@ -51,7 +54,7 @@ public class UserRecommendApiController {
     }
 
     //MySql의 데이터를 csv파일로 만든 후 data 디렉토리에 저장
-    @GetMapping("api/export")
+    @Scheduled(cron = "0 0/1 * * * *")
     public void dataToCSV() {
         try {
             userRecommendService.dataToCSV();
