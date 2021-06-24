@@ -11,6 +11,11 @@ module.exports = {
         ws: true,
         changeOrigin: true
       },
+      '/login': {
+        target: 'http://localhost:9000',
+        ws: true,
+        changeOrigin: true
+      },
     }
   },
   chainWebpack: config => {
