@@ -5,6 +5,7 @@ import com.example.demo.model.Application;
 import com.example.demo.model.ESApplication;
 import com.example.demo.model.UserPreference;
 import com.example.demo.repository.CompareESRepository;
+import com.example.demo.repository.CompareRepository;
 import com.example.demo.repository.UserPreferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

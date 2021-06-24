@@ -4,6 +4,7 @@ import com.example.demo.dto.RequestUserPreferenceDto;
 import com.example.demo.model.Application;
 import com.example.demo.model.User;
 import com.example.demo.model.UserPreference;
+import com.example.demo.repository.CompareRepository;
 import com.example.demo.repository.UserPreferenceRepository;
 import lombok.Getter;
 import org.apache.mahout.cf.taste.common.TasteException;

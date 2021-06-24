@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.SearchTermDto;
+import com.example.demo.repository.CompareRepository;
 import com.example.demo.repository.ItemRecommendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

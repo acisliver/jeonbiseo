@@ -4,6 +4,7 @@ import com.example.demo.dto.RequestUpdateUserInfoDto;
 import com.example.demo.model.Application;
 import com.example.demo.model.RoleType;
 import com.example.demo.model.User;
+import com.example.demo.repository.CompareRepository;
 import com.example.demo.repository.UserPreferenceRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
