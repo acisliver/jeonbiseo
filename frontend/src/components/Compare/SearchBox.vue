@@ -121,6 +121,7 @@ export default {
           .get(url + params)
           .then(res => {
             console.log(res)
+            this.$emit("search", res.data)
           })
           .catch(e => console.log(e))
     },

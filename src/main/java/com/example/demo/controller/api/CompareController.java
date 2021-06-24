@@ -41,6 +41,7 @@ public class CompareController {
 
     @GetMapping("/api/compare/select")
     public Optional<Application> selectApplication(@RequestParam("sqlid") String sqlId,@AuthenticationPrincipal PrincipalDetails principalDetails){
+        System.out.println(sqlId);
         Optional<PrincipalDetails> principalDetails1=Optional.ofNullable(principalDetails);
         return compareService.findApplication(sqlId,principalDetails1);
     }

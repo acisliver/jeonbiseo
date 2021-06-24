@@ -11,12 +11,12 @@
         <v-col
           cols="3"
         >
-          <search-box/>
+          <search-box @search="getSearchResult"/>
         </v-col>
         <v-col
             cols="12"
         >
-          <search-application-result @comparing="getProduct"/>
+          <search-application-result :search-result="searchResult" @comparing="getProduct"/>
         </v-col>
       </v-row>
     </v-container>
@@ -29,7 +29,8 @@ export default {
   name: "Compare",
   data(){
     return {
-      comparingProducts: []
+      comparingProducts: [],
+      searchResult: []
     }
   },
   components:{
@@ -41,6 +42,9 @@ export default {
     getProduct(data) {
       this.comparingProducts.push(data)
       console.log(data)
+    },
+    getSearchResult(data) {
+      this.searchResult = data
     }
   }
 }
