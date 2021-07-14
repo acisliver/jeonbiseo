@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <core-app-bar />
+    <app-bar />
 
-    <core-view />
+    <view />
 
-    <core-footer />
+    <footer />
 
   </v-app>
 </template>
@@ -13,9 +13,9 @@
 export default {
   name: "App",
   components: {
-    CoreAppBar: () => import('@/core/AppBar'),
-    CoreView: () => import('@/core/View'),
-    CoreFooter: () => import('@/core/Footer'),
+    AppBar: () => import('@/layout/AppBar'),
+    View: () => import('@/layout/View'),
+    Footer: () => import('@/layout/Footer'),
   }
 }
 </script>
