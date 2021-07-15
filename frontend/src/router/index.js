@@ -11,17 +11,16 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter)
 
 const Home = () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
-// const About = () => import(/* webpackChunkName: "about" */ '../views/About.vue');
 const Login = () => import(/* webpackChunkName: "login" */ '../components/Login.vue');
 const MyPage = () => import(/* webpackChunkName: "mypage" */ '../views/MyPage.vue');
 const SignUp = () => import(/* webpackChunkName: "signup" */ '../components/SignUp.vue');
 const Board = () => import(/* webpackChunkName: "board-group" */ '../views/Board.vue');
 const FreeBoard = () => import(/* webpackChunkName: "board-group" */ '../views/FreeBoard');
 const DebateBoard = () => import(/* webpackChunkName: "board-group" */ '../views/DebateBoard');
-const WriteFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteFreeBoard');
-const WriteDebateBoard = () => import(/* webpackChunkName: "board-group" */ '../components/WriteDebateBoard');
-const ReadFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../components/ReadFreeBoard');
-const ReadDebateBoard = () => import(/* webpackChunkName: "board-group" */ '../components/ReadDebateBoard');
+const WriteFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../components/Board/FreeBoard/WriteFreeBoard');
+const WriteDebateBoard = () => import(/* webpackChunkName: "board-group" */ '../components/Board/DebateBoard/WriteDebateBoard');
+const ReadFreeBoard = () => import(/* webpackChunkName: "board-group" */ '../components/Board/FreeBoard/ReadFreeBoard');
+const ReadDebateBoard = () => import(/* webpackChunkName: "board-group" */ '../components/Board/DebateBoard/ReadDebateBoard');
 const Compare = () => import(/* webpackChunkName: "compare" */ '../views/Compare');
 const Recommend = () => import(/* webpackChunkName: "recommend" */ '../views/Recommend');
 const OS = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/OS');
@@ -31,27 +30,6 @@ const Portability = () => import(/* webpackChunkName: "recommend" */ '../views/r
 const Pen = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/Pen');
 const RecommendItem = () => import(/* webpackChunkName: "recommend" */ '../views/recommends/RecommendItem');
 const R = ()  => import(/* webpackChunkName: "recommend" */ '../components/Recommend/RecommendResult');
-
-
-// const rejectAuthUser = (to, from, next) =>{
-//   if(store.state.isLogin){
-//     alert('이미 로그인하였습니다')
-//     next('/')
-//   }
-//   else{
-//     next()
-//   }
-// }
-//
-// const onlyAuthUser = (to, from, next) =>{
-//   if(!store.state.isLogin){
-//     alert('로그인이 필요한 기능힙니다')
-//     next('/')
-//   }
-//   else{
-//     next()
-//   }
-// }
 
 const routes = [
   {

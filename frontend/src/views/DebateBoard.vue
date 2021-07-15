@@ -14,7 +14,7 @@ export default {
     }
   },
   components: {
-    Pagination: () => import('@/components/Pagination')
+    Pagination: () => import('@/components/Board/Pagination')
   },
   computed: {
     ...mapState({

@@ -43,7 +43,7 @@ export default {
   },
   components: {
     Reply: () =>import('@/components/Reply'),
-    WriteReply: () => import('@/components/WriteReply')
+    WriteReply: () => import('@/components/Board/FreeBoard/WriteReply')
   },
   computed: {
     ...mapState({

@@ -146,7 +146,7 @@
 import {mapState} from "vuex";
 import axios from "axios";
 import PieChart from "./PieChart";
-import Timer from  "./Timer"
+import Timer from "./Timer"
 
 export default {
   name: "ReadDebateBoard",

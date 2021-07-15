@@ -51,7 +51,7 @@ export default {
     }
   },
   components: {
-    WriteRereply: import('@/components/WriteRereply'),
+    WriteRereply: import('@/components/Board/FreeBoard/WriteRereply'),
   },
   computed: {
     ...mapState({
