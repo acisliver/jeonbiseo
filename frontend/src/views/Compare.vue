@@ -30,7 +30,7 @@ export default {
   data(){
     return {
       comparingProducts: [],
-      searchResult: []
+      searchResult: [],
     }
   },
   components:{

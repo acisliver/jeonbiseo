@@ -3,7 +3,8 @@ import axios from "axios";
 export default {
     namespaced: true,
     state:{
-        searchResult: null
+        searchResult: null,
+        selectedDevice: []
     },
     getter: {
         getSearchResult({state}){
@@ -11,7 +12,8 @@ export default {
         }
     },
     mutations: {
-        setSearchResult: (state, searchResult) => state.searchResult = searchResult
+        setSearchResult: (state, searchResult) => state.searchResult = searchResult,
+        setSelectedDevice: (state, device) => state.selectedDevice.push(device)
     },
     actions: {
         searchApplication({commit}, searchWord){
@@ -27,5 +29,12 @@ export default {
                 })
                 .catch(e => console.log(e))
         },
+        selectDevice({commit}, device) {
+            console.log(2)
+            commit("setSelectedDevice", device)
+        },
+        deleteDevice({state}, devcie){
+            state.selectedDevice.remove(devcie)
+        }
     }
 }
