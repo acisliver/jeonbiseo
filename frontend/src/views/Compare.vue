@@ -16,7 +16,7 @@
         <v-col
             cols="12"
         >
-          <search-application-result :search-result="searchResult" @comparing="getProduct"/>
+          <search-result :search-result="searchResult" @comparing="getProduct"/>
         </v-col>
       </v-row>
     </v-container>
@@ -36,7 +36,7 @@ export default {
   components:{
     SearchBox: () => import("../components/Compare/SearchBox"),
     ComparingAppliaction: () => import("../components/Compare/ComparingApplication"),
-    SearchApplicationResult: () => import("../components/Compare/SearchApplicationResult")
+    SearchResult: () => import("../components/Compare/SearchResult")
   },
   methods: {
     getProduct(data) {

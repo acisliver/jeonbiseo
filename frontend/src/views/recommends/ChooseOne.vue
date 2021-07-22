@@ -1,6 +1,6 @@
 <template>
   <div class="chose-one container">
-    <h2>어떤 {{categoryName}}를 선호하시나요?</h2>
+    <h2>어떤 {{ categoryName }}를 선호하시나요?</h2>
     <div class="card-group container">
       <div
         v-for="item in categoryObj"
@@ -56,13 +56,19 @@ export default {
     }
   },
   methods: {
+    /**
+     * 사용자가 선택한 취향 정보를 json으로 만들어 서버로 전송
+     * @param {String} choosedOne
+     */
     chooseOne(choosedOne){
       let recObj = localStorage.getItem('recommendObj')
 
+      //localStorage에 recommendObj가 없다면 json을 생성해준다
       recObj = recObj ? JSON.parse(recObj) : {}
       recObj[this.categoryName] = choosedOne
       localStorage.setItem('recommendObj', JSON.stringify(recObj))
 
+      //추천이 끝났다면 서버로 json 전송
       if(this.nextPageName === "End") return
       else this.$router.push({name: this.nextPageName})
     }

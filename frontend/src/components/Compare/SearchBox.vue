@@ -13,78 +13,24 @@
                 :append-icon="'mdi-magnify'"
                 @click:append="searchApplication(searchWord)"
             ></v-text-field>
+
             <v-checkbox
-                v-model="selectedList"
-                label="운영체제"
-                value="os"
+                v-model="selectAll"
+                label="전체선택"
+                :value="selectAll"
+                color="success"
                 hide-details
             ></v-checkbox>
+
             <v-checkbox
-                v-model="selectedList"
-                label="무게"
-                value="appWeight"
-                hide-details
+              v-for="item in selectedList"
+              :key="item.name"
+              v-model="item.value"
+              :label="item.label"
+              :value="item.value"
+              hide-details
             ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="화면크기"
-                value="appSize"
-                hide-details
-            ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="전용터치펜"
-                value="usePen"
-                hide-details
-            ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="테블릿통신"
-                value="network"
-                hide-details
-            ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="RAM용량"
-                value="ramSize"
-                hide-details
-            ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="저장용량"
-                value="hddSize"
-                hide-details
-            ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="배터리용량"
-                value="batterySize"
-                hide-details
-            ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="전면카메라"
-                value="frontCamera"
-                hide-details
-            ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="후면카메라"
-                value="backCamera"
-                hide-details
-            ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="스피커개수"
-                value="speakerNum"
-                hide-details
-            ></v-checkbox>
-            <v-checkbox
-                v-model="selectedList"
-                label="화면비율"
-                value="screenRatio"
-                hide-details
-            ></v-checkbox>
+
             <v-btn
                 width="0.5em"
                 class="ma-2"
@@ -101,18 +47,63 @@
 
 <script>
 import axios from "axios";
-// import {mapActions} from "vuex"
 
 export default {
   name: "SearchBox",
   data() {
     return {
-      selectedList: ['os', 'appWeight', 'appSize', 'usePen', 'network', 'ramSize', 'hddSize', 'batterySize', 'frontCamera', 'backCamera', 'speakerNum', 'screenRatio'],
+      selectedList: [
+        {
+          name: 'os',
+          value: true,
+          label: '운영체제'
+        },
+        {
+          name: 'appWeight',
+          value: true,
+          label: '무게'
+        },
+        {
+          name: 'appSize',
+          value: true,
+          label: '화면크기'
+        },
+        {
+          name: 'usePen',
+          value: true,
+          label: '전용터치펜'
+        },
+        {
+          name: 'network',
+          value: true,
+          label: '테블릿통신'
+        },
+      ],
       searchWord: "",
     }
   },
+  computed: {
+    selectAll: {
+      get: function () {
+        let flag = true
+        this.selectedList.forEach(el => {
+          if (!el.value) flag = null
+        })
+        return flag
+      },
+      set: function (newVal) {
+        console.log('newVal: ' + newVal)
+        this.selectedList.forEach(el => {
+          el.value = newVal
+        })
+      }
+    }
+  },
   methods: {
-    //검색어로 검색
+    /**
+     * 검색어로 전자기기 검색
+     * @param {String} searchWord 검색어
+     */
     searchApplication(searchWord){
       console.log(searchWord)
       const url = "/api/compare/search"
@@ -125,7 +116,9 @@ export default {
           })
           .catch(e => console.log(e))
     },
-    //카테고리 선택
+    /**
+     * 카테고리 선택 시 해당 데이터를 서버로 전송하여 추천 정보로 이용
+     */
     sendSelectedList(){
       const url = "/api/compare/list"
       // let config = {
@@ -133,6 +126,13 @@ export default {
       //     // token: localStorage.getItem('token')
       //   }
       // }
+
+      //value만 추출하여 배열로 만든다
+      const list = []
+      this.selectedList.forEach(el => list.push(el.name))
+      console.log(list)
+
+      //서버로 전송
       const body = { "selectedList": JSON.stringify(this.selectedList)}
       axios
           .post(url, body)
