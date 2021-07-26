@@ -5,22 +5,32 @@
         style="color: gray;"
         height="100%"
     >
-      <v-row v-if="comparingProducts.length > 0" class="justify-space-around">
+      <v-row v-if="comparingProducts.length > 0">
         <v-card
             v-for="result in comparingProducts"
             :key="result.id"
             class="d-flex flex-column justify-space-between flex-wrap"
             width="25%"
         >
-          <div style="width: 100%;">
+          <v-col style="width: 100%;">
+
             <img
                 width="100$"
                 height="auto"
                 :src="result.url"
             >
-          </div>
 
-          <div class="category">
+            <v-icon
+                tag="button"
+                style="position: absolute"
+                @click="outCompare(result)"
+            >
+              mdi-close-box-outline
+            </v-icon>
+
+          </v-col>
+
+          <v-col class="category justify-space-between">
             <div>{{result.productName}}</div>
             <div>{{result.brand}}</div>
             <div> {{result.os}}</div>
@@ -28,10 +38,11 @@
             <div v-if="isAppWeight">무게 {{result.appWeight}}</div>
             <div v-if="isNetwork">{{result.network}}</div>
             <div v-if="isUsePen">펜사용 {{result.usePen}}</div>
-          </div>
+          </v-col>
         </v-card>
       </v-row>
       <div v-else>비교할 제품을 클릭해주세요</div>
+
     </v-card>
   </div>
 </template>
@@ -73,14 +84,16 @@ export default {
     }
   },
   methods: {
-    selectDevice: function () {
-
-    },
+    outCompare(outProduct){
+      this.$emit('out-compare', outProduct)
+    }
   }
-
 }
 </script>
 
 <style scoped>
+.category div{
+  margin-bottom: 1rem;
+}
 
 </style>

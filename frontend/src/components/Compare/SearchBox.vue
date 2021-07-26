@@ -94,7 +94,6 @@ export default {
         return flag
       },
       set: function (newVal) {
-        console.log('newVal: ' + newVal)
         this.selectedList.forEach(el => {
           el.value = newVal
         })

@@ -6,7 +6,10 @@
         height="100%"
     >
       <v-row  v-if="searchResult.length > 0" class="justify-space-between">
+
         <v-icon @click="prevPage">mdi-arrow-left-circle-outline</v-icon>
+
+        <!--검색결과 이미지 카드-->
         <v-card
             v-for="result in paginatedData"
             :key="result.id"
@@ -14,31 +17,34 @@
             width="17%"
             @click="inCompare"
         >
+
+          <!--이미지 래퍼-->
           <div style="width: 100%;">
             <img
                 width="100%"
                 height="auto"
                 :src="result.url"
                 @click="inCompare"
+                style="pointer-events: none"
             >
           </div>
 
-          <div
-              @click="inCompare"
-          >{{result.productName}}</div>
-<!--          <v-overlay-->
-<!--              :absolute="absolute"-->
-<!--              :value="overlay"-->
-<!--            >-->
-<!--            <v-btn-->
-<!--                color="success"-->
-<!--                @click="overlay = false"-->
-<!--            >-->
-<!--              비교중-->
-<!--            </v-btn>-->
-<!--          </v-overlay>-->
+          <!--제품명-->
+          <div @click="inCompare">{{result.productName}}</div>
+
+          <!--비교중 오버레이-->
+          <v-overlay
+              absolute
+              :value="false"
+              style="pointer-events: none"
+            >
+            <v-icon x-large>mdi-check-circle</v-icon>
+          </v-overlay>
+
         </v-card>
+
         <v-icon @click="nextPage">mdi-arrow-right-circle-outline</v-icon>
+
       </v-row>
       <div
           v-else
@@ -48,6 +54,8 @@
         검색 결과가 없습니다.
       </div>
     </v-card>
+
+<!--결과 페이지 마지막 알림-->
     <v-snackbar
         v-model="snackbar"
     >
@@ -64,12 +72,12 @@
         </v-btn>
       </template>
     </v-snackbar>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import {mapState, mapActions} from "vuex"
 
 export default {
   name: "SearchResult",
@@ -79,8 +87,6 @@ export default {
       pageNum: 1,
       pageText: '첫',
       snackbar: false,
-      absolute: true,
-      overlay: true,
     }
   },
   props: {
@@ -88,13 +94,13 @@ export default {
       type: Array,
     },
     comparingProducts: {
-      type: Array
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   },
   computed: {
-    ...mapState({
-      selectedDevice: state => state.selectedDevice
-    }),
     pageCount () {
       if (this.searchResult === null ){
         return 1;
@@ -113,14 +119,8 @@ export default {
       }
       return this.searchResult.slice(start, end);
     },
-    compare() {
-      return this.comparingProducts.map(el => el.value)
-    }
   },
   methods: {
-    ...mapActions({
-      selectDevice: "applicationStore/selectDevice"
-    }),
     prevPage(){
       if (this.pageNum > 1) this.pageNum -= 1
       else {
@@ -144,17 +144,22 @@ export default {
           token: localStorage.getItem('token')
         }
       }
+
+      //productName에서 이벤트가 발생한게 아니라면 이 값은 ""이 된다.
       const target = event.currentTarget.innerText
+
       //텍스트에서 이벤트핸들링 함수가 발생했을 경우
+      //overlay에서 이벤트가 발생할 경우 이벤트 버블링이 제대로 되지 않는다.
+      //이유는 overlay의 사이즈가 최상단의 부모 노드의 사이즈와 같기 때문에 overlay에서만 이벤트가 발생하고 끝
+      //따라서 캡처링을 추가해줄 필요가 있다.
       if (target !== ""){
-        console.log(target)
         const selectedProduct = this.searchResult.find(el => el.productName === target)
-        // this.$emit("comparing", selectedProduct)
-        console.log(selectedProduct)
+
         axios.get("/api/compare/select?sqlid=" + selectedProduct.sqlId, config)
             .then(res => this.$emit("comparing", res.data))
             .catch(e => console.log(e))
       }
+
     },
   }
 }

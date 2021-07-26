@@ -6,7 +6,7 @@
         <v-col
           cols="9"
         >
-          <comparing-appliaction :comparing-products="comparingProducts" :category-list="categoryList"/>
+          <comparing-appliaction :comparing-products="comparingProducts" :category-list="categoryList" @out-compare="deleteProduct"/>
         </v-col>
         <v-col
           cols="3"
@@ -69,7 +69,7 @@ export default {
     /**
      * SearchResult로 부터 제품정보를 받아오는 메소드
      * 이미 선택된 제품은 선택되지 않게 필터링
-     * @param {Object} data
+     * @param {Object} data application object
      */
     getProduct(data) {
       //비교중인 제품인지 확인
@@ -81,6 +81,15 @@ export default {
       })
       //비교중이 아니라면 ComparingApplication에 제품정보를 추가
       if(!isCompare) this.comparingProducts.push(data)
+    },
+    /**
+     * 비교 중 삭제한 제품 삭제
+     * @param {Object} data applicaion object
+     */
+    deleteProduct(data){
+      const itemToFind = this.comparingProducts.find(el => {return el.id === data.id})
+      const idx = this.comparingProducts.indexOf(itemToFind)
+      if(idx > -1) this.comparingProducts.splice(idx, 1)
     },
     getSearchResult(data) {
       this.searchResult = data
