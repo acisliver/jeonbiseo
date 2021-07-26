@@ -66,8 +66,21 @@ export default {
     SearchResult: () => import("../components/Compare/SearchResult")
   },
   methods: {
+    /**
+     * SearchResult로 부터 제품정보를 받아오는 메소드
+     * 이미 선택된 제품은 선택되지 않게 필터링
+     * @param {Object} data
+     */
     getProduct(data) {
-      this.comparingProducts.push(data)
+      //비교중인 제품인지 확인
+      const isCompare = this.comparingProducts.some(el => {
+        if (el.id === data.id){
+          alert("비교중인 제품입니다.")
+          return true;
+        }
+      })
+      //비교중이 아니라면 ComparingApplication에 제품정보를 추가
+      if(!isCompare) this.comparingProducts.push(data)
     },
     getSearchResult(data) {
       this.searchResult = data

@@ -72,7 +72,7 @@ import axios from "axios";
 import {mapState, mapActions} from "vuex"
 
 export default {
-  name: "SearchApplicationResult",
+  name: "SearchResult",
   data() {
     return {
       pageSize: 5,

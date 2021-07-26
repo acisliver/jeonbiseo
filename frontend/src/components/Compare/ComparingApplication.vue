@@ -5,7 +5,7 @@
         style="color: gray;"
         height="100%"
     >
-      <v-row v-if="comparingProducts.length > 0">
+      <v-row v-if="comparingProducts.length > 0" class="justify-space-around">
         <v-card
             v-for="result in comparingProducts"
             :key="result.id"
@@ -56,7 +56,6 @@ export default {
   },
   computed: {
     isOs() {
-      console.log(this.categoryList.find(el => el.name === 'os').value)
       return this.categoryList.find(el => el.name === 'os').value
     },
     isAppSize() {

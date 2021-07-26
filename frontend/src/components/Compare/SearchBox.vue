@@ -107,13 +107,11 @@ export default {
      * @param {String} searchWord 검색어
      */
     searchApplication(searchWord){
-      console.log(searchWord)
       const url = "/api/compare/search"
       const params = `?searchWord=${searchWord}`
       axios
           .get(url + params)
           .then(res => {
-            console.log(res)
             this.$emit("search", res.data)
           })
           .catch(e => console.log(e))
@@ -142,7 +140,6 @@ export default {
           .catch(e => console.log(e))
     },
     selectCategory() {
-      console.log(this.selectedList)
       this.$emit('category', this.selectedList)
     }
   }
