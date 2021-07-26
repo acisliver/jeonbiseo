@@ -20,6 +20,7 @@
                 :value="selectAll"
                 color="success"
                 hide-details
+                @click="selectCategory"
             ></v-checkbox>
 
             <v-checkbox
@@ -29,6 +30,7 @@
               :label="item.label"
               :value="item.value"
               hide-details
+              @click="selectCategory"
             ></v-checkbox>
 
             <v-btn
@@ -139,7 +141,10 @@ export default {
           .then(res => console.log(res))
           .catch(e => console.log(e))
     },
-
+    selectCategory() {
+      console.log(this.selectedList)
+      this.$emit('category', this.selectedList)
+    }
   }
 }
 </script>

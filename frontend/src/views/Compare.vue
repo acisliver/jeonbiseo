@@ -6,17 +6,17 @@
         <v-col
           cols="9"
         >
-          <comparing-appliaction :comparing-products="comparingProducts"/>
+          <comparing-appliaction :comparing-products="comparingProducts" :category-list="categoryList"/>
         </v-col>
         <v-col
           cols="3"
         >
-          <search-box @search="getSearchResult"/>
+          <search-box @search="getSearchResult" @category="getCategoryList"/>
         </v-col>
         <v-col
             cols="12"
         >
-          <search-result :search-result="searchResult" @comparing="getProduct"/>
+          <search-result :search-result="searchResult" :comparing-products="comparingProducts" @comparing="getProduct"/>
         </v-col>
       </v-row>
     </v-container>
@@ -31,6 +31,33 @@ export default {
     return {
       comparingProducts: [],
       searchResult: [],
+      categoryList: [
+        {
+          name: 'os',
+          value: true,
+          label: '운영체제'
+        },
+        {
+          name: 'appWeight',
+          value: true,
+          label: '무게'
+        },
+        {
+          name: 'appSize',
+          value: true,
+          label: '화면크기'
+        },
+        {
+          name: 'usePen',
+          value: true,
+          label: '전용터치펜'
+        },
+        {
+          name: 'network',
+          value: true,
+          label: '테블릿통신'
+        },
+      ]
     }
   },
   components:{
@@ -41,10 +68,12 @@ export default {
   methods: {
     getProduct(data) {
       this.comparingProducts.push(data)
-      console.log(data)
     },
     getSearchResult(data) {
       this.searchResult = data
+    },
+    getCategoryList(list) {
+      this.categoryList = list
     }
   }
 }
