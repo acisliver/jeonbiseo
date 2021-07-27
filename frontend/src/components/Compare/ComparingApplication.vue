@@ -33,7 +33,7 @@
           <v-col class="category justify-space-between">
             <div>{{result.productName}}</div>
             <div>{{result.brand}}</div>
-            <div> {{result.os}}</div>
+            <div v-if="isOs"> {{result.os}}</div>
             <div v-if="isAppSize">사이즈 {{result.appSize}}</div>
             <div v-if="isAppWeight">무게 {{result.appWeight}}</div>
             <div v-if="isNetwork">{{result.network}}</div>
@@ -70,7 +70,6 @@ export default {
       return this.categoryList.find(el => el.name === 'os').value
     },
     isAppSize() {
-      console.log(this.categoryList)
       return this.categoryList.find(el => el.name === 'appSize').value
     },
     isAppWeight() {
@@ -84,8 +83,13 @@ export default {
     }
   },
   methods: {
+    /**
+     * 비교중인 제품 중 무엇을 제거할지 커스텀 이벤트를 통해 전달
+     * @param {Object} outProduct 비교에서 제거할 제품
+     */
     outCompare(outProduct){
       this.$emit('out-compare', outProduct)
+      console.log(outProduct)
     }
   }
 }

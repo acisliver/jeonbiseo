@@ -13,7 +13,8 @@
         <v-card
             v-for="result in paginatedData"
             :key="result.id"
-            class="d-flex align-content-space-between flex-wrap justify-center"
+            class="d-flex align-content-space-between flex-wrap justify-center pa-1"
+            :class="['sqlId' + result.sqlId]"
             width="17%"
             @click="inCompare"
         >
@@ -24,20 +25,19 @@
                 width="100%"
                 height="auto"
                 :src="result.url"
-                @click="inCompare"
                 style="pointer-events: none"
             >
           </div>
 
           <!--제품명-->
-          <div @click="inCompare">{{result.productName}}</div>
+          <div>{{result.productName}}</div>
 
           <!--비교중 오버레이-->
           <v-overlay
               absolute
-              :value="false"
-              style="pointer-events: none"
-            >
+              :value="true"
+              style="pointer-events: none; visibility: hidden"
+          >
             <v-icon x-large>mdi-check-circle</v-icon>
           </v-overlay>
 
@@ -46,6 +46,8 @@
         <v-icon @click="nextPage">mdi-arrow-right-circle-outline</v-icon>
 
       </v-row>
+
+      <!--default 창-->
       <div
           v-else
           class="container"
@@ -59,7 +61,7 @@
     <v-snackbar
         v-model="snackbar"
     >
-      {{ pageText }} 페이지입니다.
+      {{ snackbarText }}
 
       <template v-slot:action="{ attrs }">
         <v-btn
@@ -85,8 +87,9 @@ export default {
     return {
       pageSize: 5,
       pageNum: 1,
-      pageText: '첫',
+      snackbarText: '',
       snackbar: false,
+      overlayList: []
     }
   },
   props: {
@@ -124,14 +127,14 @@ export default {
     prevPage(){
       if (this.pageNum > 1) this.pageNum -= 1
       else {
-        this.pageText = "첫"
+        this.snackbarText = "첫 페이지입니다."
         this.snackbar = true
       }
     },
     nextPage(){
       if (this.pageNum < this.pageCount) this.pageNum += 1
       else {
-        this.pageText = "마지막"
+        this.snackbarText = "마지막 페이지입니다."
         this.snackbar = true
       }
     },
@@ -145,22 +148,27 @@ export default {
         }
       }
 
-      //productName에서 이벤트가 발생한게 아니라면 이 값은 ""이 된다.
-      const target = event.currentTarget.innerText
+      //productName or v-card 에서 이벤트가 발생한게 아니라면 이 값은 ""이 된다.
+      const targetNode = event.currentTarget
+      const targetInnerText = targetNode.innerText
 
-      //텍스트에서 이벤트핸들링 함수가 발생했을 경우
-      //overlay에서 이벤트가 발생할 경우 이벤트 버블링이 제대로 되지 않는다.
-      //이유는 overlay의 사이즈가 최상단의 부모 노드의 사이즈와 같기 때문에 overlay에서만 이벤트가 발생하고 끝
-      //따라서 캡처링을 추가해줄 필요가 있다.
-      if (target !== ""){
-        const selectedProduct = this.searchResult.find(el => el.productName === target)
+      //클릭 시 오버레이 visible
+      const overlay = targetNode.children[2]
+      overlay.style.visibility = "visible"
+
+
+      //이미지에서 이벤트 발생 시 이벤트 버블링을 통해 상위에서 처리
+      if (targetInnerText !== ""){
+        const selectedProduct = this.searchResult.find(el => el.productName === targetInnerText)
 
         axios.get("/api/compare/select?sqlid=" + selectedProduct.sqlId, config)
             .then(res => this.$emit("comparing", res.data))
             .catch(e => console.log(e))
       }
-
     },
+    hiddenOverlay(id){
+      document.querySelector('.sqlId' + id).children[2].style.visibility = "hidden"
+    }
   }
 }
 </script>

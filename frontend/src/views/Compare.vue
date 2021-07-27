@@ -16,7 +16,7 @@
         <v-col
             cols="12"
         >
-          <search-result :search-result="searchResult" :comparing-products="comparingProducts" @comparing="getProduct"/>
+          <search-result ref="searchResult" :search-result="searchResult" :comparing-products="comparingProducts" @comparing="getProduct"/>
         </v-col>
       </v-row>
     </v-container>
@@ -90,6 +90,8 @@ export default {
       const itemToFind = this.comparingProducts.find(el => {return el.id === data.id})
       const idx = this.comparingProducts.indexOf(itemToFind)
       if(idx > -1) this.comparingProducts.splice(idx, 1)
+
+      this.$refs.searchResult.hiddenOverlay(data.id)
     },
     getSearchResult(data) {
       this.searchResult = data
